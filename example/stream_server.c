@@ -86,8 +86,8 @@ static void check_photo(char *bmpfilename)
                 DebugPrintf("\n----open %s err--------", bmpfilename);
                 return;
         }
-        fseek(fp,0,SEEK_END); //定位到文件末
-        curpos = ftell(fp); //文件长度
+        fseek(fp,0,SEEK_END); //locate to the end of the file
+        curpos = ftell(fp); //the lenth of the file
 
         Err_Check.photo = 0;
         if (curpos < 10240)  {
