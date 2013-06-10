@@ -167,253 +167,247 @@ static void * save_file(void * arg)
         int save_file_count = 0;
         while(1)
         {
-                save_file_count++;
-                if(save_file_count == 50)
+            save_file_count++;
+            if(save_file_count == 50)
+            {
+                save_file_count = 0;
+                DebugPrintf("\n----- save_file thread running -----");
+                PrintScreen("\n----- save_file thread running -----");
+            }
+            /////////启动灵敏度自校准开始///////////////
+            //if (curhou_time == 2) {
+                    //is_redict = 0;
+                    //BASIC_LEVEL_ = 24000;
+            //}
+            ////////////////////////
+            // get data from data queue
+            data = dq_get(&context->dq);
+            if(data == NULL)
+            {
+                DebugPrintf("\n----- data == NULL -----");
+                continue;
+            }
+            else
+            {
+                if(data->type == DATA_VIDEO)
                 {
-                        save_file_count = 0;
-                        DebugPrintf("\n----- save_file thread running -----");
-                        PrintScreen("\n----- save_file thread running -----");
-                }
-                /////////启动灵敏度自校准开始///////////////
-                //if (curhou_time == 2) {
-                        //is_redict = 0;
-                        //BASIC_LEVEL_ = 24000;
-                //}
-                ////////////////////////
-                // get data from data queue
-                data = dq_get(&context->dq);
-                if(data == NULL)
-                {
-                        DebugPrintf("\n----- data == NULL -----");
-                        continue;
-                }
-                else
-                {
-                        if(data->type == DATA_VIDEO)
+                    if(data->flags == DATA_VIDEO_I)
+                    {
+            ///////////////////////////////////////////////////////////////////
+                        ReadSysTime();
+                        memcpy(read_sys_Time, sys_Time, 15);
+                        curmin_time = (read_sys_Time[10] - 48)*10+(read_sys_Time[11] - 48);
+                        curhou_time = (read_sys_Time[8] - 48)*10+(read_sys_Time[9] - 48);
+                        save_curhour = curhou_time;
+                        curday_time = (read_sys_Time[6] - 48)*10+(read_sys_Time[7] - 48);
+                        curmon_time = (read_sys_Time[4] - 48)*10+(read_sys_Time[5] - 48);
+                        curyea_time = (read_sys_Time[0] - 48)*1000+(read_sys_Time[1] - 48)*100+(read_sys_Time[2] - 48)*10+(read_sys_Time[3] - 48);
+
+                        if(curmon_time != premon_time)
                         {
-                                if(data->flags == DATA_VIDEO_I)
-                                {
-                                ///////////////////////////////////////////////////////////////////
-                                        ReadSysTime();
-                                        memcpy(read_sys_Time, sys_Time, 15);
-                                        curmin_time = (read_sys_Time[10] - 48)*10+(read_sys_Time[11] - 48);
-                                        curhou_time = (read_sys_Time[8] - 48)*10+(read_sys_Time[9] - 48);
-                                        save_curhour = curhou_time;
-                                        curday_time = (read_sys_Time[6] - 48)*10+(read_sys_Time[7] - 48);
-                                        curmon_time = (read_sys_Time[4] - 48)*10+(read_sys_Time[5] - 48);
-                                        curyea_time = (read_sys_Time[0] - 48)*1000+(read_sys_Time[1] - 48)*100+(read_sys_Time[2] - 48)*10+(read_sys_Time[3] - 48);
-
-                                        if(curmon_time != premon_time)
-                                        {
-                                                if(curmon_time == 1)
-                                                {
-                                                        sprintf(delfilename, "/mnt/work/%04d11*.jpg",curyea_time-1);
-                                                        DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                                        DelFile(delfilename);
-                                                }
-                                                else if(curmon_time == 2)
-                                                {
-                                                        sprintf(delfilename, "/mnt/work/%04d12*.jpg",curyea_time-1);
-                                                        DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                                        DelFile(delfilename);
-                                                }
-                                                else
-                                                {
-                                                        sprintf(delfilename, "/mnt/work/%04d%02d*.jpg",curyea_time, curmon_time-2);
-                                                        DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                                        DelFile(delfilename);
-                                                }
-                                                premon_time = curmon_time;
-                                        ////////////////////////////////////////////////////////////
-                                                DebugPrintf("\n----- curmin_time = %d -----",curmin_time);
-                                                ret = spct_decode(&videodecoder, data->data,
-                                                data->size, &gotbuf, &gotsize);
-                                                if(ret < 0) // decode error
-                                                {
-                                                        DebugPrintf("\n----- decode error -----");
-                                                        break;
-                                                }
-                                                if(gotsize != 0) // decoder need more data
-                                                {
-                                                        //display one frame
-                                                        //sprintf(bmpfilename, "/mnt/safe/%.12s.jpg", read_sys_Time);
-                                                        sprintf(bmpfilename, "/mnt/safe/%.14s.jpg", read_sys_Time);
-                                                        DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
-                                                        YUV2JPEG(gotbuf, 704, 576, bmpfilename);
-                                                        DebugPrintf("\nbmp save gotsized:%d ", gotsize);
-                                                        //BmpFileSend(bmpfilename);
-                                                }
-                                                else
-                                                {
-                                                        DebugPrintf("\n----- decoder need more data -----");
-                                                }
-                                        //////////////////////////////////////////////////////////////
-                                        }
-                                        if(curday_time != preday_time)
-                                        {
-                                                preday_time = curday_time;
-
-                                                if(curmon_time == 1)
-                                                {
-                                                        sprintf(delfilename, "/mnt/work/%04d12%02d*.jpg",curyea_time-1, curday_time);
-                                                        DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                                        DelFile(delfilename);
-                                                }
-                                                else
-                                                {
-                                                        sprintf(delfilename, "/mnt/work/%04d%02d%02d*.jpg",curyea_time, curmon_time-1,curday_time);
-                                                        DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                                        DelFile(delfilename);
-                                                }
-                                        }
-                                        cur_seconds = time(NULL);
-
-                                                switch (catch_mode)
-                                                {
-                                                        case 0x01:
-                                                                if (catchonemotion || Err_Check.begincheck)
-                                                                {
-                                                                        //if(curmin_time  + 60 - premin_time == freqsendbmp || curmin_time  + 60 - premin_time == freqsendbmp + 60) //采集图像频率
-                                                                        #if NDEBUG
-                                                                                DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
-                                                                        #endif
-                                                                        if (cur_seconds - pre_seconds >= catch_freq || (Err_Check.begincheck && !Err_Check.photo_checked))
-                                                                        {
-                                                                                DebugPrintf("\n-----------motion deteced-------------------");
-                                                                                PrintScreen("\n-----------motion deteced-------------------");
-                                                                                DebugPrintf("\n----- curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
-                                                                                pre_seconds = cur_seconds;
-                                                                                ret = spct_decode(&videodecoder, data->data,
-                                                                                data->size, &gotbuf, &gotsize);
-                                                                                if(ret < 0) // decode error
-                                                                                {
-                                                                                        DebugPrintf("\n----- decode error -----");
-                                                                                        break;
-                                                                                }
-                                                                                if(gotsize != 0) // decoder need more data
-                                                                                {
-                                                                                        // display one frame
-                                                                                        //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
-                                                                                        sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
-                                                                                        DebugPrintf("\n-----bmpfilename = %s-----\n", bmpfilename);
-                                                                                        YUV2JPEG(gotbuf, 704, 576, bmpfilename); // 保存jpg图片
-                                                                                        DebugPrintf("\nbmp save sized:%d ", data->size);
-                                                                                        DebugPrintf("\nbmp save gotsized:%d ", gotsize);
-
-                                                                                        //if (Err_Check.begincheck && (!Err_Check.photo_checked))
-                                                                                                check_photo(bmpfilename);
-
-                                                                                        BmpFileSend(bmpfilename);			// 发送图片
-                                                                                        //DebugPrintf
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                                        DebugPrintf("\n----- decoder need more data -----\n");
-                                                                                }
-                                                                                catchonemotion = 0;
-                                                                        }
-
-                                                                }
-                                                                break;
-
-                                                        default:
-                                                                if (cur_seconds - pre_seconds >= catch_freq || (Err_Check.begincheck && !Err_Check.photo_checked))
-                                                                {
-                                                                        DebugPrintf("\n---prefix curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
-                                                                        pre_seconds = cur_seconds;
-                                                                        #if NDEBUG
-                                                                                DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
-                                                                        #endif
-                                                                        ret = spct_decode(&videodecoder, data->data,
-                                                                        data->size, &gotbuf, &gotsize);
-                                                                        if(ret < 0) // decode error
-                                                                        {
-                                                                                DebugPrintf("\n----- decode error -----");
-                                                                                break;
-                                                                        }
-                                                                        if(gotsize != 0) // decoder need more data
-                                                                        {
-                                                                                // display one frame
-                                                                                //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
-                                                                                sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
-                                                                                DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
-
-                                                                                YUV2JPEG(gotbuf, 704, 576, bmpfilename); // 保存jpg图片
-
-                                                                                DebugPrintf("\nbmp save sized:%d ", data->size);
-                                                                                DebugPrintf("\nbmp save gotsized:%d ", gotsize);
-                                                                                //DebugPrintf("\n----Err_Check.begincheck = %d-----\n", Err_Check.begincheck);
-                                                                                //DebugPrintf("\n------beginsendbmp = %d bmpfilename = %s\n\n", beginsendbmp, bmpfilename);
-                                                                                //if (Err_Check.begincheck && (!Err_Check.photo_checked))
-                                                                                        check_photo(bmpfilename);
-                                                                                //DebugPrintf("\n------beginsendbmp = %d bmpfilename = %s\n\n", beginsendbmp, bmpfilename);
-                                                                                BmpFileSend(bmpfilename);			// 发送图片
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                                DebugPrintf("\n----- decoder need more data -----\n");
-                                                                        }
-
-                                                                }
-                                                                break;
-                                                }
-
-                                        //////////////////////////////////////
-                                        /////////////更新时间/////////////////
-                                        if(time_change == 1)
-                                        {
-                                                premin_time = curmin_time;
-                                                time_change = 0;
-                                                pre_seconds = cur_seconds;
-                                        }
-                                        //////////////////////////////////////
-
-                                        if (premin_time != curmin_time)
-                                        {
-                                                GetIpaddr(); // 获取IP
-                                                DebugPrintf("\n-----snrnum = %s -----\n",snrnum);//freqsendbmp分钟显示一次串号，IP
-                                                premin_time = curmin_time;
-                        //beginsendcard = 1;
-                                        }
-
-                                        //DebugPrintf("\n--save_curhour = %d, save_prehour = %d-----\n", save_curhour, save_prehour);
-
-                                        if(save_curhour  + 24 - save_prehour == 3
-                                                                                || save_curhour  + 24 - save_prehour == 3 + 24) {
-
-                                                startsyncbmp = 1;
-                                                save_prehour = save_curhour;
-                                                DebugPrintf("\n------copy card info to flash------\n");
-                                                pthread_mutex_lock(&cardfile_lock);				//更新读卡记录数据库
-                                                system("cp /tmp/cards.xml /mnt/cards.xml");
-                                                pthread_mutex_unlock(&cardfile_lock);
-
-                                        }
-
-                                        if(curhou_time != prehou_time)
-                                        {
-                        //startsyncbmp = 1;
-                                                prehou_time = curhou_time;
-                                                if(islink() == 0) // SD卡已挂载
-                                                {
-                                                        system("cp -rf /tmp/*.jpg /mnt/work/");
-                                                }
-                                                system("rm -rf /tmp/*.jpg");
-                                                beginsavewebpar = 1;
-                                        }
-                                //////////////////////////////////////////////////////////////////////
-                                }
+                            if(curmon_time == 1)
+                            {
+                                sprintf(delfilename, "/mnt/work/%04d11*.jpg",curyea_time-1);
+                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                                DelFile(delfilename);
+                            }
+                            else if(curmon_time == 2)
+                            {
+                                sprintf(delfilename, "/mnt/work/%04d12*.jpg",curyea_time-1);
+                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                                DelFile(delfilename);
+                            }
+                            else
+                            {
+                                sprintf(delfilename, "/mnt/work/%04d%02d*.jpg",curyea_time, curmon_time-2);
+                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                                DelFile(delfilename);
+                            }
+                            premon_time = curmon_time;
+                            ////////////////////////////////////////////////////////////
+                            DebugPrintf("\n----- curmin_time = %d -----",curmin_time);
+                            ret = spct_decode(&videodecoder, data->data,
+                            data->size, &gotbuf, &gotsize);
+                            if(ret < 0) // decode error
+                            {
+                                    DebugPrintf("\n----- decode error -----");
+                                    break;
+                            }
+                            if(gotsize != 0) // decoder need more data
+                            {
+                                    //display one frame
+                                    //sprintf(bmpfilename, "/mnt/safe/%.12s.jpg", read_sys_Time);
+                                    sprintf(bmpfilename, "/mnt/safe/%.14s.jpg", read_sys_Time);
+                                    DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
+                                    YUV2JPEG(gotbuf, 704, 576, bmpfilename);
+                                    DebugPrintf("\nbmp save gotsized:%d ", gotsize);
+                                    //BmpFileSend(bmpfilename);
+                            }
+                            else
+                            {
+                                    DebugPrintf("\n----- decoder need more data -----");
+                            }
+                            //////////////////////////////////////////////////////////////
                         }
-                        // free data from data queue
-                        dq_pop(&context->dq);
+                        if(curday_time != preday_time)
+                        {
+                            preday_time = curday_time;
+                            if(curmon_time == 1)
+                            {
+                                sprintf(delfilename, "/mnt/work/%04d12%02d*.jpg",curyea_time-1, curday_time);
+                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                                DelFile(delfilename);
+                            }
+                            else
+                            {
+                                    sprintf(delfilename, "/mnt/work/%04d%02d%02d*.jpg",curyea_time, curmon_time-1,curday_time);
+                                    DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                                    DelFile(delfilename);
+                            }
+                        }
+                        cur_seconds = time(NULL);
+
+                        switch (catch_mode)
+                        {
+                            case 0x01:
+                            if (catchonemotion || Err_Check.begincheck)
+                            {
+                                //if(curmin_time  + 60 - premin_time == freqsendbmp || curmin_time  + 60 - premin_time == freqsendbmp + 60) //采集图像频率
+                                #if NDEBUG
+                                        DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
+                                #endif
+                                if (cur_seconds - pre_seconds >= catch_freq || (Err_Check.begincheck && !Err_Check.photo_checked))
+                                {
+                                    DebugPrintf("\n-----------motion deteced-------------------");
+                                    PrintScreen("\n-----------motion deteced-------------------");
+                                    DebugPrintf("\n----- curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
+                                    pre_seconds = cur_seconds;
+                                    ret = spct_decode(&videodecoder, data->data,
+                                    data->size, &gotbuf, &gotsize);
+                                    if(ret < 0) // decode error
+                                    {
+                                        DebugPrintf("\n----- decode error -----");
+                                        break;
+                                    }
+                                    if(gotsize != 0) // decoder need more data
+                                    {
+                                        // display one frame
+                                        //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
+                                    sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
+                                    DebugPrintf("\n-----bmpfilename = %s-----\n", bmpfilename);
+                                    YUV2JPEG(gotbuf, 704, 576, bmpfilename); // 保存jpg图片
+                                    DebugPrintf("\nbmp save sized:%d ", data->size);
+                                    DebugPrintf("\nbmp save gotsized:%d ", gotsize);
+
+                                    //if (Err_Check.begincheck && (!Err_Check.photo_checked))
+                                    check_photo(bmpfilename);
+
+                                    BmpFileSend(bmpfilename);			// 发送图片
+
+                                }
+                                else
+                                {
+                                    DebugPrintf("\n----- decoder need more data -----\n");
+                                }
+                                catchonemotion = 0;
+                            }
+                        }
+                        break;
+
+                        default:
+                        if (cur_seconds - pre_seconds >= catch_freq || (Err_Check.begincheck && !Err_Check.photo_checked))
+                        {
+                            DebugPrintf("\n---prefix curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
+                            pre_seconds = cur_seconds;
+                            #if NDEBUG
+                                    DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
+                            #endif
+                            ret = spct_decode(&videodecoder, data->data,
+                            data->size, &gotbuf, &gotsize);
+                            if(ret < 0) // decode error
+                            {
+                                    DebugPrintf("\n----- decode error -----");
+                                    break;
+                            }
+                            if(gotsize != 0) // decoder need more data
+                            {
+                                // display one frame
+                                //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
+                                sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
+                                DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
+
+                                YUV2JPEG(gotbuf, 704, 576, bmpfilename); // 保存jpg图片
+
+                                DebugPrintf("\nbmp save sized:%d ", data->size);
+                                DebugPrintf("\nbmp save gotsized:%d ", gotsize);
+                                //DebugPrintf("\n----Err_Check.begincheck = %d-----\n", Err_Check.begincheck);
+                                //DebugPrintf("\n------beginsendbmp = %d bmpfilename = %s\n\n", beginsendbmp, bmpfilename);
+                                //if (Err_Check.begincheck && (!Err_Check.photo_checked))
+                                        check_photo(bmpfilename);
+                                //DebugPrintf("\n------beginsendbmp = %d bmpfilename = %s\n\n", beginsendbmp, bmpfilename);
+                                BmpFileSend(bmpfilename);			// 发送图片
+                            }
+                            else
+                            {
+                                DebugPrintf("\n----- decoder need more data -----\n");
+                            }
+                        }
+                        break;
+                    }
+
+                    //////////////////////////////////////
+                    /////////////更新时间/////////////////
+                    if(time_change == 1)
+                    {
+                            premin_time = curmin_time;
+                            time_change = 0;
+                            pre_seconds = cur_seconds;
+                    }
+                    //////////////////////////////////////
+
+                    if (premin_time != curmin_time)
+                    {
+                            GetIpaddr(); // 获取IP
+                            DebugPrintf("\n-----snrnum = %s -----\n",snrnum);//freqsendbmp分钟显示一次串号，IP
+                            premin_time = curmin_time;
+                            //beginsendcard = 1;
+                    }
+
+                    //DebugPrintf("\n--save_curhour = %d, save_prehour = %d-----\n", save_curhour, save_prehour);
+
+                    if(save_curhour  + 24 - save_prehour == 3 || save_curhour  + 24 - save_prehour == 3 + 24) {
+                        startsyncbmp = 1;
+                        save_prehour = save_curhour;
+                        DebugPrintf("\n------copy card info to flash------\n");
+                        pthread_mutex_lock(&cardfile_lock);				//更新读卡记录数据库
+                        system("cp /tmp/cards.xml /mnt/cards.xml");
+                        pthread_mutex_unlock(&cardfile_lock);
+                    }
+
+                    if(curhou_time != prehou_time)
+                    {
+                        //startsyncbmp = 1;
+                        prehou_time = curhou_time;
+                        if(islink() == 0) // SD卡已挂载
+                        {
+                                system("cp -rf /tmp/*.jpg /mnt/work/");
+                        }
+                        system("rm -rf /tmp/*.jpg");
+                        beginsavewebpar = 1;
+                    }
+                //////////////////////////////////////////////////////////////////////
                 }
+            }
+            // free data from data queue
+            dq_pop(&context->dq);
         }
-        ///////////////////////////////////////////////////////////////////////
-        spct_decode_close(&videodecoder);
-        DebugPrintf("\n-----save_file Thread exit-----\n");
-        sleep(1);
-        system("reboot");
-        ///////////////////////////////////////////////////////////////////////
+    }
+    ///////////////////////////////////////////////////////////////////////
+    spct_decode_close(&videodecoder);
+    DebugPrintf("\n-----save_file Thread exit-----\n");
+    sleep(1);
+    system("reboot");
+    ///////////////////////////////////////////////////////////////////////
 }
 
 static void send_data(void * handler, void * arg)
