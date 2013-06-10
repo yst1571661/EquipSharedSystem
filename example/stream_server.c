@@ -295,14 +295,14 @@ static void * save_file(void * arg)
                                         //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
                                     sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
                                     DebugPrintf("\n-----bmpfilename = %s-----\n", bmpfilename);
-                                    YUV2JPEG(gotbuf, 704, 576, bmpfilename); // 保存jpg图片
+                                    YUV2JPEG(gotbuf, 704, 576, bmpfilename); // save .jpg pictures
                                     DebugPrintf("\nbmp save sized:%d ", data->size);
                                     DebugPrintf("\nbmp save gotsized:%d ", gotsize);
 
                                     //if (Err_Check.begincheck && (!Err_Check.photo_checked))
                                     check_photo(bmpfilename);
 
-                                    BmpFileSend(bmpfilename);			// 发送图片
+                                    BmpFileSend(bmpfilename);			// send pictures
 
                                 }
                                 else
@@ -336,7 +336,7 @@ static void * save_file(void * arg)
                                 sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
                                 DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
 
-                                YUV2JPEG(gotbuf, 704, 576, bmpfilename); // 保存jpg图片
+                                YUV2JPEG(gotbuf, 704, 576, bmpfilename); // save .jpg pictures
 
                                 DebugPrintf("\nbmp save sized:%d ", data->size);
                                 DebugPrintf("\nbmp save gotsized:%d ", gotsize);
@@ -345,7 +345,7 @@ static void * save_file(void * arg)
                                 //if (Err_Check.begincheck && (!Err_Check.photo_checked))
                                         check_photo(bmpfilename);
                                 //DebugPrintf("\n------beginsendbmp = %d bmpfilename = %s\n\n", beginsendbmp, bmpfilename);
-                                BmpFileSend(bmpfilename);			// 发送图片
+                                BmpFileSend(bmpfilename);			// send pictures
                             }
                             else
                             {
@@ -367,8 +367,8 @@ static void * save_file(void * arg)
 
                     if (premin_time != curmin_time)
                     {
-                            GetIpaddr(); // 获取IP
-                            DebugPrintf("\n-----snrnum = %s -----\n",snrnum);//freqsendbmp分钟显示一次串号，IP
+                            GetIpaddr();
+                            DebugPrintf("\n-----snrnum = %s -----\n",snrnum);//show the macaddr every minite
                             premin_time = curmin_time;
                             //beginsendcard = 1;
                     }
@@ -379,7 +379,7 @@ static void * save_file(void * arg)
                         startsyncbmp = 1;
                         save_prehour = save_curhour;
                         DebugPrintf("\n------copy card info to flash------\n");
-                        pthread_mutex_lock(&cardfile_lock);				//更新读卡记录数据库
+                        pthread_mutex_lock(&cardfile_lock);				//update card.xml
                         system("cp /tmp/cards.xml /mnt/cards.xml");
                         pthread_mutex_unlock(&cardfile_lock);
                     }
@@ -511,7 +511,7 @@ int main(int argc, char * argv[])
         system("mkdir /mnt/work");
         system("mkdir /mnt/safe");
         init_log("/mnt/log/local.log",LOG_DEBUG);	//init log file
-//////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////
         if(init_at24c02b() == -1) // init eeprom
         {
                 return -1;
@@ -527,7 +527,7 @@ int main(int argc, char * argv[])
         }
         else
         {
-                fscanf(fd_mac,"%s",snrnum_temp);//取出的串号为12位
+                fscanf(fd_mac,"%s",snrnum_temp);//the macaddr is 12bit
                 fclose(fd_mac);
                 strcpy(snrnum, snrnum_temp);
                 snrnum[12] = '\0';
@@ -541,15 +541,15 @@ int main(int argc, char * argv[])
         system("ifconfig eth0 up");
         system("sleep 5");
 
-        //net_configure(); // 网络配置
+        //net_configure();
 ////////////////////////////////////////////////////////////////////
         memset(&context , 0 , sizeof(context));
 
         // parser argv
         pasarg(argc, argv, &context);
         //catch_mode 226    catch_sen  227  catch_freq 228 229   238 check eeprom 236 237 数卡时间间隔 239 240 用户数目
-        card_tlimit = 30;							//初始化读卡时间限制
-        device_mode = 0x01;							//默认设备为开放模式
+        card_tlimit = 30;							//init the limit of card interval
+        device_mode = 0x01;							//default open mode
         beginsendbmp = 1;
         beginupload = 0;
         reboot_flag=0;
@@ -572,7 +572,7 @@ int main(int argc, char * argv[])
             card_tlimit += read_at24c02b(221);
             if (card_tlimit == 65535)
                 card_tlimit = 30;
-            if (read_at24c02b(239) == 1)	//开机设置设备开放模式
+            if (read_at24c02b(239) == 1)	//set open mode on boot
                 device_mode = 1;
             else
                 device_mode = 0;
@@ -595,9 +595,9 @@ int main(int argc, char * argv[])
             write_at24c02b(231, BASIC_LEVEL_&0xFF);
             write_at24c02b(220, (card_tlimit>>8)&0xFF);
             write_at24c02b(221, card_tlimit&0xFF);
-            write_at24c02b(239,1);		//默认设备为开放模式
+            write_at24c02b(239,1);		//default set open mode
             write_at24c02b(241, 0);
-            is_redict = 0;				//第一次上电测试检测移动数据
+            is_redict = 0;			//test motion data when boot
             write_at24c02b(60, 0); //write_at24c02b(ADDR_BEGIN, 0);make
         }
 
@@ -656,13 +656,13 @@ int main(int argc, char * argv[])
         ///////////////////////////////////////////////////////////////////////////
         cam_start_work(&context.ipcam);
         */
-        init_ds3231(); // 初始化实时时钟芯片
+        init_ds3231(); // init clock chip
         struct rtc_time curtime;
         get_time(&curtime);
         DebugPrintf("\n-----current time %02d%02d%02d%02d%d.%02d-----", curtime.tm_mon,curtime.tm_mday,curtime.tm_hour,curtime.tm_min,curtime.tm_year,curtime.tm_sec);
         //init_ch450();
-        init_gpio_e(); // 初始化gpio
-        init_card_uart(); //初始化读卡器
+        init_gpio_e();
+        init_card_uart();
 
         ////////////////////////////////////////////////////////////////////////////
         if(read_at24c02b(45) == 11)
@@ -728,7 +728,7 @@ int main(int argc, char * argv[])
         //cam_start_work(&context.ipcam);
 
         /////////////////////////////////////////////////////////////////////////////
-        //net_configure();                      					//网络配置  read_optfile();
+        //net_configure();                      					//  read_optfile();
 
         if (pthread_mutex_init(&sttDspRoute.dsp_lock, NULL) != 0)
         {
@@ -736,20 +736,20 @@ int main(int argc, char * argv[])
                 exit(0);
         }
 
-        if (WorkThreadCreate(WavePacketSend, 0))        	//开同步图片线程
+        if (WorkThreadCreate(WavePacketSend, 0))        	//start the synchronization pictures thread
         {
                 perror("\n------------Thread WavePacketSend create error");
                 fflush(stdout);
                 exit(0);
         }
 
-        if (WorkThreadCreate(CardPacketSend, 0))        	//开查询参数线程
+        if (WorkThreadCreate(CardPacketSend, 0))        	//start the query parameter thread
         {
                 perror("\n------------Thread WavePacketSend create error");
                 fflush(stdout);
                 exit(0);
         }
-        if (_ConnLoop() == -1)	// 网络连接
+        if (_ConnLoop() == -1)	//net connect
         {
                 FreeMemForEx();
         }
