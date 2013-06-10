@@ -523,10 +523,10 @@ int main(int argc, char * argv[])
                 return -1;
         }
 
-    FILE *fd_mac;
+        FILE *fd_mac;
         char macaddr_cmd[50];
         char snrnum_temp[20];
-        fd_mac = fopen("/tmp/macaddr","r+"); // ´®ºÅÎÄ¼þ
+        fd_mac = fopen("/tmp/macaddr","r+"); // open the macaddr file
         if(fd_mac == NULL)
         {
                 DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
