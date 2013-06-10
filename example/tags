@@ -1,0 +1,910 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ADDR_BEGIN	tcp_connect.c	2484;"	d	file:
+ALARM_IRQ	rtc.h	67;"	d
+AR	Makefile	/^AR=i686-mingw32-ar$/;"	m
+BASIC_DIME	ip_cam_dev.c	247;"	d	file:
+BASIC_DISP	ip_cam_dev.c	246;"	d	file:
+BASIC_DISP	tcp_connect.c	2148;"	d	file:
+BASIC_LEVEL	ip_cam_dev.c	245;"	d	file:
+BASIC_LEVEL_	ip_cam_dev.c	/^int BASIC_LEVEL_ = 30000;$/;"	v
+BASIC_VALUE	tcp_connect.c	2149;"	d	file:
+BCD2BIN	bcd.h	13;"	d
+BCD_TO_BIN	bcd.h	17;"	d
+BCD_decode_tab	MYI2C_Ex.c	/^unsigned char BCD_decode_tab[0x10] = { 0X81, 0Xf3, 0X49, 0X61, 0X33, 0X25, 0X05, 0Xf1, 0X01, 0X21, 0X11, 0X07, 0X8d, 0X43, 0X0d, 0X1d };$/;"	v
+BIN2BCD	bcd.h	14;"	d
+BIN_TO_BCD	bcd.h	18;"	d
+BUFSIZE	tcp_connect.h	37;"	d
+BmpFileSend	tcp_connect.c	/^void BmpFileSend(char * bmpfilename)$/;"	f	signature:(char * bmpfilename)
+BmpFileSend	tcp_connect.h	/^ void BmpFileSend(char * bmpfilename);$/;"	p	signature:(char * bmpfilename)
+CAM_STATUS_FREE	ip_cam_dev.c	49;"	d	file:
+CAM_STATUS_INVAL	ip_cam_dev.c	48;"	d	file:
+CAM_STATUS_RUN	ip_cam_dev.c	47;"	d	file:
+CC	Makefile	/^CC=arm-linux-gcc$/;"	m
+CC	Makefile	/^CC=gcc$/;"	m
+CC	Makefile	/^CC=i686-mingw32-gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -O0 -g$/;"	m
+CHECK_ADDR	tcp_connect.c	2210;"	d	file:
+CHS_PER_CARD	ip_cam_dev.c	432;"	d	file:
+CMD_ACK	tcp_connect.h	23;"	d
+CMD_QUERY	tcp_connect.h	21;"	d
+CMD_STDSET	tcp_connect.h	22;"	d
+CMD_WAVE	tcp_connect.h	20;"	d
+CXX	Makefile	/^CXX=i686-mingw32-g++$/;"	m
+CardPacketSend	tcp_connect.c	/^void* CardPacketSend(void *arg)         \/\/查询参数$/;"	f	signature:(void *arg)
+CardPacketSend	tcp_connect.h	/^void* CardPacketSend(void *arg);$/;"	p	signature:(void *arg)
+CardRead	RfDemo_linux.c	/^int CardRead()$/;"	f
+DB_H_	db.h	2;"	d
+DEMO_ASFDISP	Makefile	/^DEMO_ASFDISP = demo_filedisp$/;"	m
+DEMO_ASFDISP	Makefile	/^DEMO_ASFDISP = demo_filedisp.exe$/;"	m
+DEMO_ASFREAD	Makefile	/^DEMO_ASFREAD = demo_filereader$/;"	m
+DEMO_ASFREAD	Makefile	/^DEMO_ASFREAD = demo_filereader.exe$/;"	m
+DEMO_DECODE	Makefile	/^DEMO_DECODE = demo_decode.exe$/;"	m
+DEMO_DECODE	Makefile	/^DEMO_DECODE=demo_decode$/;"	m
+DEMO_DISP	Makefile	/^DEMO_DISP = demo_display.exe$/;"	m
+DEMO_DISP	Makefile	/^DEMO_DISP=stream_display$/;"	m
+DEMO_SAVEFILE	Makefile	/^DEMO_SAVEFILE = demo_savefile.exe$/;"	m
+DEMO_SAVEFILE	Makefile	/^DEMO_SAVEFILE = stream_savefile$/;"	m
+DEMO_SERVER	Makefile	/^DEMO_SERVER =demo_server.exe$/;"	m
+DEMO_SERVER	Makefile	/^DEMO_SERVER=stream_server$/;"	m
+DISABLE	ip_cam_dev.c	56;"	d	file:
+DS3231_ADR	rtc.h	71;"	d
+DS3231_REG_COMPENSATE	rtc.h	85;"	d
+DS3231_REG_CONTROL	rtc.h	83;"	d
+DS3231_REG_DATE	rtc.h	78;"	d
+DS3231_REG_HOUR	rtc.h	76;"	d
+DS3231_REG_MIN	rtc.h	75;"	d
+DS3231_REG_MONTH	rtc.h	79;"	d
+DS3231_REG_SEC	rtc.h	74;"	d
+DS3231_REG_STATUS	rtc.h	84;"	d
+DS3231_REG_TEM_LSB	rtc.h	87;"	d
+DS3231_REG_TEM_MSB	rtc.h	86;"	d
+DS3231_REG_WEEK	rtc.h	77;"	d
+DS3231_REG_YEAR	rtc.h	80;"	d
+DataFun	ip_cam_dev.h	/^typedef void (*DataFun)(void * handler, void* data);$/;"	t
+DelFile	tcp_connect.c	/^int DelFile(char *filename)$/;"	f	signature:(char *filename)
+DispStates	asf_display.c	/^typedef struct DispStates {$/;"	s	file:
+DispStates	asf_display.c	/^} DispStates;$/;"	t	typeref:struct:DispStates	file:
+DispStates	sdl_display.c	/^typedef struct DispStates {$/;"	s	file:
+DispStates	sdl_display.c	/^} DispStates;$/;"	t	typeref:struct:DispStates	file:
+DispStates::bmp	asf_display.c	/^	SDL_Overlay * bmp;$/;"	m	struct:DispStates	file:	access:public
+DispStates::bmp	sdl_display.c	/^	SDL_Overlay * bmp;$/;"	m	struct:DispStates	file:	access:public
+DispStates::client	sdl_display.c	/^	Streaming_Client client; \/\/ streaming clent obj$/;"	m	struct:DispStates	file:	access:public
+DispStates::dispthread	asf_display.c	/^	SDL_Thread * dispthread;$/;"	m	struct:DispStates	file:	access:public
+DispStates::dispthread	sdl_display.c	/^	SDL_Thread * dispthread;$/;"	m	struct:DispStates	file:	access:public
+DispStates::fileinfo	asf_display.c	/^	Spct_File_Info fileinfo;$/;"	m	struct:DispStates	file:	access:public
+DispStates::height	asf_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+DispStates::height	sdl_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+DispStates::reader	asf_display.c	/^	Spct_File_Reader reader; \/\/ streaming clent obj$/;"	m	struct:DispStates	file:	access:public
+DispStates::screen	asf_display.c	/^	SDL_Surface * screen;$/;"	m	struct:DispStates	file:	access:public
+DispStates::screen	sdl_display.c	/^	SDL_Surface * screen;$/;"	m	struct:DispStates	file:	access:public
+DispStates::session	sdl_display.c	/^	C_Session * session;	 \/\/ connect session$/;"	m	struct:DispStates	file:	access:public
+DispStates::stoped	asf_display.c	/^	int stoped;$/;"	m	struct:DispStates	file:	access:public
+DispStates::stoped	sdl_display.c	/^	int stoped;$/;"	m	struct:DispStates	file:	access:public
+DispStates::trans	asf_display.c	/^	TransStates trans; $/;"	m	struct:DispStates	file:	access:public
+DispStates::trans	sdl_display.c	/^	TransStates trans; $/;"	m	struct:DispStates	file:	access:public
+DispStates::url	asf_display.c	/^	char * url;$/;"	m	struct:DispStates	file:	access:public
+DispStates::url	sdl_display.c	/^	char * url;$/;"	m	struct:DispStates	file:	access:public
+DispStates::width	asf_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+DispStates::width	sdl_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+DispatchPacket	tcp_connect.c	/^static int DispatchPacket(stuConnSock *sttParm)$/;"	f	file:	signature:(stuConnSock *sttParm)
+ENABLE	ip_cam_dev.c	52;"	d	file:
+EXIT	ip_cam_dev.c	73;"	d	file:
+Err_Check	tcp_connect.h	/^} Err_Check;$/;"	v	typeref:struct:err_check
+FF_QUIT_EVENT	asf_display.c	42;"	d	file:
+FF_QUIT_EVENT	sdl_display.c	41;"	d	file:
+FreeMemForEx	tcp_connect.c	/^ void FreeMemForEx()$/;"	f
+FreeMemForEx	tcp_connect.h	/^ void FreeMemForEx();$/;"	p	signature:()
+GDBM_BAD_MAGIC_NUMBER	gdbm.h	109;"	d
+GDBM_BLOCK_SIZE_ERROR	gdbm.h	104;"	d
+GDBM_CACHESIZE	gdbm.h	49;"	d
+GDBM_CANNOT_REPLACE	gdbm.h	119;"	d
+GDBM_CANT_BE_READER	gdbm.h	111;"	d
+GDBM_CANT_BE_WRITER	gdbm.h	112;"	d
+GDBM_CENTFREE	gdbm.h	52;"	d
+GDBM_COALESCEBLKS	gdbm.h	53;"	d
+GDBM_EMPTY_DATABASE	gdbm.h	110;"	d
+GDBM_FAST	gdbm.h	39;"	d
+GDBM_FASTMODE	gdbm.h	50;"	d
+GDBM_FILE	gdbm.h	/^typedef struct {int dummy[10];} *GDBM_FILE;$/;"	t	typeref:struct:__anon3
+GDBM_FILE_OPEN_ERROR	gdbm.h	105;"	d
+GDBM_FILE_READ_ERROR	gdbm.h	108;"	d
+GDBM_FILE_SEEK_ERROR	gdbm.h	107;"	d
+GDBM_FILE_WRITE_ERROR	gdbm.h	106;"	d
+GDBM_ILLEGAL_DATA	gdbm.h	120;"	d
+GDBM_INSERT	gdbm.h	45;"	d
+GDBM_ITEM_NOT_FOUND	gdbm.h	117;"	d
+GDBM_MALLOC_ERROR	gdbm.h	103;"	d
+GDBM_NEWDB	gdbm.h	38;"	d
+GDBM_NOLOCK	gdbm.h	41;"	d
+GDBM_NO_ERROR	gdbm.h	102;"	d
+GDBM_OPT_ALREADY_SET	gdbm.h	121;"	d
+GDBM_OPT_ILLEGAL	gdbm.h	122;"	d
+GDBM_READER	gdbm.h	35;"	d
+GDBM_READER_CANT_DELETE	gdbm.h	113;"	d
+GDBM_READER_CANT_REORGANIZE	gdbm.h	115;"	d
+GDBM_READER_CANT_STORE	gdbm.h	114;"	d
+GDBM_REORGANIZE_FAILED	gdbm.h	118;"	d
+GDBM_REPLACE	gdbm.h	46;"	d
+GDBM_SYNC	gdbm.h	40;"	d
+GDBM_SYNCMODE	gdbm.h	51;"	d
+GDBM_UNKNOWN_UPDATE	gdbm.h	116;"	d
+GDBM_WRCREAT	gdbm.h	37;"	d
+GDBM_WRITER	gdbm.h	36;"	d
+GPIO_CLR_PIN	GPIO_Ex.c	14;"	d	file:
+GPIO_IOC_MAGIC	GPIO_Ex.c	11;"	d	file:
+GPIO_READ_PIN	GPIO_Ex.c	15;"	d	file:
+GPIO_SET_PIN	GPIO_Ex.c	13;"	d	file:
+GetIpaddr	tcp_connect.c	/^int GetIpaddr() \/\/ 获取本地IP$/;"	f
+GetKey	tcp_connect.c	/^int GetKey(char *dst,char *outptr,char *filename)$/;"	f	signature:(char *dst,char *outptr,char *filename)
+GetNetStat	locallink.c	/^int GetNetStat( )$/;"	f
+Get_Netaddr	tcp_connect.c	/^ void Get_Netaddr(char *netaddr,unsigned char *temp_addr)$/;"	f	signature:(char *netaddr,unsigned char *temp_addr)
+HR12	rtc.h	63;"	d
+HR24	rtc.h	62;"	d
+HandleNewConn	tcp_connect.c	/^static int HandleNewConn(int fdListen)$/;"	f	file:	signature:(int fdListen)
+HeartbeatInit	tcp_connect.c	/^static void HeartbeatInit(int frequency, int alarmcnts)$/;"	f	file:	signature:(int frequency, int alarmcnts)
+INCLUDE	Makefile	/^INCLUDE = -I$(LIB_INC)$/;"	m
+INS_DIR	Makefile	/^INS_DIR := \/home\/ko\/target$/;"	m
+IPConfigfile_Path	tcp_connect.h	38;"	d
+IP_CAM_DEV_INC	ip_cam_dev.h	26;"	d
+Init_Webserver_Par	ip_cam_dev.c	/^int Init_Webserver_Par()$/;"	f
+IpAls	tcp_connect.c	/^int IpAls(const char *tmp,int length)$/;"	f	signature:(const char *tmp,int length)
+Ip_Cam_Device	ip_cam_dev.h	/^} Ip_Cam_Device;$/;"	t	typeref:struct:ip_cam_device
+IsSetaction	ip_cam_dev.c	/^void IsSetaction(int action_fd)$/;"	f	signature:(int action_fd)
+IsSetaction	tcp_connect.h	/^void IsSetaction(int action_fd);$/;"	p	signature:(int action_fd)
+KEY_SIZE_MAX	db.h	10;"	d
+LD	Makefile	/^LD=i686-mingw32-ld$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS = -L$(LIB_DIR) -lstreaming -lutils -lspctdecode -lpthread -ljpeg$/;"	m
+LEVEL_AMOUNT	ip_cam_dev.c	248;"	d	file:
+LIB_DIR	Makefile	/^LIB_DIR := ..\/lib\/$(TARGET)$/;"	m
+LIB_INC	Makefile	/^LIB_INC := ..\/include$/;"	m
+LedTwinkle	tcp_connect.c	/^void LedTwinkle()$/;"	f
+Led_delay	tcp_connect.h	/^int Led_delay;$/;"	v
+Led_off	tcp_connect.h	/^int Led_off;$/;"	v
+Led_on	tcp_connect.h	/^int Led_on;$/;"	v
+LimitVal	YUV2BMP.c	/^long LimitVal(long srcVal, long minVal, long maxVal)$/;"	f	signature:(long srcVal, long minVal, long maxVal)
+LimitVal	YUV2JPEG.c	/^long LimitVal(long srcVal, long minVal, long maxVal)$/;"	f	signature:(long srcVal, long minVal, long maxVal)
+MAX_LINK_SOCK	tcp_connect.h	11;"	d
+MyRGB	YUV2BMP.h	/^}MyRGB;$/;"	t	typeref:struct:__anon1
+NDEBUG	tcp_connect.h	41;"	d
+NTSC_HEIGHT_SIZE	ip_cam_dev.c	62;"	d	file:
+NTSC_WIDTH_SIZE	ip_cam_dev.c	61;"	d	file:
+NULL	YUV2BMP.h	15;"	d
+PACKET_ERR	tcp_connect.h	19;"	d
+PAL_HEIGHT_SIZE	ip_cam_dev.c	60;"	d	file:
+PAL_WIDTH_SIZE	ip_cam_dev.c	59;"	d	file:
+PORT	tcp_connect.h	10;"	d
+QUERY_NONE	tcp_connect.h	25;"	d
+Query_Buf_Res	ip_cam_dev.c	/^} Query_Buf_Res;$/;"	t	typeref:struct:query_buf_res	file:
+RECORD_LENGTH	db.h	6;"	d
+RECV_BUFF_SIZE	tcp_connect.h	12;"	d
+RTC_TIME_SCALE	rtc.h	64;"	d
+ReadSysTime	tcp_connect.c	/^void ReadSysTime(void)$/;"	f	signature:(void)
+ReadVol	GPIO_Ex.c	/^int ReadVol()$/;"	f
+ReadVol	GPIO_Ex.h	/^int ReadVol();$/;"	p	signature:()
+SDL_INC	Makefile	/^SDL_INC = \/usr\/include\/SDL				# linux SDL  include$/;"	m
+SDL_INC	Makefile	/^SDL_INC = \/usr\/local\/i686-mingw32\/i686-mingw32\/SDL-1.2.13\/include\/SDL  # mingw SDL include$/;"	m
+SDL_LIB	Makefile	/^SDL_LIB = \/usr\/lib						# linux SDL lib$/;"	m
+SDL_LIB	Makefile	/^SDL_LIB = \/usr\/local\/i686-mingw32\/i686-mingw32\/SDL-1.2.13\/lib		# mingw SDL lib$/;"	m
+SEND_BUFF_SIZE	tcp_connect.h	13;"	d
+SERVER_BUSY	tcp_connect.h	18;"	d
+SERVER_ERR	tcp_connect.h	17;"	d
+SIGRTC	rtc.h	66;"	d
+SPCT6100_DEV_H	spct6100_dev.h	2;"	d
+STRIP	Makefile	/^STRIP=i686-mingw32-strip$/;"	m
+Save_Webserver_Par	ip_cam_dev.c	/^int Save_Webserver_Par()$/;"	f
+Server_Context	stream_server.c	/^} Server_Context;$/;"	t	typeref:struct:server_context	file:
+SetLed	GPIO_Ex.c	/^int SetLed(int val)$/;"	f	signature:(int val)
+SetLed	GPIO_Ex.h	/^int SetLed(int val);$/;"	p	signature:(int val)
+SetNonBlock	tcp_connect.c	/^static void SetNonBlock(int fdListen)$/;"	f	file:	signature:(int fdListen)
+Set_time	device.c	/^int Set_time(unsigned char * time_buf)$/;"	f	signature:(unsigned char * time_buf)
+SockBuffRecv	tcp_connect.c	/^static int SockBuffRecv(stuConnSock *sttParm)$/;"	f	file:	signature:(stuConnSock *sttParm)
+SockPackSend	tcp_connect.c	/^static int SockPackSend(unsigned char cmdWord, int fdConn, stuConnSock *sttParm, const unsigned char *sendData, size_t dataLen)$/;"	f	file:	signature:(unsigned char cmdWord, int fdConn, stuConnSock *sttParm, const unsigned char *sendData, size_t dataLen)
+SockRelease	tcp_connect.c	/^static void SockRelease(stuConnSock *sttParm)$/;"	f	file:	signature:(stuConnSock *sttParm)
+SockServerInit	tcp_connect.c	/^static int SockServerInit()$/;"	f	file:
+SockThreadOpen	tcp_connect.c	/^static int SockThreadOpen(stuConnSock *sttParm)$/;"	f	file:	signature:(stuConnSock *sttParm)
+SyncParketExec	tcp_connect.c	/^static void* SyncParketExec(void *arg)$/;"	f	file:	signature:(void *arg)
+TARGET	Makefile	/^	export TARGET=arm && make all install$/;"	m
+TARGET	Makefile	/^	export TARGET=linux && make all install$/;"	m
+TARGET	Makefile	/^	export TARGET=mingw && make all install$/;"	m
+TARGET	Makefile	/^TARGET=mingw$/;"	m
+TICK_IRQ	rtc.h	68;"	d
+TIME_DISP	tcp_connect.c	2260;"	d	file:
+Test_24Card	librf.h	/^int Test_24Card(int icdev);$/;"	p	signature:(int icdev)
+Test_Struct	asf_save.c	/^} Test_Struct;$/;"	t	typeref:struct:test_struct	file:
+TransStates	asf_display.c	/^typedef struct TransStates$/;"	s	file:
+TransStates	asf_display.c	/^} TransStates;$/;"	t	typeref:struct:TransStates	file:
+TransStates	sdl_display.c	/^typedef struct TransStates$/;"	s	file:
+TransStates	sdl_display.c	/^} TransStates;$/;"	t	typeref:struct:TransStates	file:
+TransStates::audioframecount	asf_display.c	/^	int audioframecount;$/;"	m	struct:TransStates	file:	access:public
+TransStates::audioframecount	sdl_display.c	/^	int audioframecount;$/;"	m	struct:TransStates	file:	access:public
+TransStates::audiototalbytes	asf_display.c	/^	int audiototalbytes;$/;"	m	struct:TransStates	file:	access:public
+TransStates::audiototalbytes	sdl_display.c	/^	int audiototalbytes;$/;"	m	struct:TransStates	file:	access:public
+TransStates::time	asf_display.c	/^	int time;$/;"	m	struct:TransStates	file:	access:public
+TransStates::time	sdl_display.c	/^	int time;$/;"	m	struct:TransStates	file:	access:public
+TransStates::videoframecount	asf_display.c	/^	int videoframecount;$/;"	m	struct:TransStates	file:	access:public
+TransStates::videoframecount	sdl_display.c	/^	int videoframecount;$/;"	m	struct:TransStates	file:	access:public
+TransStates::videototalbytes	asf_display.c	/^	int videototalbytes;$/;"	m	struct:TransStates	file:	access:public
+TransStates::videototalbytes	sdl_display.c	/^	int videototalbytes;$/;"	m	struct:TransStates	file:	access:public
+Trim	tcp_connect.c	/^char *Trim(char *ptr)$/;"	f	signature:(char *ptr)
+TurnLedOff	GPIO_Ex.c	/^int TurnLedOff()$/;"	f
+TurnLedOff	GPIO_Ex.h	/^int TurnLedOff();$/;"	p	signature:()
+TurnLedOn	GPIO_Ex.c	/^int TurnLedOn()$/;"	f
+TurnLedOn	GPIO_Ex.h	/^int TurnLedOn();$/;"	p	signature:()
+USERHEAD	db.h	9;"	d
+UserConfigfile_Path	tcp_connect.h	39;"	d
+V4L2_BUF_FLAG_SPCT6100_AUDIO	spct6100_dev.h	54;"	d
+V4L2_BUF_FLAG_SPCT6100_MOTION	spct6100_dev.h	55;"	d
+V4L2_BUF_FLAG_SPCT6100_SPS	spct6100_dev.h	53;"	d
+V4L2_BUF_FLAG_SPCT6100_VIDEO	spct6100_dev.h	57;"	d
+V4L2_BUF_FLAG_SPCT6100_VLOST	spct6100_dev.h	56;"	d
+V4L2_CID_AUDIO	spct6100_dev.h	44;"	d
+V4L2_CID_DISABLEMOSAIC	spct6100_dev.h	30;"	d
+V4L2_CID_DOWNLOAD	spct6100_dev.h	48;"	d
+V4L2_CID_DSPSTATUS	spct6100_dev.h	49;"	d
+V4L2_CID_EENSPEED	spct6100_dev.h	26;"	d
+V4L2_CID_EQUALITY	spct6100_dev.h	25;"	d
+V4L2_CID_GOPSET	spct6100_dev.h	40;"	d
+V4L2_CID_INITENV	spct6100_dev.h	46;"	d
+V4L2_CID_MINTERVAL	spct6100_dev.h	32;"	d
+V4L2_CID_MODE	spct6100_dev.h	23;"	d
+V4L2_CID_MOSAIC	spct6100_dev.h	27;"	d
+V4L2_CID_MOTIONDETECT	spct6100_dev.h	28;"	d
+V4L2_CID_MTHRESHOLD	spct6100_dev.h	33;"	d
+V4L2_CID_OSDSET	spct6100_dev.h	34;"	d
+V4L2_CID_OSDTIMESYNC	spct6100_dev.h	29;"	d
+V4L2_CID_REQIFRAME	spct6100_dev.h	22;"	d
+V4L2_CID_RGPIO	spct6100_dev.h	41;"	d
+V4L2_CID_RI2C	spct6100_dev.h	36;"	d
+V4L2_CID_RUNCODE	spct6100_dev.h	51;"	d
+V4L2_CID_SGPIOD	spct6100_dev.h	37;"	d
+V4L2_CID_SHOWSIZE	spct6100_dev.h	47;"	d
+V4L2_CID_STATUS	spct6100_dev.h	24;"	d
+V4L2_CID_STOPBOARD	spct6100_dev.h	31;"	d
+V4L2_CID_UPLOAD	spct6100_dev.h	50;"	d
+V4L2_CID_VLOSTEN	spct6100_dev.h	39;"	d
+V4L2_CID_WATCHEN	spct6100_dev.h	42;"	d
+V4L2_CID_WATCHSET	spct6100_dev.h	43;"	d
+V4L2_CID_WGPIO	spct6100_dev.h	38;"	d
+V4L2_CID_WI2C	spct6100_dev.h	35;"	d
+WAVE_BUFF_LEN	tcp_connect.h	29;"	d
+WAVE_DATA_UNIT	tcp_connect.h	27;"	d
+WAVE_PACK_UNIT	tcp_connect.h	28;"	d
+WavePacketSend	tcp_connect.c	/^ void* WavePacketSend(void *arg)$/;"	f	signature:(void *arg)
+WavePacketSend	tcp_connect.h	/^ void* WavePacketSend(void *arg);$/;"	p	signature:(void *arg)
+WorkThreadCreate	tcp_connect.c	/^ int WorkThreadCreate(ptexec threadexec, int prio) \/\/ 创建线程$/;"	f	signature:(ptexec threadexec, int prio)
+WorkThreadCreate	tcp_connect.h	/^ int WorkThreadCreate(ptexec threadexec, int prio);$/;"	p	signature:(ptexec threadexec, int prio)
+WriteBmpFileHead	YUV2BMP.c	/^int WriteBmpFileHead(FILE *pf, long width, long height)$/;"	f	signature:(FILE *pf, long width, long height)
+XML2_INC	Makefile	/^XML2_INC = ..\/include\/libxml2 #XML2_INC = \/usr\/local\/arm_linux_4.2\/arm-linux\/include\/libxml2$/;"	m
+XmlChange	xml.c	/^int XmlChange(xmlChar *filename, int ChildrenNode1, int next1, int ChildrenNode2, int next2, xmlChar *recordtag, xmlChar *record) $/;"	f	signature:(xmlChar *filename, int ChildrenNode1, int next1, int ChildrenNode2, int next2, xmlChar *recordtag, xmlChar *record)
+XmlCreat	xml.c	/^int XmlCreat(xmlChar *filename)$/;"	f	signature:(xmlChar *filename)
+XmlRead	xml.c	/^xmlChar *XmlRead(xmlChar *filename, int ChildrenNode1, int next1, int ChildrenNode2, int next2, xmlChar *record) {$/;"	f	signature:(xmlChar *filename, int ChildrenNode1, int next1, int ChildrenNode2, int next2, xmlChar *record)
+XmlRead	xml.h	/^xmlChar *XmlRead(xmlChar *filename, int ChildrenNode1, int next1, int ChildrenNode2, int next2, xmlChar *record);$/;"	p	signature:(xmlChar *filename, int ChildrenNode1, int next1, int ChildrenNode2, int next2, xmlChar *record)
+XmlWrite	xml.c	/^int XmlWrite(xmlChar *filename, xmlChar *record) $/;"	f	signature:(xmlChar *filename, xmlChar *record)
+YUV2BMP	YUV2BMP.c	/^int YUV2BMP(unsigned char *pSrcBuffer, long width, long height, const char *fileName)$/;"	f	signature:(unsigned char *pSrcBuffer, long width, long height, const char *fileName)
+YUV2BMP	YUV2BMP.h	/^int YUV2BMP(unsigned char *pSrcBuffer, long width, long height, const char *fileName);$/;"	p	signature:(unsigned char *pSrcBuffer, long width, long height, const char *fileName)
+YUV2JPEG	YUV2JPEG.c	/^int YUV2JPEG(unsigned char *pSrcBuffer, long width, long height, const char *outfileName)$/;"	f	signature:(unsigned char *pSrcBuffer, long width, long height, const char *outfileName)
+YUV2RGB	YUV2BMP.c	/^int YUV2RGB(unsigned char Y, unsigned char U, unsigned char V, MyRGB *pDest)$/;"	f	signature:(unsigned char Y, unsigned char U, unsigned char V, MyRGB *pDest)
+YUV2RGB	YUV2JPEG.c	/^int YUV2RGB(unsigned char Y, unsigned char U, unsigned char V, MyRGB *pDest)$/;"	f	signature:(unsigned char Y, unsigned char U, unsigned char V, MyRGB *pDest)
+YUV2RGBBuffer	YUV2JPEG.c	/^int YUV2RGBBuffer(unsigned char *pSrcBuffer, long width, long height, char *outbuffer)$/;"	f	signature:(unsigned char *pSrcBuffer, long width, long height, char *outbuffer)
+_BCD_H	bcd.h	11;"	d
+_ConnLoop	tcp_connect.c	/^int _ConnLoop()$/;"	f
+_ConnLoop	tcp_connect.h	/^int _ConnLoop();$/;"	p	signature:()
+_GDBM_H_	gdbm.h	31;"	d
+_GPIO_EX_H	GPIO_Ex.h	2;"	d
+_RTC_H	rtc.h	59;"	d
+_TCP_CON_INC_	tcp_connect.h	2;"	d
+_XML_H	xml.h	2;"	d
+_YUV2BMP_H	YUV2BMP.h	2;"	d
+__P	gdbm.h	68;"	d
+__P	gdbm.h	70;"	d
+__RDRF_H	librf.h	2;"	d
+__anon1::b	YUV2BMP.h	/^	unsigned char b;$/;"	m	struct:__anon1	access:public
+__anon1::g	YUV2BMP.h	/^	unsigned char g;$/;"	m	struct:__anon1	access:public
+__anon1::r	YUV2BMP.h	/^	unsigned char r;$/;"	m	struct:__anon1	access:public
+__anon2::dptr	gdbm.h	/^	char *dptr;$/;"	m	struct:__anon2	access:public
+__anon2::dsize	gdbm.h	/^	int   dsize;$/;"	m	struct:__anon2	access:public
+__anon3::dummy	gdbm.h	/^typedef struct {int dummy[10];} *GDBM_FILE;$/;"	m	struct:__anon3	access:public
+__s16	spct6100_dev.h	/^typedef __signed__ short __s16;$/;"	t
+__s32	spct6100_dev.h	/^typedef __signed__ int __s32;$/;"	t
+__s64	spct6100_dev.h	/^typedef __signed__ long long __s64;$/;"	t
+__s8	spct6100_dev.h	/^typedef __signed__ char __s8;$/;"	t
+__u16	spct6100_dev.h	/^typedef unsigned short __u16;$/;"	t
+__u32	spct6100_dev.h	/^typedef unsigned int __u32;$/;"	t
+__u64	spct6100_dev.h	/^typedef unsigned long long __u64;$/;"	t
+__u8	spct6100_dev.h	/^typedef unsigned char __u8;$/;"	t
+a_hex	librf.h	/^int a_hex(unsigned char *a,unsigned char *hex,int len);		$/;"	p	signature:(unsigned char *a,unsigned char *hex,int len)
+action_fd	ip_cam_dev.h	/^int		action_fd;$/;"	v
+action_fd	tcp_connect.h	/^int		action_fd;$/;"	v
+audio_addr	ip_cam_dev.c	/^	char * audio_addr;$/;"	m	struct:packet_header	file:	access:public
+audio_enable	ip_cam_dev.c	/^	char audio_enable;             \/\/0x2f$/;"	m	struct:av_packet_header	file:	access:public
+audio_flag	ip_cam_dev.c	/^	unsigned int audio_flag;$/;"	m	struct:packet_header	file:	access:public
+audio_length	ip_cam_dev.c	/^	unsigned int audio_length;     \/\/0x18$/;"	m	struct:av_packet_header	file:	access:public
+audio_length	ip_cam_dev.c	/^	unsigned int audio_length;$/;"	m	struct:packet_header	file:	access:public
+audio_offset	ip_cam_dev.c	/^	unsigned int audio_offset;     \/\/0x24$/;"	m	struct:av_packet_header	file:	access:public
+audio_timestamp	ip_cam_dev.c	/^	unsigned int audio_timestamp;  \/\/0x38$/;"	m	struct:av_packet_header	file:	access:public
+audio_timestamp	ip_cam_dev.c	/^	unsigned int audio_timestamp;$/;"	m	struct:packet_header	file:	access:public
+audioframecount	asf_display.c	/^	int audioframecount;$/;"	m	struct:TransStates	file:	access:public
+audioframecount	sdl_display.c	/^	int audioframecount;$/;"	m	struct:TransStates	file:	access:public
+audiototalbytes	asf_display.c	/^	int audiototalbytes;$/;"	m	struct:TransStates	file:	access:public
+audiototalbytes	sdl_display.c	/^	int audiototalbytes;$/;"	m	struct:TransStates	file:	access:public
+av_packet_header	ip_cam_dev.c	/^struct av_packet_header{$/;"	s	file:
+av_packet_header::audio_enable	ip_cam_dev.c	/^	char audio_enable;             \/\/0x2f$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::audio_length	ip_cam_dev.c	/^	unsigned int audio_length;     \/\/0x18$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::audio_offset	ip_cam_dev.c	/^	unsigned int audio_offset;     \/\/0x24$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::audio_timestamp	ip_cam_dev.c	/^	unsigned int audio_timestamp;  \/\/0x38$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::bvideolost	ip_cam_dev.c	/^	unsigned int bvideolost;       \/\/0x30$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::encode_enable	ip_cam_dev.c	/^	char encode_enable;            \/\/0x2e$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::frame_type	ip_cam_dev.c	/^	unsigned int frame_type;       \/\/0x0c$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::header_size	ip_cam_dev.c	/^	unsigned int header_size;      \/\/0x0$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::motion_enable	ip_cam_dev.c	/^	char motion_enable;            \/\/0x2d$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::motion_length	ip_cam_dev.c	/^	unsigned int motion_length;    \/\/0x34$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::packet_size	ip_cam_dev.c	/^	unsigned int packet_size;      \/\/0x04$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::pad0	ip_cam_dev.c	/^	unsigned int pad0;             \/\/0x08$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::pad1	ip_cam_dev.c	/^	unsigned char pad1[88 - 0x3c]; \/\/0x3c$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::reserved0	ip_cam_dev.c	/^	unsigned int reserved0;        \/\/0x1c bsps$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::reserved1	ip_cam_dev.c	/^	unsigned int reserved1;        \/\/0x28 channel id$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::video_length	ip_cam_dev.c	/^	unsigned int video_length;     \/\/0x14$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::video_offset	ip_cam_dev.c	/^	unsigned int video_offset;     \/\/0x20$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::video_timestamp	ip_cam_dev.c	/^	unsigned int video_timestamp;  \/\/0x10$/;"	m	struct:av_packet_header	file:	access:public
+av_packet_header::videolost_enable	ip_cam_dev.c	/^	char videolost_enable;         \/\/0x2c$/;"	m	struct:av_packet_header	file:	access:public
+b	YUV2BMP.h	/^	unsigned char b;$/;"	m	struct:__anon1	access:public
+basename	stream_server.c	/^	char basename[256];$/;"	m	struct:server_context	file:	access:public
+begincheck	tcp_connect.h	/^	unsigned char begincheck;$/;"	m	struct:err_check	access:public
+beginsavewebpar	tcp_connect.h	/^int beginsavewebpar;$/;"	v
+beginsendbmp	tcp_connect.h	/^int beginsendbmp;$/;"	v
+beginsendcard	tcp_connect.h	/^int beginsendcard;$/;"	v
+beginsenddevice	tcp_connect.h	/^int beginsenddevice;$/;"	v
+beginsendsnrnum	tcp_connect.h	/^int beginsendsnrnum;$/;"	v
+beginsendtersta	tcp_connect.h	/^int beginsendtersta;$/;"	v
+beginsyncbmp	tcp_connect.h	/^int beginsyncbmp;$/;"	v
+beginwrite	stream_server.c	/^	int beginwrite;$/;"	m	struct:server_context	file:	access:public
+bmp	asf_display.c	/^	SDL_Overlay * bmp;$/;"	m	struct:DispStates	file:	access:public
+bmp	sdl_display.c	/^	SDL_Overlay * bmp;$/;"	m	struct:DispStates	file:	access:public
+board_check	tcp_connect.c	/^static void board_check(unsigned char *transBuffer)$/;"	f	file:	signature:(unsigned char *transBuffer)
+bsavefile	stream_server.c	/^	int bsavefile;$/;"	m	struct:server_context	file:	access:public
+buf_index	ip_cam_dev.c	/^    unsigned int buf_index;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av	ip_cam_dev.c	/^struct buffer_av{$/;"	s	file:
+buffer_av::buf_index	ip_cam_dev.c	/^    unsigned int buf_index;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av::bytesused	ip_cam_dev.c	/^	unsigned int bytesused;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av::flags	ip_cam_dev.c	/^    unsigned int flags;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av::input	ip_cam_dev.c	/^    unsigned int input;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av::length	ip_cam_dev.c	/^    unsigned int length;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av::offset	ip_cam_dev.c	/^    unsigned int offset;$/;"	m	struct:buffer_av	file:	access:public
+buffer_av::timestamp	ip_cam_dev.c	/^    struct timeval timestamp;$/;"	m	struct:buffer_av	typeref:struct:buffer_av::timeval	file:	access:public
+bvideolost	ip_cam_dev.c	/^	unsigned int bvideolost;       \/\/0x30$/;"	m	struct:av_packet_header	file:	access:public
+bytesused	ip_cam_dev.c	/^	unsigned int bytesused;$/;"	m	struct:buffer_av	file:	access:public
+cam_start_work	ip_cam_dev.c	/^int cam_start_work(Ip_Cam_Device * ipcam)$/;"	f	signature:(Ip_Cam_Device * ipcam)
+cam_start_work	ip_cam_dev.h	/^int cam_start_work(Ip_Cam_Device * ipcam);$/;"	p	signature:(Ip_Cam_Device * ipcam)
+card	tcp_connect.h	/^	unsigned char card;$/;"	m	struct:err_check	access:public
+card_beep	RfDemo_linux.c	/^void card_beep(int msec)$/;"	f	signature:(int msec)
+card_checked	tcp_connect.h	/^	unsigned char card_checked;$/;"	m	struct:err_check	access:public
+card_tlimit	tcp_connect.h	/^int card_tlimit;$/;"	v
+catch_freq	tcp_connect.h	/^int catch_freq;   \/\/时间间隔  单位:秒$/;"	v
+catch_mode	tcp_connect.h	/^int catch_mode;   \/\/ 0x01 动态检测  0x00 定时检测$/;"	v
+catch_sen	ip_cam_dev.h	/^int catch_sen;$/;"	v
+catch_sen	tcp_connect.h	/^int catch_sen;    \/\/采集灵敏度 0-4$/;"	v
+catchonemotion	ip_cam_dev.h	/^int catchonemotion;$/;"	v
+catchonemotion	tcp_connect.h	/^int catchonemotion;$/;"	v
+check_card	tcp_connect.c	/^static void check_card(int cur_cardsnr)$/;"	f	file:	signature:(int cur_cardsnr)
+check_eeprom	tcp_connect.c	/^static void check_eeprom(void)$/;"	f	file:	signature:(void)
+check_flash	tcp_connect.c	/^static void check_flash(void)$/;"	f	file:	signature:(void)
+check_photo	stream_server.c	/^static void check_photo(char *bmpfilename)$/;"	f	file:	signature:(char *bmpfilename)
+check_rtc	tcp_connect.c	/^static void check_rtc(void)$/;"	f	file:	signature:(void)
+client	asf_save.c	/^	Streaming_Client * client;$/;"	m	struct:test_struct	file:	access:public
+client	sdl_display.c	/^	Streaming_Client client; \/\/ streaming clent obj$/;"	m	struct:DispStates	file:	access:public
+clientAddr	tcp_connect.c	/^	struct in_addr clientAddr;                    \/\/客户端IP$/;"	m	struct:connectSock	typeref:struct:connectSock::in_addr	file:	access:public
+close_card_uart	RfDemo_linux.c	/^void close_card_uart()$/;"	f
+close_gpio_e	GPIO_Ex.c	/^void close_gpio_e()$/;"	f
+close_gpio_e	GPIO_Ex.h	/^void close_gpio_e();$/;"	p	signature:()
+cmptid	ip_cam_dev.h	/^	pthread_t cmptid;$/;"	m	struct:ip_cam_device	access:public
+comp_fd	ip_cam_dev.h	/^	int comp_fd;$/;"	m	struct:ip_cam_device	access:public
+comp_proc	ip_cam_dev.c	/^static void * comp_proc(void * para)$/;"	f	file:	signature:(void * para)
+connectComm	tcp_connect.h	/^typedef struct connectComm$/;"	s
+connectComm::dsp_data	tcp_connect.h	/^	unsigned char dsp_data[WAVE_BUFF_LEN];      \/\/波形发送缓冲区$/;"	m	struct:connectComm	access:public
+connectComm::dsp_lock	tcp_connect.h	/^	pthread_mutex_t dsp_lock;$/;"	m	struct:connectComm	access:public
+connectComm::dsp_num	tcp_connect.h	/^	unsigned int dsp_num;                      		 \/\/波形发送缓冲区数据大小$/;"	m	struct:connectComm	access:public
+connectSock	tcp_connect.c	/^typedef struct connectSock$/;"	s	file:
+connectSock::clientAddr	tcp_connect.c	/^	struct in_addr clientAddr;                    \/\/客户端IP$/;"	m	struct:connectSock	typeref:struct:connectSock::in_addr	file:	access:public
+connectSock::curReadth	tcp_connect.c	/^	unsigned long curReadth;                      \/\/接收缓冲区当前未处理字节数$/;"	m	struct:connectSock	file:	access:public
+connectSock::fdSock	tcp_connect.c	/^	int fdSock;                                   \/\/socket描述符$/;"	m	struct:connectSock	file:	access:public
+connectSock::isPid	tcp_connect.c	/^	pthread_t isPid;                              \/\/线程id$/;"	m	struct:connectSock	file:	access:public
+connectSock::lockBuffIn	tcp_connect.c	/^	pthread_mutex_t lockBuffIn;                   \/\/互斥锁 保护当前socket用户接收缓冲区$/;"	m	struct:connectSock	file:	access:public
+connectSock::lockBuffOut	tcp_connect.c	/^	pthread_mutex_t lockBuffOut;                  \/\/互斥锁 保护当前socket用户发送缓冲区$/;"	m	struct:connectSock	file:	access:public
+connectSock::loginLegal	tcp_connect.c	/^	int loginLegal;                               \/\/登录合法$/;"	m	struct:connectSock	file:	access:public
+connectSock::noProbes	tcp_connect.c	/^	int noProbes;                                 \/\/心搏函数未检测次数$/;"	m	struct:connectSock	file:	access:public
+connectSock::packBuffIn	tcp_connect.c	/^	unsigned char *packBuffIn;                    \/\/用户接收缓冲区$/;"	m	struct:connectSock	file:	access:public
+connectSock::packBuffOut	tcp_connect.c	/^	unsigned char *packBuffOut;                   \/\/用户发送缓冲区$/;"	m	struct:connectSock	file:	access:public
+connectSock::remainPos	tcp_connect.c	/^	unsigned long remainPos;                      \/\/上次通信未处理不完整包字节数$/;"	m	struct:connectSock	file:	access:public
+convertColor	YUV2JPEG.c	/^int convertColor(unsigned char *color, int width)$/;"	f	signature:(unsigned char *color, int width)
+curReadth	tcp_connect.c	/^	unsigned long curReadth;                      \/\/接收缓冲区当前未处理字节数$/;"	m	struct:connectSock	file:	access:public
+datacount	asf_save.c	/^	int datacount;$/;"	m	struct:test_struct	file:	access:public
+datahandler	ip_cam_dev.h	/^	void * datahandler;$/;"	m	struct:ip_cam_device	access:public
+datum	gdbm.h	/^      } datum;$/;"	t	typeref:struct:__anon2
+day	tcp_connect.h	/^	unsigned char day;$/;"	m	struct:err_check	access:public
+db_close	db.c	/^int db_close(GDBM_FILE gdb_ptr)$/;"	f	signature:(GDBM_FILE gdb_ptr)
+db_close	db.h	/^int db_close(GDBM_FILE ptr);$/;"	p	signature:(GDBM_FILE ptr)
+db_delete	db.c	/^int db_delete(GDBM_FILE db_ptr, datum key)$/;"	f	signature:(GDBM_FILE db_ptr, datum key)
+db_delete	db.h	/^int db_delete(GDBM_FILE ptr, datum key);$/;"	p	signature:(GDBM_FILE ptr, datum key)
+db_exists	db.c	/^int db_exists(GDBM_FILE db_ptr, datum key)$/;"	f	signature:(GDBM_FILE db_ptr, datum key)
+db_exists	db.h	/^int db_exists(GDBM_FILE ptr, datum key);              \/\/查找到返回0  否则负值$/;"	p	signature:(GDBM_FILE ptr, datum key)
+db_open	db.c	/^GDBM_FILE db_open(char *filename)$/;"	f	signature:(char *filename)
+db_open	db.h	/^GDBM_FILE db_open(char *filename);$/;"	p	signature:(char *filename)
+db_store	db.c	/^int db_store(GDBM_FILE db_ptr, datum key, datum value)$/;"	f	signature:(GDBM_FILE db_ptr, datum key, datum value)
+db_store	db.h	/^int db_store(GDBM_FILE ptr, datum key, datum value); \/\/存储$/;"	p	signature:(GDBM_FILE ptr, datum key, datum value)
+dc_CheckCard	librf.h	/^int dc_CheckCard(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_24C01	librf.h	/^int dc_Check_24C01(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_24C02	librf.h	/^int dc_Check_24C02(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_24C04	librf.h	/^int dc_Check_24C04(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_24C08	librf.h	/^int dc_Check_24C08(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_24C16	librf.h	/^int dc_Check_24C16(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_24C64	librf.h	/^int dc_Check_24C64(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_4428	librf.h	/^int dc_Check_4428(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_4442	librf.h	/^int dc_Check_4442(int icdev);$/;"	p	signature:(int icdev)
+dc_Check_CPU	librf.h	/^int dc_Check_CPU(int icdev);$/;"	p	signature:(int icdev)
+dc_HL_authentication	librf.h	/^int dc_HL_authentication(int icdev,unsigned char reqmode,unsigned long snr,unsigned char authmode,unsigned char secnr);$/;"	p	signature:(int icdev,unsigned char reqmode,unsigned long snr,unsigned char authmode,unsigned char secnr)
+dc_HL_decrement	librf.h	/^int dc_HL_decrement(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned long _Value,unsigned long _Snr,unsigned long *_NValue,unsigned long *_NSnr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned long _Value,unsigned long _Snr,unsigned long *_NValue,unsigned long *_NSnr)
+dc_HL_increment	librf.h	/^int dc_HL_increment(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned long _Value,unsigned long _Snr,unsigned long *_NValue,unsigned long *_NSnr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned long _Value,unsigned long _Snr,unsigned long *_NValue,unsigned long *_NSnr)
+dc_HL_initval	librf.h	/^int dc_HL_initval(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned long _Value,unsigned long *_Snr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned long _Value,unsigned long *_Snr)
+dc_HL_read	librf.h	/^int dc_HL_read(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long _Snr,unsigned char *_Data,unsigned long *_NSnr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long _Snr,unsigned char *_Data,unsigned long *_NSnr)
+dc_HL_readhex	librf.h	/^int dc_HL_readhex(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long _Snr,unsigned char *_Data,unsigned long *_NSnr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long _Snr,unsigned char *_Data,unsigned long *_NSnr)
+dc_HL_write	librf.h	/^int dc_HL_write(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long *_Snr,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long *_Snr,unsigned char *_Data)
+dc_HL_writehex	librf.h	/^int dc_HL_writehex(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long *_Snr,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _Adr,unsigned long *_Snr,unsigned char *_Data)
+dc_anticoll	librf.h	/^int dc_anticoll(int icdev,unsigned char _Bcnt,unsigned long *_Snr);$/;"	p	signature:(int icdev,unsigned char _Bcnt,unsigned long *_Snr)
+dc_anticoll2	librf.h	/^int dc_anticoll2(int icdev,unsigned char _Bcnt,unsigned long *_Snr);$/;"	p	signature:(int icdev,unsigned char _Bcnt,unsigned long *_Snr)
+dc_attrib	librf.h	/^int dc_attrib(int icdev,unsigned char *PUPI, unsigned char CID);$/;"	p	signature:(int icdev,unsigned char *PUPI, unsigned char CID)
+dc_authentication	librf.h	/^int dc_authentication(int icdev,unsigned char _Mode,unsigned char _SecNr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _SecNr)
+dc_authentication_2	librf.h	/^int dc_authentication_2(int icdev,unsigned char _Mode,unsigned char KeyNr,unsigned char Adr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char KeyNr,unsigned char Adr)
+dc_beep	librf.h	/^int dc_beep(int icdev,unsigned short _Msec);$/;"	p	signature:(int icdev,unsigned short _Msec)
+dc_card	librf.h	/^int dc_card(int icdev,unsigned char _Mode,unsigned long *_Snr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned long *_Snr)
+dc_card_double	librf.h	/^int dc_card_double(int icdev,unsigned char _Mode,unsigned char *_Snr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char *_Snr)
+dc_card_double_hex	librf.h	/^int dc_card_double_hex(int icdev,unsigned char _Mode,unsigned char *_Snr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char *_Snr)
+dc_card_hex	librf.h	/^int dc_card_hex(int icdev,unsigned char _Mode,unsigned char *snrstr);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char *snrstr)
+dc_change_addr	librf.h	/^int dc_change_addr(int icdev,unsigned char saddr);$/;"	p	signature:(int icdev,unsigned char saddr)
+dc_changeb3	librf.h	/^int dc_changeb3(int icdev,unsigned char _SecNr,unsigned char *_KeyA,unsigned char _B0,unsigned char _B1,unsigned char _B2,unsigned char _B3,unsigned char _Bk,unsigned char *_KeyB);$/;"	p	signature:(int icdev,unsigned char _SecNr,unsigned char *_KeyA,unsigned char _B0,unsigned char _B1,unsigned char _B2,unsigned char _B3,unsigned char _Bk,unsigned char *_KeyB)
+dc_changepin_4428	librf.h	/^int dc_changepin_4428(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_changepin_4428_hex	librf.h	/^int dc_changepin_4428_hex(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_changepin_4442	librf.h	/^int dc_changepin_4442(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_changepin_4442_hex	librf.h	/^int dc_changepin_4442_hex(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_check_write	librf.h	/^int dc_check_write(int icdev,unsigned long Snr,unsigned char authmode,unsigned char Adr,unsigned char * _data);$/;"	p	signature:(int icdev,unsigned long Snr,unsigned char authmode,unsigned char Adr,unsigned char * _data)
+dc_check_writehex	librf.h	/^int dc_check_writehex(int icdev,unsigned long Snr,unsigned char authmode,unsigned char Adr,unsigned char * _data);$/;"	p	signature:(int icdev,unsigned long Snr,unsigned char authmode,unsigned char Adr,unsigned char * _data)
+dc_clr_control_bit	librf.h	/^int dc_clr_control_bit(int icdev,unsigned char _b);$/;"	p	signature:(int icdev,unsigned char _b)
+dc_config	librf.h	/^int dc_config(int icdev,unsigned char _Mode,unsigned char _Baud);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _Baud)
+dc_config_card	librf.h	/^int dc_config_card(int icdev,unsigned char cardtype);$/;"	p	signature:(int icdev,unsigned char cardtype)
+dc_cpuapdu	librf.h	/^int dc_cpuapdu(int icdev,unsigned char slen,unsigned char * sendbuffer,unsigned char *rlen,unsigned char * databuffer);$/;"	p	signature:(int icdev,unsigned char slen,unsigned char * sendbuffer,unsigned char *rlen,unsigned char * databuffer)
+dc_cpuapdu_hex	librf.h	/^int dc_cpuapdu_hex(int icdev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer);$/;"	p	signature:(int icdev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer)
+dc_cpuapdusource	librf.h	/^int dc_cpuapdusource(int icdev,unsigned char slen,unsigned char * sendbuffer,unsigned char *rlen,unsigned char * databuffer);$/;"	p	signature:(int icdev,unsigned char slen,unsigned char * sendbuffer,unsigned char *rlen,unsigned char * databuffer)
+dc_cpuapdusource_hex	librf.h	/^int dc_cpuapdusource_hex(int icdev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer);$/;"	p	signature:(int icdev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer)
+dc_cpudown	librf.h	/^int dc_cpudown(int icdev);$/;"	p	signature:(int icdev)
+dc_cpureset	librf.h	/^int dc_cpureset(int icdev,unsigned char *rlen,unsigned char *databuffer);$/;"	p	signature:(int icdev,unsigned char *rlen,unsigned char *databuffer)
+dc_cpureset_hex	librf.h	/^int dc_cpureset_hex(int icdev,unsigned char *rlen, char *databuffer);$/;"	p	signature:(int icdev,unsigned char *rlen, char *databuffer)
+dc_ctl_mode	librf.h	/^int dc_ctl_mode(int icdev,unsigned char mode);$/;"	p	signature:(int icdev,unsigned char mode)
+dc_decrement	librf.h	/^int dc_decrement(int icdev,unsigned char _Adr,unsigned long _Value);$/;"	p	signature:(int icdev,unsigned char _Adr,unsigned long _Value)
+dc_decrement_ml	librf.h	/^int dc_decrement_ml(int icdev,unsigned int _Value);$/;"	p	signature:(int icdev,unsigned int _Value)
+dc_des	librf.h	/^int dc_des(unsigned char *key,unsigned char *sour,unsigned char *dest,int m);$/;"	p	signature:(unsigned char *key,unsigned char *sour,unsigned char *dest,int m)
+dc_disp_mode	librf.h	/^int dc_disp_mode(int icdev,unsigned char mode);$/;"	p	signature:(int icdev,unsigned char mode)
+dc_disp_str	librf.h	/^int dc_disp_str(int icdev,char *dispstr);$/;"	p	signature:(int icdev,char *dispstr)
+dc_exit	librf.h	/^int dc_exit(int icdev);$/;"	p	signature:(int icdev)
+dc_get_status	librf.h	/^int dc_get_status(int icdev,unsigned char *_Status);$/;"	p	signature:(int icdev,unsigned char *_Status)
+dc_gettime	librf.h	/^int dc_gettime(int icdev,unsigned char *time);$/;"	p	signature:(int icdev,unsigned char *time)
+dc_gettimehex	librf.h	/^int dc_gettimehex(int icdev,char *time);$/;"	p	signature:(int icdev,char *time)
+dc_getver	librf.h	/^int dc_getver(int icdev,unsigned char *sver);$/;"	p	signature:(int icdev,unsigned char *sver)
+dc_halt	librf.h	/^int dc_halt(int icdev);$/;"	p	signature:(int icdev)
+dc_high_disp	librf.h	/^int dc_high_disp(int icdev,unsigned char offset,unsigned char displen,unsigned char *dispstr);$/;"	p	signature:(int icdev,unsigned char offset,unsigned char displen,unsigned char *dispstr)
+dc_increment	librf.h	/^int dc_increment(int icdev,unsigned char _Adr,unsigned long _Value);$/;"	p	signature:(int icdev,unsigned char _Adr,unsigned long _Value)
+dc_init	librf.h	/^int dc_init(int port,long baud);$/;"	p	signature:(int port,long baud)
+dc_init_485	librf.h	/^int dc_init_485(int port,long baud);$/;"	p	signature:(int port,long baud)
+dc_initval	librf.h	/^int dc_initval(int icdev,unsigned char _Adr,unsigned long _Value);$/;"	p	signature:(int icdev,unsigned char _Adr,unsigned long _Value)
+dc_initval_ml	librf.h	/^int dc_initval_ml(int icdev,unsigned int _Value);$/;"	p	signature:(int icdev,unsigned int _Value)
+dc_light	librf.h	/^int dc_light(int icdev,unsigned short _OnOff);$/;"	p	signature:(int icdev,unsigned short _OnOff)
+dc_load_key	librf.h	/^int dc_load_key(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned char *_NKey);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _SecNr,unsigned char *_NKey)
+dc_load_key_hex	librf.h	/^int dc_load_key_hex(int icdev,unsigned char _Mode,unsigned char _SecNr,char *_NKey);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned char _SecNr,char *_NKey)
+dc_mfdes_auth	librf.h	/^int dc_mfdes_auth(int icdev,unsigned char keyno,unsigned char keylen,unsigned char *authkey,$/;"	p	signature:(int icdev,unsigned char keyno,unsigned char keylen,unsigned char *authkey, unsigned char *randAdata,unsigned char *randBdata)
+dc_mfdes_auth_hex	librf.h	/^int dc_mfdes_auth_hex(int icdev,unsigned char keyno,unsigned char keylen,unsigned char *authkey,$/;"	p	signature:(int icdev,unsigned char keyno,unsigned char keylen,unsigned char *authkey, unsigned char *randAdata,unsigned char *randBdata)
+dc_pro_command	librf.h	/^int dc_pro_command(int idComDev,unsigned char slen,$/;"	p	signature:(int idComDev,unsigned char slen, unsigned char * sendbuffer,unsigned char *rlen, unsigned char * databuffer,unsigned char timeout)
+dc_pro_command_hex	librf.h	/^int dc_pro_command_hex(int idComDev,unsigned char slen, $/;"	p	signature:(int idComDev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer,unsigned char timeout)
+dc_pro_commandhex	librf.h	/^int dc_pro_commandhex(int idComDev,unsigned char slen,$/;"	p	signature:(int idComDev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer,unsigned char timeout)
+dc_pro_commandlink	librf.h	/^int dc_pro_commandlink(int idComDev,unsigned char slen,$/;"	p	signature:(int idComDev,unsigned char slen, unsigned char * sendbuffer,unsigned char *rlen, unsigned char * databuffer,unsigned char timeout, unsigned char FG)
+dc_pro_commandlink_hex	librf.h	/^int dc_pro_commandlink_hex(int idComDev,unsigned char slen,$/;"	p	signature:(int idComDev,unsigned char slen, unsigned char * sendbuffer,unsigned char *rlen, unsigned char * databuffer,unsigned char timeout, unsigned char FG)
+dc_pro_commandsource	librf.h	/^int dc_pro_commandsource(int idComDev,unsigned char slen,$/;"	p	signature:(int idComDev,unsigned char slen, unsigned char * sendbuffer,unsigned char *rlen, unsigned char * databuffer,unsigned char timeout)
+dc_pro_commandsource_hex	librf.h	/^int dc_pro_commandsource_hex(int idComDev,unsigned char slen, $/;"	p	signature:(int idComDev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer,unsigned char timeout)
+dc_pro_commandsourcehex	librf.h	/^int dc_pro_commandsourcehex(int idComDev,unsigned char slen, $/;"	p	signature:(int idComDev,unsigned char slen, char * sendbuffer,unsigned char *rlen, char * databuffer,unsigned char timeout)
+dc_pro_halt	librf.h	/^int dc_pro_halt(int icdev);$/;"	p	signature:(int icdev)
+dc_pro_reset	librf.h	/^int dc_pro_reset(int icdev,unsigned char *rlen,unsigned char *receive_data);$/;"	p	signature:(int icdev,unsigned char *rlen,unsigned char *receive_data)
+dc_pro_reset_hex	librf.h	/^int dc_pro_reset_hex(int icdev,unsigned char *rlen, char *receive_data);$/;"	p	signature:(int icdev,unsigned char *rlen, char *receive_data)
+dc_pro_resethex	librf.h	/^int dc_pro_resethex(int icdev,unsigned char *rlen, char *receive_data);$/;"	p	signature:(int icdev,unsigned char *rlen, char *receive_data)
+dc_read	librf.h	/^int dc_read(int icdev,unsigned char _Adr,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char _Adr,unsigned char *_Data)
+dc_read_24c	librf.h	/^int dc_read_24c(int icdev,int offset,int lenth,unsigned char * receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * receive_buffer)
+dc_read_24c64	librf.h	/^int dc_read_24c64(int icdev,int offset,int lenth,unsigned char * receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * receive_buffer)
+dc_read_24c64_hex	librf.h	/^int dc_read_24c64_hex(int icdev,int offset,int lenth,unsigned char* receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* receive_buffer)
+dc_read_24c_hex	librf.h	/^int dc_read_24c_hex(int icdev,int offset,int lenth,unsigned char* receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* receive_buffer)
+dc_read_4428	librf.h	/^int dc_read_4428(int icdev,int offset,int lenth,unsigned char * receive_buffer);										 								 									$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * receive_buffer)
+dc_read_4428_hex	librf.h	/^int dc_read_4428_hex(int icdev,int offset,int lenth,unsigned char* receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* receive_buffer)
+dc_read_4442	librf.h	/^int dc_read_4442(int icdev,int offset,int lenth,unsigned char * receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * receive_buffer)
+dc_read_4442_hex	librf.h	/^int dc_read_4442_hex(int icdev,int offset,int lenth,unsigned char* receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* receive_buffer)
+dc_read_all	librf.h	/^int dc_read_all(int icdev,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char *_Data)
+dc_read_allhex	librf.h	/^int dc_read_allhex(int icdev, char *_Data);$/;"	p	signature:(int icdev, char *_Data)
+dc_read_auto	librf.h	/^int dc_read_auto(int icdev,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char *_Data)
+dc_read_autohex	librf.h	/^int dc_read_autohex(int icdev,char *_Data);$/;"	p	signature:(int icdev,char *_Data)
+dc_read_hex	librf.h	/^int dc_read_hex(int icdev,unsigned char _Adr,char *_Data);$/;"	p	signature:(int icdev,unsigned char _Adr,char *_Data)
+dc_read_one	librf.h	/^int dc_read_one(int icdev,unsigned char _SecNr,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char _SecNr,unsigned char *_Data)
+dc_read_onehex	librf.h	/^int dc_read_onehex(int icdev,unsigned char _SecNr,char *_Data);$/;"	p	signature:(int icdev,unsigned char _SecNr,char *_Data)
+dc_readpin_4428	librf.h	/^int dc_readpin_4428(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_readpin_4428_hex	librf.h	/^int dc_readpin_4428_hex(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_readpin_4442	librf.h	/^int dc_readpin_4442(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_readpin_4442_hex	librf.h	/^int dc_readpin_4442_hex(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_readpincount_4428	librf.h	/^int dc_readpincount_4428(int icdev);$/;"	p	signature:(int icdev)
+dc_readpincount_4442	librf.h	/^int dc_readpincount_4442(int icdev);$/;"	p	signature:(int icdev)
+dc_readval	librf.h	/^int dc_readval(int icdev,unsigned char _Adr,unsigned long *_Value);$/;"	p	signature:(int icdev,unsigned char _Adr,unsigned long *_Value)
+dc_readval_ml	librf.h	/^int dc_readval_ml(int icdev,unsigned int *_Value);$/;"	p	signature:(int icdev,unsigned int *_Value)
+dc_request	librf.h	/^int dc_request(int icdev,unsigned char _Mode,unsigned int *TagType);$/;"	p	signature:(int icdev,unsigned char _Mode,unsigned int *TagType)
+dc_request_b	librf.h	/^int dc_request_b(int icdev,unsigned char _Mode,$/;"	p	signature:(int icdev,unsigned char _Mode, unsigned char AFI, unsigned char N, unsigned char *ATQB)
+dc_reset	librf.h	/^int dc_reset(int icdev,unsigned int _Msec);$/;"	p	signature:(int icdev,unsigned int _Msec)
+dc_restore	librf.h	/^int dc_restore(int icdev,unsigned char _Adr);$/;"	p	signature:(int icdev,unsigned char _Adr)
+dc_select	librf.h	/^int dc_select(int icdev,unsigned long _Snr,unsigned char *_Size);$/;"	p	signature:(int icdev,unsigned long _Snr,unsigned char *_Size)
+dc_select2	librf.h	/^int dc_select2(int icdev,unsigned long _Snr,unsigned char *_Size);$/;"	p	signature:(int icdev,unsigned long _Snr,unsigned char *_Size)
+dc_set_addr	librf.h	/^int dc_set_addr(unsigned char saddr);$/;"	p	signature:(unsigned char saddr)
+dc_set_autoflag	librf.h	/^int dc_set_autoflag(int icdev,unsigned char _Byte);$/;"	p	signature:(int icdev,unsigned char _Byte)
+dc_set_control_bit	librf.h	/^int dc_set_control_bit(int icdev,unsigned char _b);$/;"	p	signature:(int icdev,unsigned char _b)
+dc_setbptime	librf.h	/^int dc_setbptime(int icdev,unsigned char _Byte);$/;"	p	signature:(int icdev,unsigned char _Byte)
+dc_setbright	librf.h	/^int dc_setbright(int icdev,unsigned char bright);$/;"	p	signature:(int icdev,unsigned char bright)
+dc_setcpu	librf.h	/^int dc_setcpu(int icdev,unsigned char _Byte);$/;"	p	signature:(int icdev,unsigned char _Byte)
+dc_setcpupara	librf.h	/^int dc_setcpupara(int icdev,unsigned char cputype,unsigned char cpupro,unsigned char cpuetu);$/;"	p	signature:(int icdev,unsigned char cputype,unsigned char cpupro,unsigned char cpuetu)
+dc_settime	librf.h	/^int dc_settime(int icdev,unsigned char *time);$/;"	p	signature:(int icdev,unsigned char *time)
+dc_settimehex	librf.h	/^int dc_settimehex(int icdev,char *time);$/;"	p	signature:(int icdev,char *time)
+dc_srd_eeprom	librf.h	/^int dc_srd_eeprom(int icdev,int offset,int lenth,unsigned char *rec_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char *rec_buffer)
+dc_srd_eepromhex	librf.h	/^int dc_srd_eepromhex(int icdev,int offset,int lenth,unsigned char *rec_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char *rec_buffer)
+dc_swr_eeprom	librf.h	/^int dc_swr_eeprom(int icdev,int offset,int lenth,unsigned char* send_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* send_buffer)
+dc_swr_eepromhex	librf.h	/^int dc_swr_eepromhex(int icdev,int offset,int lenth,unsigned char* send_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* send_buffer)
+dc_transfer	librf.h	/^int dc_transfer(int icdev,unsigned char _Adr);$/;"	p	signature:(int icdev,unsigned char _Adr)
+dc_update	librf.h	/^int dc_update(int icdev);$/;"	p	signature:(int icdev)
+dc_verifypin_4428	librf.h	/^int dc_verifypin_4428(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_verifypin_4428_hex	librf.h	/^int dc_verifypin_4428_hex(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_verifypin_4442	librf.h	/^int dc_verifypin_4442(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_verifypin_4442_hex	librf.h	/^int dc_verifypin_4442_hex(int icdev,unsigned char *passwd);$/;"	p	signature:(int icdev,unsigned char *passwd)
+dc_write	librf.h	/^int dc_write(int icdev,unsigned char _Adr,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char _Adr,unsigned char *_Data)
+dc_write_24c	librf.h	/^int dc_write_24c(int icdev,int offset,int lenth,unsigned char * snd_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * snd_buffer)
+dc_write_24c64	librf.h	/^int dc_write_24c64(int icdev,int offset,int lenth,unsigned char * snd_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * snd_buffer)
+dc_write_24c64_hex	librf.h	/^int dc_write_24c64_hex(int icdev,int offset,int lenth,unsigned char* send_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* send_buffer)
+dc_write_24c_hex	librf.h	/^int dc_write_24c_hex(int icdev,int offset,int lenth,unsigned char* send_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* send_buffer)
+dc_write_4428	librf.h	/^int dc_write_4428(int icdev,int offset,int lenth,unsigned char * snd_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * snd_buffer)
+dc_write_4428_hex	librf.h	/^int dc_write_4428_hex(int icdev,int offset,int lenth,unsigned char* send_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* send_buffer)
+dc_write_4442	librf.h	/^int dc_write_4442(int icdev,int offset,int lenth,unsigned char * snd_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char * snd_buffer)
+dc_write_4442_hex	librf.h	/^int dc_write_4442_hex(int icdev,int offset,int lenth,unsigned char* send_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* send_buffer)
+dc_write_all	librf.h	/^int dc_write_all(int icdev,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char *_Data)
+dc_write_allhex	librf.h	/^int dc_write_allhex(int icdev, char *_Data);$/;"	p	signature:(int icdev, char *_Data)
+dc_write_hex	librf.h	/^int dc_write_hex(int icdev,unsigned char _Adr,char *_Data);$/;"	p	signature:(int icdev,unsigned char _Adr,char *_Data)
+dc_write_one	librf.h	/^int dc_write_one(int icdev,unsigned char _SecNr,unsigned char *_Data);$/;"	p	signature:(int icdev,unsigned char _SecNr,unsigned char *_Data)
+dc_write_onehex	librf.h	/^int dc_write_onehex(int icdev,unsigned char _SecNr,char *_Data);$/;"	p	signature:(int icdev,unsigned char _SecNr,char *_Data)
+dcdeshex	librf.h	/^int dcdeshex(unsigned char *key,unsigned char *sour,unsigned char *dest,int m);$/;"	p	signature:(unsigned char *key,unsigned char *sour,unsigned char *dest,int m)
+dequeue_buffer	ip_cam_dev.c	/^static int dequeue_buffer(int fd, struct buffer_av *buf_av) {$/;"	f	file:	signature:(int fd, struct buffer_av *buf_av)
+disp_thread	asf_display.c	/^static int disp_thread(void * arg)$/;"	f	file:	signature:(void * arg)
+disp_thread	sdl_display.c	/^static int disp_thread(void * arg)$/;"	f	file:	signature:(void * arg)
+display_audio	asf_display.c	/^static display_audio(DispStates * vp, unsigned char * buf)$/;"	f	file:	signature:(DispStates * vp, unsigned char * buf)
+display_audio	sdl_display.c	/^static display_audio(DispStates * vp, unsigned char * buf)$/;"	f	file:	signature:(DispStates * vp, unsigned char * buf)
+display_video	asf_display.c	/^static display_video(DispStates * vp, unsigned char * buf)$/;"	f	file:	signature:(DispStates * vp, unsigned char * buf)
+display_video	sdl_display.c	/^static display_video(DispStates * vp, unsigned char * buf)$/;"	f	file:	signature:(DispStates * vp, unsigned char * buf)
+dispthread	asf_display.c	/^	SDL_Thread * dispthread;$/;"	m	struct:DispStates	file:	access:public
+dispthread	sdl_display.c	/^	SDL_Thread * dispthread;$/;"	m	struct:DispStates	file:	access:public
+do_motion_process	ip_cam_dev.c	/^static unsigned int do_motion_process(char * addr, unsigned int length)$/;"	f	file:	signature:(char * addr, unsigned int length)
+dptr	gdbm.h	/^	char *dptr;$/;"	m	struct:__anon2	access:public
+dq	stream_server.c	/^	Data_Queue dq;$/;"	m	struct:server_context	file:	access:public
+dsize	gdbm.h	/^	int   dsize;$/;"	m	struct:__anon2	access:public
+dsp_data	tcp_connect.h	/^	unsigned char dsp_data[WAVE_BUFF_LEN];      \/\/波形发送缓冲区$/;"	m	struct:connectComm	access:public
+dsp_lock	tcp_connect.h	/^	pthread_mutex_t dsp_lock;$/;"	m	struct:connectComm	access:public
+dsp_num	tcp_connect.h	/^	unsigned int dsp_num;                      		 \/\/波形发送缓冲区数据大小$/;"	m	struct:connectComm	access:public
+dstAddr	tcp_connect.c	/^	u_int dstAddr;$/;"	m	struct:route_info	file:	access:public
+dummy	gdbm.h	/^typedef struct {int dummy[10];} *GDBM_FILE;$/;"	m	struct:__anon3	access:public
+dump_fileinfo	asf_display.c	/^int dump_fileinfo(Spct_File_Info * fileinfo)$/;"	f	signature:(Spct_File_Info * fileinfo)
+dump_fileinfo	asf_read.c	/^int dump_fileinfo(Spct_File_Info * fileinfo)$/;"	f	signature:(Spct_File_Info * fileinfo)
+eeprom	tcp_connect.h	/^	unsigned char eeprom;$/;"	m	struct:err_check	access:public
+encode_enable	ip_cam_dev.c	/^	char encode_enable;            \/\/0x2e$/;"	m	struct:av_packet_header	file:	access:public
+err_check	tcp_connect.h	/^struct err_check {$/;"	s
+err_check::begincheck	tcp_connect.h	/^	unsigned char begincheck;$/;"	m	struct:err_check	access:public
+err_check::card	tcp_connect.h	/^	unsigned char card;$/;"	m	struct:err_check	access:public
+err_check::card_checked	tcp_connect.h	/^	unsigned char card_checked;$/;"	m	struct:err_check	access:public
+err_check::day	tcp_connect.h	/^	unsigned char day;$/;"	m	struct:err_check	access:public
+err_check::eeprom	tcp_connect.h	/^	unsigned char eeprom;$/;"	m	struct:err_check	access:public
+err_check::flash	tcp_connect.h	/^	unsigned char flash;$/;"	m	struct:err_check	access:public
+err_check::hour	tcp_connect.h	/^	unsigned char hour;$/;"	m	struct:err_check	access:public
+err_check::issavvideo	tcp_connect.h	/^	unsigned char issavvideo;$/;"	m	struct:err_check	access:public
+err_check::min	tcp_connect.h	/^	unsigned char min;$/;"	m	struct:err_check	access:public
+err_check::month	tcp_connect.h	/^	unsigned char month;$/;"	m	struct:err_check	access:public
+err_check::photo	tcp_connect.h	/^	unsigned char photo;$/;"	m	struct:err_check	access:public
+err_check::photo_checked	tcp_connect.h	/^	unsigned char photo_checked;$/;"	m	struct:err_check	access:public
+err_check::rtc	tcp_connect.h	/^	unsigned char rtc;$/;"	m	struct:err_check	access:public
+err_check::sec	tcp_connect.h	/^	unsigned char sec;$/;"	m	struct:err_check	access:public
+err_check::time_now	tcp_connect.h	/^    struct tm time_now;$/;"	m	struct:err_check	typeref:struct:err_check::tm	access:public
+err_check::yead_low	tcp_connect.h	/^	unsigned char yead_low;$/;"	m	struct:err_check	access:public
+err_check::year_high	tcp_connect.h	/^	unsigned char year_high;$/;"	m	struct:err_check	access:public
+error	asf_display.c	/^int error;$/;"	v
+error	sdl_display.c	/^int error;$/;"	v
+event_loop	asf_display.c	/^static void event_loop(DispStates * vp)$/;"	f	file:	signature:(DispStates * vp)
+event_loop	sdl_display.c	/^static void event_loop(DispStates * vp)$/;"	f	file:	signature:(DispStates * vp)
+exEvents	tcp_connect.c	/^fd_set rdEvents, exEvents;$/;"	v
+fdSock	tcp_connect.c	/^	int fdSock;                                   \/\/socket描述符$/;"	m	struct:connectSock	file:	access:public
+fd_i2c	rtc.h	/^static int fd_i2c;$/;"	v
+fd_i2c0	rtc.h	/^static int fd_i2c0;$/;"	v
+fd_video1	ip_cam_dev.c	/^static int fd_video1 = 0;$/;"	v	file:
+fileinfo	asf_display.c	/^	Spct_File_Info fileinfo;$/;"	m	struct:DispStates	file:	access:public
+fileopt	stream_server.c	/^	File_Opt fileopt;$/;"	m	struct:server_context	file:	access:public
+fileoptready	stream_server.c	/^	int fileoptready;$/;"	m	struct:server_context	file:	access:public
+filesize	stream_server.c	/^	int filesize;$/;"	m	struct:server_context	file:	access:public
+flags	ip_cam_dev.c	/^    unsigned int flags;$/;"	m	struct:buffer_av	file:	access:public
+flash	tcp_connect.h	/^	unsigned char flash;$/;"	m	struct:err_check	access:public
+frame_type	ip_cam_dev.c	/^	unsigned int frame_type;       \/\/0x0c$/;"	m	struct:av_packet_header	file:	access:public
+framecount	stream_server.c	/^	int framecount;$/;"	m	struct:server_context	file:	access:public
+freqsendbmp	tcp_connect.h	/^int freqsendbmp;$/;"	v
+fun	ip_cam_dev.h	/^	DataFun fun;$/;"	m	struct:ip_cam_device	access:public
+g	YUV2BMP.h	/^	unsigned char g;$/;"	m	struct:__anon1	access:public
+gIP_change	tcp_connect.h	/^static int gIP_change = 1;$/;"	v
+gateWay	tcp_connect.c	/^	u_int gateWay;$/;"	m	struct:route_info	file:	access:public
+gclient_addr	tcp_connect.c	/^struct sockaddr_in gclient_addr;$/;"	v	typeref:struct:sockaddr_in
+gdbm_close	gdbm.h	/^extern void gdbm_close __P((GDBM_FILE));$/;"	p	signature:(GDBM_FILE)
+gdbm_delete	gdbm.h	/^extern int gdbm_delete __P((GDBM_FILE, datum));$/;"	p	signature:(GDBM_FILE, datum)
+gdbm_error	gdbm.h	/^typedef int gdbm_error;		\/* For compatibilities sake. *\/$/;"	t
+gdbm_exists	gdbm.h	/^extern int gdbm_exists __P((GDBM_FILE, datum));$/;"	p	signature:(GDBM_FILE, datum)
+gdbm_fdesc	gdbm.h	/^extern int gdbm_fdesc __P((GDBM_FILE));$/;"	p	signature:(GDBM_FILE)
+gdbm_fetch	gdbm.h	/^extern datum gdbm_fetch __P((GDBM_FILE, datum));$/;"	p	signature:(GDBM_FILE, datum)
+gdbm_firstkey	gdbm.h	/^extern datum gdbm_firstkey __P((GDBM_FILE));$/;"	p	signature:(GDBM_FILE)
+gdbm_nextkey	gdbm.h	/^extern datum gdbm_nextkey __P((GDBM_FILE, datum));$/;"	p	signature:(GDBM_FILE, datum)
+gdbm_open	gdbm.h	/^extern GDBM_FILE gdbm_open __P((char *, int, int, int, void (*)()));$/;"	p	signature:(char *, int, int, int, void (*)())
+gdbm_reorganize	gdbm.h	/^extern int gdbm_reorganize __P((GDBM_FILE));$/;"	p	signature:(GDBM_FILE)
+gdbm_setopt	gdbm.h	/^extern int gdbm_setopt __P((GDBM_FILE, int, int *, int));$/;"	p	signature:(GDBM_FILE, int, int *, int)
+gdbm_store	gdbm.h	/^extern int gdbm_store __P((GDBM_FILE, datum, datum, int));$/;"	p	signature:(GDBM_FILE, datum, datum, int)
+gdbm_strerror	gdbm.h	/^extern char *gdbm_strerror __P((gdbm_error));$/;"	p	signature:(gdbm_error)
+gdbm_sync	gdbm.h	/^extern void gdbm_sync __P((GDBM_FILE));$/;"	p	signature:(GDBM_FILE)
+gdbm_usrbak	tcp_connect.c	/^static GDBM_FILE gdbm_usrbak = NULL;$/;"	v	file:
+get_gateway	tcp_connect.c	/^int get_gateway(char *gateway)$/;"	f	signature:(char *gateway)
+get_time	device.c	/^void get_time(struct rtc_time *tm)$/;"	f	signature:(struct rtc_time *tm)
+getdata_thread	asf_save.c	/^void * getdata_thread(void * par)$/;"	f	signature:(void * par)
+getstime	device.c	/^void getstime(struct tm *tm)$/;"	f	signature:(struct tm *tm)
+gheartbeat_fre	tcp_connect.h	/^static int gheartbeat_fre;$/;"	v
+gmax_nalarms	tcp_connect.h	/^static int gmax_nalarms;$/;"	v
+gpio_fd	GPIO_Ex.c	/^static int gpio_fd = -1;$/;"	v	file:
+gserver_addr	tcp_connect.c	/^struct sockaddr_in gserver_addr;$/;"	v	typeref:struct:sockaddr_in
+header_size	ip_cam_dev.c	/^	unsigned int header_size;      \/\/0x0$/;"	m	struct:av_packet_header	file:	access:public
+height	asf_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+height	sdl_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+hex_a	librf.h	/^int hex_a(unsigned char *hex,unsigned char *a,int length);$/;"	p	signature:(unsigned char *hex,unsigned char *a,int length)
+hour	tcp_connect.h	/^	unsigned char hour;$/;"	m	struct:err_check	access:public
+icdev	RfDemo_linux.c	/^static int icdev = -1;$/;"	v	file:
+ifName	tcp_connect.c	/^	char ifName[IF_NAMESIZE];$/;"	m	struct:route_info	file:	access:public
+infbuf	asf_read.c	/^char infbuf[1024];$/;"	v
+init_at24c02b	device.c	/^int init_at24c02b()$/;"	f
+init_card_uart	RfDemo_linux.c	/^int init_card_uart()$/;"	f
+init_ch450	MYI2C_Ex.c	/^int init_ch450()$/;"	f
+init_ds3231	device.c	/^int init_ds3231()$/;"	f
+init_gpio_e	GPIO_Ex.c	/^int init_gpio_e()$/;"	f
+init_gpio_e	GPIO_Ex.h	/^int init_gpio_e();$/;"	p	signature:()
+input	ip_cam_dev.c	/^    unsigned int input;$/;"	m	struct:buffer_av	file:	access:public
+ip_cam_construct	ip_cam_dev.c	/^int ip_cam_construct(Ip_Cam_Device * ipcam, char * devname)$/;"	f	signature:(Ip_Cam_Device * ipcam, char * devname)
+ip_cam_construct	ip_cam_dev.h	/^int ip_cam_construct(Ip_Cam_Device * ipcam, char * devname);$/;"	p	signature:(Ip_Cam_Device * ipcam, char * devname)
+ip_cam_destruct	ip_cam_dev.c	/^int ip_cam_destruct(Ip_Cam_Device * ipcam)$/;"	f	signature:(Ip_Cam_Device * ipcam)
+ip_cam_destruct	ip_cam_dev.h	/^int ip_cam_destruct(Ip_Cam_Device * ipcam);$/;"	p	signature:(Ip_Cam_Device * ipcam)
+ip_cam_device	ip_cam_dev.h	/^typedef struct ip_cam_device$/;"	s
+ip_cam_device::cmptid	ip_cam_dev.h	/^	pthread_t cmptid;$/;"	m	struct:ip_cam_device	access:public
+ip_cam_device::comp_fd	ip_cam_dev.h	/^	int comp_fd;$/;"	m	struct:ip_cam_device	access:public
+ip_cam_device::datahandler	ip_cam_dev.h	/^	void * datahandler;$/;"	m	struct:ip_cam_device	access:public
+ip_cam_device::fun	ip_cam_dev.h	/^	DataFun fun;$/;"	m	struct:ip_cam_device	access:public
+ip_cam_device::status	ip_cam_dev.h	/^	int status;$/;"	m	struct:ip_cam_device	access:public
+ip_cam_open_device	ip_cam_dev.c	/^static int ip_cam_open_device(Ip_Cam_Device * ipcam, char * devname)$/;"	f	file:	signature:(Ip_Cam_Device * ipcam, char * devname)
+ipcam	stream_server.c	/^	Ip_Cam_Device ipcam;$/;"	m	struct:server_context	file:	access:public
+ipdz	tcp_connect.c	/^char ipdz[16]="172.20.57.30";$/;"	v
+irq	rtc.h	/^static int irq;		\/\/alarm or tick$/;"	v
+isPid	tcp_connect.c	/^	pthread_t isPid;                              \/\/线程id$/;"	m	struct:connectSock	file:	access:public
+is_action	ip_cam_dev.c	/^int is_action = 0;$/;"	v
+is_redict	tcp_connect.c	/^int is_redict = 1; \/\/0 需要重定向$/;"	v
+islink	tcp_connect.c	/^int islink(void) \/\/ 判断SD卡是否挂载$/;"	f	signature:(void)
+issavvideo	tcp_connect.h	/^	unsigned char issavvideo;$/;"	m	struct:err_check	access:public
+led_state	tcp_connect.h	/^int led_state;$/;"	v
+lederrcount	tcp_connect.c	/^int lederrcount;$/;"	v
+ledtwinklebegin	tcp_connect.c	/^int ledtwinklebegin;$/;"	v
+length	ip_cam_dev.c	/^	int length;$/;"	m	struct:query_buf_res	file:	access:public
+length	ip_cam_dev.c	/^    unsigned int length;$/;"	m	struct:buffer_av	file:	access:public
+lockBuffIn	tcp_connect.c	/^	pthread_mutex_t lockBuffIn;                   \/\/互斥锁 保护当前socket用户接收缓冲区$/;"	m	struct:connectSock	file:	access:public
+lockBuffOut	tcp_connect.c	/^	pthread_mutex_t lockBuffOut;                  \/\/互斥锁 保护当前socket用户发送缓冲区$/;"	m	struct:connectSock	file:	access:public
+loginLegal	tcp_connect.c	/^	int loginLegal;                               \/\/登录合法$/;"	m	struct:connectSock	file:	access:public
+main	asf_display.c	/^int main(int argc, char * argv[])$/;"	f	signature:(int argc, char * argv[])
+main	asf_display.c	29;"	d	file:
+main	asf_read.c	/^int main(int argc, char * argv[])$/;"	f	signature:(int argc, char * argv[])
+main	asf_save.c	/^int main (int argc, char *argv[])$/;"	f	signature:(int argc, char *argv[])
+main	decode.c	/^int main(int argc, char * argv[])$/;"	f	signature:(int argc, char * argv[])
+main	sdl_display.c	/^int main(int argc, char * argv[])$/;"	f	signature:(int argc, char * argv[])
+main	sdl_display.c	28;"	d	file:
+main	stream_server.c	/^int main(int argc, char * argv[])$/;"	f	signature:(int argc, char * argv[])
+min	tcp_connect.h	/^	unsigned char min;$/;"	m	struct:err_check	access:public
+month	tcp_connect.h	/^	unsigned char month;$/;"	m	struct:err_check	access:public
+motion_addr	ip_cam_dev.c	/^	char * motion_addr;$/;"	m	struct:packet_header	file:	access:public
+motion_enable	ip_cam_dev.c	/^	char motion_enable;            \/\/0x2d$/;"	m	struct:av_packet_header	file:	access:public
+motion_flag	ip_cam_dev.c	/^	unsigned int motion_flag;$/;"	m	struct:packet_header	file:	access:public
+motion_length	ip_cam_dev.c	/^	unsigned int motion_length;    \/\/0x34$/;"	m	struct:av_packet_header	file:	access:public
+motion_length	ip_cam_dev.c	/^	unsigned int motion_length;$/;"	m	struct:packet_header	file:	access:public
+mrwg	tcp_connect.c	/^char mrwg[16]="172.20.56.1";$/;"	v
+myi2c_fd	MYI2C_Ex.c	/^static int myi2c_fd = -1;$/;"	v	file:
+net_configure	tcp_connect.c	/^int net_configure(void)   \/\/返回0网络配置成功，返回-1，网络配置失败$/;"	f	signature:(void)
+net_configure	tcp_connect.h	/^int net_configure(void) ;$/;"	p	signature:(void)
+netcheckagain	tcp_connect.c	/^int netcheckagain(char *tem_ipdz,char *tem_zwym,char *tem_mrwg)$/;"	f	signature:(char *tem_ipdz,char *tem_zwym,char *tem_mrwg)
+noProbes	tcp_connect.c	/^	int noProbes;                                 \/\/心搏函数未检测次数$/;"	m	struct:connectSock	file:	access:public
+offset	ip_cam_dev.c	/^    unsigned int offset;$/;"	m	struct:buffer_av	file:	access:public
+outfilename	stream_server.c	/^	char outfilename[256];$/;"	m	struct:server_context	file:	access:public
+packBuffIn	tcp_connect.c	/^	unsigned char *packBuffIn;                    \/\/用户接收缓冲区$/;"	m	struct:connectSock	file:	access:public
+packBuffOut	tcp_connect.c	/^	unsigned char *packBuffOut;                   \/\/用户发送缓冲区$/;"	m	struct:connectSock	file:	access:public
+packet_header	ip_cam_dev.c	/^struct packet_header{$/;"	s	file:
+packet_header::audio_addr	ip_cam_dev.c	/^	char * audio_addr;$/;"	m	struct:packet_header	file:	access:public
+packet_header::audio_flag	ip_cam_dev.c	/^	unsigned int audio_flag;$/;"	m	struct:packet_header	file:	access:public
+packet_header::audio_length	ip_cam_dev.c	/^	unsigned int audio_length;$/;"	m	struct:packet_header	file:	access:public
+packet_header::audio_timestamp	ip_cam_dev.c	/^	unsigned int audio_timestamp;$/;"	m	struct:packet_header	file:	access:public
+packet_header::motion_addr	ip_cam_dev.c	/^	char * motion_addr;$/;"	m	struct:packet_header	file:	access:public
+packet_header::motion_flag	ip_cam_dev.c	/^	unsigned int motion_flag;$/;"	m	struct:packet_header	file:	access:public
+packet_header::motion_length	ip_cam_dev.c	/^	unsigned int motion_length;$/;"	m	struct:packet_header	file:	access:public
+packet_header::video_addr	ip_cam_dev.c	/^	char * video_addr;$/;"	m	struct:packet_header	file:	access:public
+packet_header::video_flag	ip_cam_dev.c	/^	unsigned int video_flag;$/;"	m	struct:packet_header	file:	access:public
+packet_header::video_length	ip_cam_dev.c	/^	unsigned int video_length;$/;"	m	struct:packet_header	file:	access:public
+packet_header::video_timestamp	ip_cam_dev.c	/^	unsigned int video_timestamp;$/;"	m	struct:packet_header	file:	access:public
+packet_header::video_type	ip_cam_dev.c	/^	unsigned int video_type;$/;"	m	struct:packet_header	file:	access:public
+packet_header::videolost_flag	ip_cam_dev.c	/^	unsigned int videolost_flag;$/;"	m	struct:packet_header	file:	access:public
+packet_size	ip_cam_dev.c	/^	unsigned int packet_size;      \/\/0x04$/;"	m	struct:av_packet_header	file:	access:public
+pad0	ip_cam_dev.c	/^	unsigned int pad0;             \/\/0x08$/;"	m	struct:av_packet_header	file:	access:public
+pad1	ip_cam_dev.c	/^	unsigned char pad1[88 - 0x3c]; \/\/0x3c$/;"	m	struct:av_packet_header	file:	access:public
+parseRoutes	tcp_connect.c	/^void parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo, char *gateway)$/;"	f	signature:(struct nlmsghdr *nlHdr, struct route_info *rtInfo, char *gateway)
+parse_packet	ip_cam_dev.c	/^static void parse_packet(char ** packet_addr, struct packet_header * pkt_header)$/;"	f	file:	signature:(char ** packet_addr, struct packet_header * pkt_header)
+pasarg	stream_server.c	/^void pasarg(int argc, char * argv[], Server_Context * context)$/;"	f	signature:(int argc, char * argv[], Server_Context * context)
+photo	tcp_connect.h	/^	unsigned char photo;$/;"	m	struct:err_check	access:public
+photo_checked	tcp_connect.h	/^	unsigned char photo_checked;$/;"	m	struct:err_check	access:public
+pro	stream_server.c	/^	File_Property  pro;$/;"	m	struct:server_context	file:	access:public
+program_birth_year	asf_display.c	/^const int program_birth_year = 2010;$/;"	v
+program_birth_year	sdl_display.c	/^const int program_birth_year = 2010;$/;"	v
+program_name	asf_display.c	/^const char program_name[] = "file_display";$/;"	v
+program_name	sdl_display.c	/^const char program_name[] = "sdl_display";$/;"	v
+ptexec	tcp_connect.h	/^typedef void* ptexec(void *arg);$/;"	t
+query_Para	tcp_connect.c	/^char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)$/;"	f	signature:(const char *dataBuffer,int dataLenth,unsigned int *length)
+query_buf_res	ip_cam_dev.c	/^typedef struct query_buf_res$/;"	s	file:
+query_buf_res::length	ip_cam_dev.c	/^	int length;$/;"	m	struct:query_buf_res	file:	access:public
+query_buf_res::start	ip_cam_dev.c	/^	void * start;$/;"	m	struct:query_buf_res	file:	access:public
+query_buffer	ip_cam_dev.c	/^static int query_buffer(int fd, int index, unsigned int *length, unsigned int *offset ) {$/;"	f	file:	signature:(int fd, int index, unsigned int *length, unsigned int *offset )
+queue_buffer	ip_cam_dev.c	/^static int queue_buffer(int fd, int index) {$/;"	f	file:	signature:(int fd, int index)
+r	YUV2BMP.h	/^	unsigned char r;$/;"	m	struct:__anon1	access:public
+rdEvents	tcp_connect.c	/^fd_set rdEvents, exEvents;$/;"	v
+readNlSock	tcp_connect.c	/^int readNlSock(int sockFd, char *bufPtr, int seqNum, int pId)$/;"	f	signature:(int sockFd, char *bufPtr, int seqNum, int pId)
+read_at24c02b	device.c	/^int read_at24c02b(unsigned int addr)$/;"	f	signature:(unsigned int addr)
+read_optfile	tcp_connect.c	/^int read_optfile()		$/;"	f
+reader	asf_display.c	/^	Spct_File_Reader reader; \/\/ streaming clent obj$/;"	m	struct:DispStates	file:	access:public
+reconfig	tcp_connect.c	/^int reconfig()$/;"	f
+remainPos	tcp_connect.c	/^	unsigned long remainPos;                      \/\/上次通信未处理不完整包字节数$/;"	m	struct:connectSock	file:	access:public
+request_buffer	ip_cam_dev.c	/^static int request_buffer(int fd) {$/;"	f	file:	signature:(int fd)
+reserved0	ip_cam_dev.c	/^	unsigned int reserved0;        \/\/0x1c bsps$/;"	m	struct:av_packet_header	file:	access:public
+reserved1	ip_cam_dev.c	/^	unsigned int reserved1;        \/\/0x28 channel id$/;"	m	struct:av_packet_header	file:	access:public
+route_info	tcp_connect.c	/^struct route_info$/;"	s	file:
+route_info::dstAddr	tcp_connect.c	/^	u_int dstAddr;$/;"	m	struct:route_info	file:	access:public
+route_info::gateWay	tcp_connect.c	/^	u_int gateWay;$/;"	m	struct:route_info	file:	access:public
+route_info::ifName	tcp_connect.c	/^	char ifName[IF_NAMESIZE];$/;"	m	struct:route_info	file:	access:public
+route_info::srcAddr	tcp_connect.c	/^	u_int srcAddr;$/;"	m	struct:route_info	file:	access:public
+rtc	tcp_connect.h	/^	unsigned char rtc;$/;"	m	struct:err_check	access:public
+rtc_time	rtc.h	/^struct rtc_time {$/;"	s
+rtc_time::tm_hour	rtc.h	/^	unsigned int tm_hour;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_isdst	rtc.h	/^  	unsigned int tm_isdst;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_mday	rtc.h	/^	unsigned int tm_mday;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_min	rtc.h	/^	unsigned int tm_min;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_mon	rtc.h	/^	unsigned int tm_mon;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_sec	rtc.h	/^	unsigned int tm_sec;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_wday	rtc.h	/^	unsigned int tm_wday;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_yday	rtc.h	/^	unsigned int tm_yday;$/;"	m	struct:rtc_time	access:public
+rtc_time::tm_year	rtc.h	/^	unsigned int tm_year;$/;"	m	struct:rtc_time	access:public
+rtc_tm	device.c	/^struct rtc_time rtc_tm;$/;"	v	typeref:struct:rtc_time
+save_file	stream_server.c	/^static void * save_file(void * arg)$/;"	f	file:	signature:(void * arg)
+screen	asf_display.c	/^	SDL_Surface * screen;$/;"	m	struct:DispStates	file:	access:public
+screen	sdl_display.c	/^	SDL_Surface * screen;$/;"	m	struct:DispStates	file:	access:public
+sec	tcp_connect.h	/^	unsigned char sec;$/;"	m	struct:err_check	access:public
+self_check	tcp_connect.c	/^void self_check(int fd_video1)$/;"	f	signature:(int fd_video1)
+send_data	stream_server.c	/^static void send_data(void * handler, void * arg)$/;"	f	file:	signature:(void * handler, void * arg)
+server	stream_server.c	/^	Streaming_Server server;$/;"	m	struct:server_context	file:	access:public
+server_context	stream_server.c	/^typedef struct server_context$/;"	s	file:
+server_context::basename	stream_server.c	/^	char basename[256];$/;"	m	struct:server_context	file:	access:public
+server_context::beginwrite	stream_server.c	/^	int beginwrite;$/;"	m	struct:server_context	file:	access:public
+server_context::bsavefile	stream_server.c	/^	int bsavefile;$/;"	m	struct:server_context	file:	access:public
+server_context::dq	stream_server.c	/^	Data_Queue dq;$/;"	m	struct:server_context	file:	access:public
+server_context::fileopt	stream_server.c	/^	File_Opt fileopt;$/;"	m	struct:server_context	file:	access:public
+server_context::fileoptready	stream_server.c	/^	int fileoptready;$/;"	m	struct:server_context	file:	access:public
+server_context::filesize	stream_server.c	/^	int filesize;$/;"	m	struct:server_context	file:	access:public
+server_context::framecount	stream_server.c	/^	int framecount;$/;"	m	struct:server_context	file:	access:public
+server_context::ipcam	stream_server.c	/^	Ip_Cam_Device ipcam;$/;"	m	struct:server_context	file:	access:public
+server_context::outfilename	stream_server.c	/^	char outfilename[256];$/;"	m	struct:server_context	file:	access:public
+server_context::pro	stream_server.c	/^	File_Property  pro;$/;"	m	struct:server_context	file:	access:public
+server_context::server	stream_server.c	/^	Streaming_Server server;$/;"	m	struct:server_context	file:	access:public
+server_context::session	stream_server.c	/^	Streaming_Session * session;$/;"	m	struct:server_context	file:	access:public
+server_context::stop	stream_server.c	/^	int stop;$/;"	m	struct:server_context	file:	access:public
+server_context::timecount	stream_server.c	/^	int timecount;$/;"	m	struct:server_context	file:	access:public
+server_context::timenew	stream_server.c	/^	struct timeval timenew;$/;"	m	struct:server_context	typeref:struct:server_context::timeval	file:	access:public
+server_context::timeold	stream_server.c	/^	struct timeval timeold;$/;"	m	struct:server_context	typeref:struct:server_context::timeval	file:	access:public
+session	asf_save.c	/^	C_Session * session;$/;"	m	struct:test_struct	file:	access:public
+session	sdl_display.c	/^	C_Session * session;	 \/\/ connect session$/;"	m	struct:DispStates	file:	access:public
+session	stream_server.c	/^	Streaming_Session * session;$/;"	m	struct:server_context	file:	access:public
+set_Para	tcp_connect.c	/^char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)$/;"	f	signature:(const char *dataBuffer,int dataLenth,unsigned int *length)
+set_action	ip_cam_dev.c	/^void set_action(int fd, int *sen)$/;"	f	signature:(int fd, int *sen)
+set_action	ip_cam_dev.c	/^void set_action(int fd, int *sen);$/;"	p	file:	signature:(int fd, int *sen)
+set_action	ip_cam_dev.c	/^void set_action(int, int *);$/;"	p	file:	signature:(int, int *)
+set_action	ip_cam_dev.h	/^void set_action(int fd, int *sen);$/;"	p	signature:(int fd, int *sen)
+set_cation	tcp_connect.h	/^extern void set_cation(int, int);$/;"	p	signature:(int, int)
+set_time	device.c	/^int  set_time(unsigned int year0,unsigned int year1,unsigned int month,unsigned int day,unsigned int hour,unsigned int min,unsigned int sec)$/;"	f	signature:(unsigned int year0,unsigned int year1,unsigned int month,unsigned int day,unsigned int hour,unsigned int min,unsigned int sec)
+showhelp	stream_server.c	/^int showhelp(char * program)$/;"	f	signature:(char * program)
+sigAlarm	tcp_connect.c	/^static void sigAlarm(int signo)$/;"	f	file:	signature:(int signo)
+snrnum	tcp_connect.h	/^char snrnum[20];$/;"	v
+sockreleasebegin	tcp_connect.c	/^int sockreleasebegin;$/;"	v
+srcAddr	tcp_connect.c	/^	u_int srcAddr;$/;"	m	struct:route_info	file:	access:public
+srd_alleeprom	librf.h	/^int srd_alleeprom(int icdev,int offset,int lenth,unsigned char *receive_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char *receive_buffer)
+start	ip_cam_dev.c	/^	void * start;$/;"	m	struct:query_buf_res	file:	access:public
+status	ip_cam_dev.h	/^	int status;$/;"	m	struct:ip_cam_device	access:public
+stop	stream_server.c	/^	int stop;$/;"	m	struct:server_context	file:	access:public
+stoped	asf_display.c	/^	int stoped;$/;"	m	struct:DispStates	file:	access:public
+stoped	sdl_display.c	/^	int stoped;$/;"	m	struct:DispStates	file:	access:public
+streaming_off	ip_cam_dev.c	/^int streaming_off(int fd) {$/;"	f	signature:(int fd)
+streaming_on	ip_cam_dev.c	/^static int streaming_on(int fd) {$/;"	f	file:	signature:(int fd)
+sttConnSock	tcp_connect.c	/^stuConnSock sttConnSock[MAX_LINK_SOCK];           \/\/最大允许客户端并发连接数$/;"	v
+sttDspRoute	tcp_connect.h	/^stuConnComm sttDspRoute;$/;"	v
+stuConnComm	tcp_connect.h	/^}stuConnComm;$/;"	t	typeref:struct:connectComm
+stuConnSock	tcp_connect.c	/^}stuConnSock;$/;"	t	typeref:struct:connectSock	file:
+swr_alleeprom	librf.h	/^int swr_alleeprom(int icdev,int offset,int lenth,unsigned char* snd_buffer);$/;"	p	signature:(int icdev,int offset,int lenth,unsigned char* snd_buffer)
+syncbeginFname	tcp_connect.h	/^char syncbeginFname[50];$/;"	v
+syncendFname	tcp_connect.h	/^char syncendFname[50];$/;"	v
+sys_Time	tcp_connect.h	/^unsigned char sys_Time[15];$/;"	v
+test_struct	asf_save.c	/^typedef struct test_struct$/;"	s	file:
+test_struct::client	asf_save.c	/^	Streaming_Client * client;$/;"	m	struct:test_struct	file:	access:public
+test_struct::datacount	asf_save.c	/^	int datacount;$/;"	m	struct:test_struct	file:	access:public
+test_struct::session	asf_save.c	/^	C_Session * session;$/;"	m	struct:test_struct	file:	access:public
+test_struct::url	asf_save.c	/^	char * url;$/;"	m	struct:test_struct	file:	access:public
+time	asf_display.c	/^	int time;$/;"	m	struct:TransStates	file:	access:public
+time	sdl_display.c	/^	int time;$/;"	m	struct:TransStates	file:	access:public
+time_change	tcp_connect.h	/^int time_change;$/;"	v
+time_now	tcp_connect.h	/^    struct tm time_now;$/;"	m	struct:err_check	typeref:struct:err_check::tm	access:public
+timecount	stream_server.c	/^	int timecount;$/;"	m	struct:server_context	file:	access:public
+timenew	stream_server.c	/^	struct timeval timenew;$/;"	m	struct:server_context	typeref:struct:server_context::timeval	file:	access:public
+timeold	asf_read.c	/^struct timeval timeold;$/;"	v	typeref:struct:timeval
+timeold	stream_server.c	/^	struct timeval timeold;$/;"	m	struct:server_context	typeref:struct:server_context::timeval	file:	access:public
+timestamp	ip_cam_dev.c	/^    struct timeval timestamp;$/;"	m	struct:buffer_av	typeref:struct:buffer_av::timeval	file:	access:public
+tm_hour	rtc.h	/^	unsigned int tm_hour;$/;"	m	struct:rtc_time	access:public
+tm_isdst	rtc.h	/^  	unsigned int tm_isdst;$/;"	m	struct:rtc_time	access:public
+tm_mday	rtc.h	/^	unsigned int tm_mday;$/;"	m	struct:rtc_time	access:public
+tm_min	rtc.h	/^	unsigned int tm_min;$/;"	m	struct:rtc_time	access:public
+tm_mon	rtc.h	/^	unsigned int tm_mon;$/;"	m	struct:rtc_time	access:public
+tm_sec	rtc.h	/^	unsigned int tm_sec;$/;"	m	struct:rtc_time	access:public
+tm_wday	rtc.h	/^	unsigned int tm_wday;$/;"	m	struct:rtc_time	access:public
+tm_yday	rtc.h	/^	unsigned int tm_yday;$/;"	m	struct:rtc_time	access:public
+tm_year	rtc.h	/^	unsigned int tm_year;$/;"	m	struct:rtc_time	access:public
+trans	asf_display.c	/^	TransStates trans; $/;"	m	struct:DispStates	file:	access:public
+trans	sdl_display.c	/^	TransStates trans; $/;"	m	struct:DispStates	file:	access:public
+uc	librf.h	4;"	d
+uint32	GPIO_Ex.c	/^typedef unsigned int     uint32; $/;"	t	file:
+update_user_xml	tcp_connect.h	/^int update_user_xml;            \/\/更新用户数据$/;"	v
+url	asf_display.c	/^	char * url;$/;"	m	struct:DispStates	file:	access:public
+url	asf_save.c	/^	char * url;$/;"	m	struct:test_struct	file:	access:public
+url	sdl_display.c	/^	char * url;$/;"	m	struct:DispStates	file:	access:public
+usage	decode.c	/^void usage()$/;"	f
+user_count	tcp_connect.h	/^int user_count;$/;"	v
+user_version	tcp_connect.h	/^unsigned long user_version;    \/\/用户数据库版本号$/;"	v
+video_addr	ip_cam_dev.c	/^	char * video_addr;$/;"	m	struct:packet_header	file:	access:public
+video_flag	ip_cam_dev.c	/^	unsigned int video_flag;$/;"	m	struct:packet_header	file:	access:public
+video_length	ip_cam_dev.c	/^	unsigned int video_length;     \/\/0x14$/;"	m	struct:av_packet_header	file:	access:public
+video_length	ip_cam_dev.c	/^	unsigned int video_length;$/;"	m	struct:packet_header	file:	access:public
+video_offset	ip_cam_dev.c	/^	unsigned int video_offset;     \/\/0x20$/;"	m	struct:av_packet_header	file:	access:public
+video_timestamp	ip_cam_dev.c	/^	unsigned int video_timestamp;  \/\/0x10$/;"	m	struct:av_packet_header	file:	access:public
+video_timestamp	ip_cam_dev.c	/^	unsigned int video_timestamp;$/;"	m	struct:packet_header	file:	access:public
+video_type	ip_cam_dev.c	/^	unsigned int video_type;$/;"	m	struct:packet_header	file:	access:public
+videoframecount	asf_display.c	/^	int videoframecount;$/;"	m	struct:TransStates	file:	access:public
+videoframecount	sdl_display.c	/^	int videoframecount;$/;"	m	struct:TransStates	file:	access:public
+videolost_enable	ip_cam_dev.c	/^	char videolost_enable;         \/\/0x2c$/;"	m	struct:av_packet_header	file:	access:public
+videolost_flag	ip_cam_dev.c	/^	unsigned int videolost_flag;$/;"	m	struct:packet_header	file:	access:public
+videototalbytes	asf_display.c	/^	int videototalbytes;$/;"	m	struct:TransStates	file:	access:public
+videototalbytes	sdl_display.c	/^	int videototalbytes;$/;"	m	struct:TransStates	file:	access:public
+width	asf_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+width	sdl_display.c	/^	int width, height;	\/* source height & width *\/$/;"	m	struct:DispStates	file:	access:public
+wrconfile	tcp_connect.c	/^int wrconfile(const char *str,const char *filename)$/;"	f	signature:(const char *str,const char *filename)
+write_at24c02b	device.c	/^int write_at24c02b(unsigned int addr, int data)$/;"	f	signature:(unsigned int addr, int data)
+x	asf_save.c	/^int x = 1000;$/;"	v
+yead_low	tcp_connect.h	/^	unsigned char yead_low;$/;"	m	struct:err_check	access:public
+year_high	tcp_connect.h	/^	unsigned char year_high;$/;"	m	struct:err_check	access:public
+zwym	tcp_connect.c	/^char zwym[16]="255.255.254.0";$/;"	v
