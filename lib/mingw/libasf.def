@@ -1,0 +1,21 @@
+EXPORTS
+    Codec_List @1 DATA
+    add_audio_stream @2
+    add_video_stream @3
+    asf_close @4
+    asf_create @5
+    asf_write_data @6
+    close_asf @7
+    create_asf_file @8
+    drain_buffer @9
+    fileopt_asf_construct @10
+    fileopt_asf_destruct @11
+    get_codec_from_id @12
+    get_padding @13
+    put_data_chunk @14
+    put_data_object @15
+    put_header_extension @16
+    put_multi_payload @17
+    put_single_payload @18
+    timeval2int @19
+    write_packet @20

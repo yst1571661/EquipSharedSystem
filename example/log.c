@@ -53,13 +53,13 @@ int init_log(char *filename, int level)
     }
     log->std = 0;
     if (filename != NULL) {
-		do {
-        	fd = open(filename, O_RDWR | O_CREAT | O_APPEND );
-			if (fd < 0 && errno == EINTR) {
-				continue;
-			} else
-				break;
-		} while (1);
+                do {
+                fd = open(filename, O_RDWR | O_CREAT | O_APPEND );
+                        if (fd < 0 && errno == EINTR) {
+                                continue;
+                        } else
+                                break;
+                } while (1);
         memcpy(log->file, filename, strlen(filename)+1);
     }
     else {
@@ -146,25 +146,25 @@ void log_error_core(int level , const char *file, const char *fun, int line, con
 
     errstr[0] = '\n';
     errstr[1] = '\r';
-    
+
     now = time(NULL);
 
     t = localtime(&now);
-    strftime(str,100,"%Y-%m-%d %H:%M:%S ",t); 
-	
+    strftime(str,100,"%Y-%m-%d %H:%M:%S ",t);
+
     memcpy(errstr+count+2, str, strlen(str) > MAX_INFO_STR ? MAX_INFO_STR : strlen(str));
     count += strlen(str);
     errstr[++count] = ' ';
-    
+
     p = errstr + (++count);
-	
+
     sprintf(p, "[%s] file:%s fun:%s line:%d ", log_table[level], file,fun, line);
     count += strlen(p);
     errstr[count] = ' ';
     errstr[++count] = ' ';
 
     p = errstr + (++count);
-	
+
     va_start(args, fmt);
     vsprintf(p, fmt, args);
     va_end(args);
@@ -173,10 +173,10 @@ void log_error_core(int level , const char *file, const char *fun, int line, con
     errstr[++count] = '\n';
 
     mutex_lock();
-    
+
     fwrite(errstr, 1, count,logs->fp);
     log->size += count;
-    
+
     if (log->size > MAX_LOG) {
         if (!log->std) {
             char filename[MAX_NAME];
