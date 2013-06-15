@@ -179,13 +179,32 @@ void log_error_core(int level , const char *file, const char *fun, int line, con
 
     if (log->size > MAX_LOG) {
         if (!log->std) {
-            char filename[MAX_NAME];
+            char Filename[MAX_NAME],FilenameNext[MAX_NAME],CMD[MAX_NAME];
             int level;
             level = logs->log_level;
-            memcpy(filename, log->file, strlen(logs->file)+1);
-            unlink(logs->file);
+
+            //计算备份日志的序号
+            LogNum = read_at24c02b(242);
+            printf("LogNum = %d\n",LogNum);
+            if(LogNum>=MAX_LOG_COUNT)       //超过最大日志数
+            {
+                LogNum = 0;                 //日志循环
+                printf("from LOG 0\n");
+                write_at24c02b(242,0);
+            }
+            else
+            {
+                LogNum++;
+                printf("Next LOG\n");
+                write_at24c02b(242,LogNum);
+            }
+            sprintf(Filename,LOGFILEBACKDIR"%d",LogNum);
+            sprintf(CMD,"cp %s %s",log->file,Filename);
+            system(CMD);
+            //memcpy(Filename, log->file, strlen(logs->file)+1);
+            unlink(log->file);
             close_log();
-            init_log(filename, level);
+            init_log(LOGFILETMPDIR, level);     //LOGFILETMPDIR为内存中日志的目录
         }
     }
     mutex_unlock();

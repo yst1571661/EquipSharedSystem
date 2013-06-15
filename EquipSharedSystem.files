@@ -154,3 +154,4 @@ test/db_store_test.c
 test/gdbm.h
 test/gread.c
 test/thread_mutex_test.c
+include/streaming_server.h

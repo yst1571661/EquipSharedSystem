@@ -54,14 +54,14 @@ static int gIP_change = 1;
 #define	PrintScreen	printf
 #else
 #define	PrintScreen	/\
-					/
+                                        /
 #endif
 
 typedef struct connectComm
 {
-	unsigned char dsp_data[WAVE_BUFF_LEN];      //波形发送缓冲区
-	unsigned int dsp_num;                      		 //波形发送缓冲区数据大小
-	pthread_mutex_t dsp_lock;
+        unsigned char dsp_data[WAVE_BUFF_LEN];      //波形发送缓冲区
+        unsigned int dsp_num;                      		 //波形发送缓冲区数据大小
+        pthread_mutex_t dsp_lock;
 }stuConnComm;
 stuConnComm sttDspRoute;
 
@@ -119,23 +119,23 @@ extern int action_fd;
 
 /* 故障检测信息 */
 struct err_check {
-	unsigned char begincheck;
-	unsigned char flash;
-	unsigned char eeprom;
-	unsigned char rtc;
-	unsigned char card_checked;
-	unsigned char card;
-	unsigned char photo_checked;
-	unsigned char photo;
-	
-	unsigned char year_high;
-	unsigned char yead_low;
-	unsigned char month;
-	unsigned char day;
-	unsigned char hour;
-	unsigned char min;
-	unsigned char sec;
-	unsigned char issavvideo;
+        unsigned char begincheck;
+        unsigned char flash;
+        unsigned char eeprom;
+        unsigned char rtc;
+        unsigned char card_checked;
+        unsigned char card;
+        unsigned char photo_checked;
+        unsigned char photo;
+
+        unsigned char year_high;
+        unsigned char yead_low;
+        unsigned char month;
+        unsigned char day;
+        unsigned char hour;
+        unsigned char min;
+        unsigned char sec;
+        unsigned char issavvideo;
     //time_t		  time_now;
     struct tm time_now;
 } Err_Check;
@@ -157,9 +157,9 @@ int _ConnLoop();
  void FreeMemForEx();
 
  void* WavePacketSend(void *arg);
- 
+
 void* CardPacketSend(void *arg);
-	
+
 typedef void* ptexec(void *arg);
  int WorkThreadCreate(ptexec threadexec, int prio);
 

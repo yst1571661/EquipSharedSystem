@@ -24,10 +24,14 @@
 #define DEBUG_LAST            7
 
 #define MAX_LOG     (1048576 << 0)       //1MB
+#define MAX_LOG_COUNT    10
 #define MAX_NAME    50
 #define MAX_ERROR_STR 2048
-typedef struct abt_log log_t;
 
+#define LOGFILETMPDIR   "/tmp/local.log"
+#define LOGFILEBACKDIR  "/mnt/log/local.log"
+typedef struct abt_log log_t;
+unsigned LogNum;
 
 
 struct abt_log {

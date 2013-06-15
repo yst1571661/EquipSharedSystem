@@ -66,7 +66,6 @@ typedef struct server_context
 extern struct sockaddr_in gserver_addr;
 extern struct err_check err_check;
 
-
 //extern GDBM_FILE gdbm_card;
 
 //extern int is_redict;
@@ -115,7 +114,7 @@ static void * save_file(void * arg)
         int ret;
         char bmpfilename[50];
         char delfilename[50];
-    unsigned char min_time[2];
+        unsigned char min_time[2];
         int premin_time = 0;
         int curmin_time = 0;
         int prehou_time = 0;
@@ -503,18 +502,22 @@ int main(int argc, char * argv[])
 {
         Server_Context context;
         char url[256];
+        char LogFilename[50],LogFilenameNext[50];
+        unsigned char LogCount=0;
+        int res;
         pthread_attr_t attr;
         pthread_t threadId1;
-        int res;
-        system("mkdir /mnt/log");
-        system("mkdir /mnt/work");
-        system("mkdir /mnt/safe");
-        init_log("/mnt/log/local.log",LOG_DEBUG);	//init log file
+
         //////////////////////////////////////////////////////////////////////
         if(init_at24c02b() == -1) // init eeprom
         {
                 return -1;
         }
+        system("mkdir /mnt/log");
+        system("mkdir /mnt/work");
+        system("mkdir /mnt/safe");
+
+        init_log(LOGFILETMPDIR,LOG_DEBUG);
 
         FILE *fd_mac;
         char macaddr_cmd[50];
@@ -535,13 +538,13 @@ int main(int argc, char * argv[])
         sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
         DebugPrintf("\n----------%s----------",macaddr_cmd);
         DebugPrintf("\n");
-        system("ifconfig eth0 down ");
-        system(macaddr_cmd);
-        system("ifconfig eth0 up");
-        system("sleep 5");
+        //system("ifconfig eth0 down ");
+        //system(macaddr_cmd);
+        //system("ifconfig eth0 up");
+        //system("sleep 5");
 
         //net_configure();
-////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////
         memset(&context , 0 , sizeof(context));
 
         // parser argv
@@ -552,6 +555,7 @@ int main(int argc, char * argv[])
         beginsendbmp = 1;
         beginupload = 0;
         reboot_flag=0;
+
         if (read_at24c02b(225) == 11)
         {
             catch_mode = read_at24c02b(226);
@@ -595,7 +599,8 @@ int main(int argc, char * argv[])
             write_at24c02b(220, (card_tlimit>>8)&0xFF);
             write_at24c02b(221, card_tlimit&0xFF);
             write_at24c02b(239,1);		//default set open mode
-            write_at24c02b(241, 0);
+            write_at24c02b(241,0);
+            write_at24c02b(242,0);              //log number
             is_redict = 0;			//test motion data when boot
             write_at24c02b(60, 0); //write_at24c02b(ADDR_BEGIN, 0);make
         }

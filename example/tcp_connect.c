@@ -586,18 +586,18 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 ansData[2]  =0x06;
                 if(dataBuffer[1] == 0x00)
                 {
-            sprintf(syncbeginFname, "%02d%02d%02d%02d%02d%02d00.jpg", dataBuffer[2],dataBuffer[3],dataBuffer[4],dataBuffer[5],dataBuffer[6],dataBuffer[7]);
-             sprintf(syncendFname, "%02d%02d%02d%02d%02d%02d00.jpg", dataBuffer[8], dataBuffer[9],dataBuffer[10],dataBuffer[11],dataBuffer[12],dataBuffer[13]);
+                    sprintf(syncbeginFname, "%02d%02d%02d%02d%02d%02d00.jpg", dataBuffer[2],dataBuffer[3],dataBuffer[4],dataBuffer[5],dataBuffer[6],dataBuffer[7]);
+                    sprintf(syncendFname, "%02d%02d%02d%02d%02d%02d00.jpg", dataBuffer[8], dataBuffer[9],dataBuffer[10],dataBuffer[11],dataBuffer[12],dataBuffer[13]);
 #if DEBUG_CONN
-             DebugPrintf("\n-- query case 6 received-syncbeginFname = %s  syncendFname = %s---", syncbeginFname, syncendFname);
+                    DebugPrintf("\n-- query case 6 received-syncbeginFname = %s  syncendFname = %s---", syncbeginFname, syncendFname);
 #endif
-             beginsyncbmp = 1;
+                    beginsyncbmp = 1;
                 }
                 else if(dataBuffer[1] == 0xFF)
                 {
-                        beginsyncbmp = 0;
+                    beginsyncbmp = 0;
                 }
-                 return ansData;
+                return ansData;
                 break;
         /**********************************************************************************************/
         case 7: 			//采集模式  参数查询						//查询环境参数，具体为查询当前的电源电压和环境温度
