@@ -1355,9 +1355,9 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 ansData[2] = 0x14;
                 ansData[3] = dataBuffer[5];		//序号
                 ansData[4] = dataBuffer[6];
-        software_seqtmp = 0;
-        software_seqtmp+= (dataBuffer[5]<<8)&0xFF00;		//实际收到的序号
-        software_seqtmp += (dataBuffer[6])&0xFF;
+                software_seqtmp = 0;
+                software_seqtmp+= (dataBuffer[5]<<8)&0xFF00;		//实际收到的序号
+                software_seqtmp += (dataBuffer[6])&0xFF;
 
 #if DEBUG_DATA
                 DebugPrintf("\nsoftware_seq=%d\nsoftware_seqtmp=%d",software_seq,software_seqtmp);
@@ -1366,7 +1366,7 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 unsigned int RetWrite;
                 FILE *fp;
 
-        if(led_state==1)				//当前有人在上机
+                if(led_state==1)				//当前有人在上机
                 {
                         beginupload = 0;
 #if DEBUG_DATA
@@ -1374,9 +1374,9 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
 #endif
                         ansData[0] = 0xff;
                 }
-        else if(software_seqtmp==0)				//the first packet
-        //////////////////////在此接受程序//////////////////////////////
-        {
+                else if(software_seqtmp==0)				//the first packet
+                //////////////////////在此接受程序//////////////////////////////
+                {
                         system("rm /tmp/Tmp*");		//清除上次的临时文件
                         sprintf(soft_nametmp,"/tmp/Tmp_Soft");
 
@@ -1425,7 +1425,7 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                         ansData[0] = 0x00;
                 }
                 else
-        //////////////////////序列不连续//////////////////////////////
+                //////////////////////序列不连续//////////////////////////////
                 {
 #if DEBUG_CONN
                         DebugPrintf("\nsoftware_seq=%d\nsoftware_seqtmp=%d  !!!",software_seq,software_seqtmp);
@@ -1446,27 +1446,27 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 ansData[1] = 0x02;
                 ansData[2] = 0x15;
 
-        software_version = 0;														//software version
-        software_version += dataBuffer[1] << 24;			//high byte in the front,low byte in the back
-        software_version += dataBuffer[2] << 16;
-        software_version += dataBuffer[3] << 8;
-        software_version += dataBuffer[4] ;
+                software_version = 0;														//software version
+                software_version += dataBuffer[1] << 24;			//high byte in the front,low byte in the back
+                software_version += dataBuffer[2] << 16;
+                software_version += dataBuffer[3] << 8;
+                software_version += dataBuffer[4] ;
 
-        char*  program_tmp=malloc(byte_all);							//for store tmporary program
-        unsigned int CRC_server=0,CRC_local;
-        sprintf(soft_nametmp,"/tmp/Tmp_Soft");
-        fp=fopen(soft_nametmp,"r");        											//open the file
-        fread(program_tmp,1,byte_all,fp);										//read the file to "program_tmp"
-        fclose(fp);
-        CRC_local = CRC_check(program_tmp,0,byte_all);		//caculate the result of CRC
-        CRC_server += (dataBuffer[5]<<24)&0xFF000000;		//CRC result of the server
-        CRC_server += (dataBuffer[6]<<16)&0xFF0000;
-        CRC_server += (dataBuffer[7]<<8)&0xFF00;
-        CRC_server += (dataBuffer[8])&0xFF;
+                char*  program_tmp=malloc(byte_all);							//for store tmporary program
+                unsigned int CRC_server=0,CRC_local;
+                sprintf(soft_nametmp,"/tmp/Tmp_Soft");
+                fp=fopen(soft_nametmp,"r");        											//open the file
+                fread(program_tmp,1,byte_all,fp);										//read the file to "program_tmp"
+                fclose(fp);
+                CRC_local = CRC_check(program_tmp,0,byte_all);		//caculate the result of CRC
+                CRC_server += (dataBuffer[5]<<24)&0xFF000000;		//CRC result of the server
+                CRC_server += (dataBuffer[6]<<16)&0xFF0000;
+                CRC_server += (dataBuffer[7]<<8)&0xFF00;
+                CRC_server += (dataBuffer[8])&0xFF;
 
 #if DEBUG_DATA
-                        //DebugPrintf("\nALL BYTE = %d\nCRC_server=%x\nCRC_local=%x",CRC_server,CRC_local);
-                        //PrintScreen("\nALL BYTE = %d\nCRC_server=%x\nCRC_local=%x",CRC_server,CRC_local);
+                //DebugPrintf("\nALL BYTE = %d\nCRC_server=%x\nCRC_local=%x",CRC_server,CRC_local);
+                //PrintScreen("\nALL BYTE = %d\nCRC_server=%x\nCRC_local=%x",CRC_server,CRC_local);
 #endif
 
         if(CRC_server!=CRC_local)
@@ -1516,8 +1516,8 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
 
         beginupload = 0;
 #if DEBUG_DATA
-            DebugPrintf("\nGOING TO REBOOT!");
-            PrintScreen("\nGOING TO REBOOT!");
+        DebugPrintf("\nGOING TO REBOOT!");
+        PrintScreen("\nGOING TO REBOOT!");
 #endif
         reboot_flag = 1;
         return ansData;
@@ -1572,7 +1572,7 @@ static void* SyncParketExec(void *arg)
 {
         stuConnSock *conn = (stuConnSock *)arg;
         unsigned int leftLen, headFlag, packLen, ackLen=0;
-        unsigned char cmdWord, *buffer, *oriAddr, aCmdBuff[2048];
+        unsigned char cmdWord, *buffer, *oriAddr, aCmdBuff[1024*2];
         unsigned char *tmpBuffer;
 
         int count = 0;
@@ -3952,7 +3952,10 @@ void* CardPacketSend(void *arg)         //查询参数
             system("cp /tmp/user.xml /mnt/user.xml");
 
             if ((gdbm_user = db_open("/tmp/user.xml")) != NULL)
+            {
                 DebugPrintf("\n--------!!!!!!!!!!!!!!update user successful------\n");
+                PrintScreen("\n----!!updata_ordertime.xml----\n");
+            }
 
             write_at24c02b(232, (user_version >> 24) & 0xFF);
             write_at24c02b(233, (user_version >> 16) & 0xFF);
@@ -3962,12 +3965,9 @@ void* CardPacketSend(void *arg)         //查询参数
         }
         if(updata_ordertime_xml){						//更新备份的预约时间数据库
                         DebugPrintf("\n-------------!!!!!!!!!updata_ordertime.xml-------------\n");
+                        PrintScreen("\n----!!updata_ordertime.xml----\n");
                         updata_ordertime_xml = 0;
-                        //system("cp /tmp/ordertime.xml /tmp/ordertime.xml");
-
                         system("cp /tmp/ordertime.xml /mnt/ordertime.xml");
-
-                        system("./gread ../ordertime.xml");
 
                 }
 
