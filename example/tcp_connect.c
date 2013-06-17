@@ -3642,16 +3642,16 @@ void* CardPacketSend(void *arg)         //查询参数
                     }
 /***************非机组卡**********************************************/
                     sprintf(normal_card, "N%08lX", cur_cardsnr);		//在卡号前加N标示，检测是否为非机组卡
-                        key.dptr = normal_card;
-                                        key.dsize = strlen(normal_card)+1;
-                                        data = key;
+                    key.dptr = normal_card;
+                            key.dsize = strlen(normal_card)+1;
+                            data = key;
 
-                                        system("cp /tmp/cards.xml /mnt");
-                                        if (gdbm_exists(gdbm_user, key) != 0) {			//判断用户是否在非机组数据库,存在用户则进入
-#if NDEBUG
+                            system("cp /tmp/cards.xml /mnt");
+                            if (gdbm_exists(gdbm_user, key) != 0) {			//判断用户是否在非机组数据库,存在用户则进入
+
                             DebugPrintf("\n----obtain a normal card normal_card = %s, cardrecordwr = %s-------", normal_card, cardrecordwr);
                             PrintScreen("\n----obtain a normal card normal_card = %s, cardrecordwr = %s-------", normal_card, cardrecordwr);
-#endif
+
 
                                                 ////////////////////////////////////////
                                                 //记录刷卡信息//////////////////////////
@@ -3678,7 +3678,7 @@ void* CardPacketSend(void *arg)         //查询参数
                                                         //没有人上机或上机的人是自己/////////////
                                                         DebugPrintf("\n----------------open mode!!--------------------");
                                                         Led_delay = 1;
-                                sprintf(cardrecordwr, "%.14s_%.14s_%08lX", card_time, read_sys_Time,cur_cardsnr);		//记录刷卡信息
+                                                        sprintf(cardrecordwr, "%.14s_%.14s_%08lX", card_time, read_sys_Time,cur_cardsnr);		//记录刷卡信息
 #if NDEBUG
                                                         DebugPrintf("\n-----normal card cardrecordwr = %s-------", cardrecordwr);
 #endif
@@ -3686,7 +3686,7 @@ void* CardPacketSend(void *arg)         //查询参数
                                                         key.dsize = strlen(cardrecordwr) + 1;
                                                         data = key;
 
-                               // pthread_mutex_lock(&cardfile_lock);
+                                                        // pthread_mutex_lock(&cardfile_lock);
                                                         if (db_store(gdbm_card, key, data) < 0) {		//保存读卡记录
                                                                 DebugPrintf("\n--------normal store cardrecordwe err ------");
                                                                 //pthread_mutex_unlock(&cardfile_lock);
