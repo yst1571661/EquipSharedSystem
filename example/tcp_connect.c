@@ -1572,7 +1572,7 @@ static void* SyncParketExec(void *arg)
 {
         stuConnSock *conn = (stuConnSock *)arg;
         unsigned int leftLen, headFlag, packLen, ackLen=0;
-        unsigned char cmdWord, *buffer, *oriAddr, aCmdBuff[1024*2];
+        unsigned char cmdWord, *buffer, *oriAddr, aCmdBuff[1024*11];
         unsigned char *tmpBuffer;
 
         int count = 0;
@@ -1580,7 +1580,7 @@ static void* SyncParketExec(void *arg)
         {
                 pthread_testcancel();  //线程取消点
                 //DebugPrintf("\n-----------------------------------\n");
-        if( conn->packBuffIn==NULL)continue;
+                if( conn->packBuffIn==NULL)continue;
                 pthread_mutex_lock(&conn->lockBuffIn);
 
 
@@ -1619,7 +1619,7 @@ static void* SyncParketExec(void *arg)
                                 {
                                         cmdWord = buffer[4];                                           		//命令字
                                         packLen = (int)((buffer[5]<<8) + buffer[6]);                  	 //获取有效数据长度
-                                        if (packLen > 2048) {
+                                        if (packLen > RECV_BUFF_SIZE) {
                                                 leftLen = 0;
                                                 DebugPrintf("\n-------packet too large packLen = 0x%x------", packLen);
                                                 pthread_mutex_unlock(&conn->lockBuffIn);
@@ -1756,7 +1756,7 @@ static void* SyncParketExec(void *arg)
 
 static void SockRelease(stuConnSock *sttParm)
 {
-    sttParm->fdSock = 0;
+        sttParm->fdSock = 0;
         sttParm->loginLegal = 0;
 
         pthread_mutex_lock(&sttParm->lockBuffIn);
