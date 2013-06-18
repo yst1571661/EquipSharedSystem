@@ -73,3 +73,6 @@ make arm
 make arm
 make arm
 make arm
+make arm
+make arm
+telnet 192.168.1.8

@@ -538,12 +538,14 @@ int main(int argc, char * argv[])
         sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
         DebugPrintf("\n----------%s----------",macaddr_cmd);
         DebugPrintf("\n");
-        //system("ifconfig eth0 down ");
-        //system(macaddr_cmd);
-        //system("ifconfig eth0 up");
-        //system("sleep 5");
+#if RELEASE_MODE
+        system("ifconfig eth0 down ");
+        system(macaddr_cmd);
+        system("ifconfig eth0 up");
+        system("sleep 5");
 
-        //net_configure();
+        net_configure();
+#endif
         ////////////////////////////////////////////////////////////////////
         memset(&context , 0 , sizeof(context));
 
