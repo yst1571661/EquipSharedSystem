@@ -1572,7 +1572,7 @@ static void* SyncParketExec(void *arg)
 {
         stuConnSock *conn = (stuConnSock *)arg;
         unsigned int leftLen, headFlag, packLen, ackLen=0;
-        unsigned char cmdWord, *buffer, *oriAddr, aCmdBuff[1024*11];
+        unsigned char cmdWord, *buffer, *oriAddr, aCmdBuff[1024*1500];
         unsigned char *tmpBuffer;
 
         int count = 0;
@@ -1582,8 +1582,6 @@ static void* SyncParketExec(void *arg)
                 //DebugPrintf("\n-----------------------------------\n");
                 if( conn->packBuffIn==NULL)continue;
                 pthread_mutex_lock(&conn->lockBuffIn);
-
-
 
                 if ((conn->fdSock>0) && (conn->curReadth>0))                //扫描可用可读写socket
                 {
@@ -2035,7 +2033,7 @@ int _ConnLoop()
                 carchExEvents = exEvents;
                 catchRdEvents = rdEvents;
                 //pthread_mutex_unlock(&gspecset_lock);
-        // system("ifconfig eth0 up");
+                // system("ifconfig eth0 up");
                 rtn = select(highConn+1, &catchRdEvents, NULL, &carchExEvents, &tmout);
                 //pthread_mutex_unlock(&gspecset_lock);
 
@@ -2237,6 +2235,7 @@ void parseRoutes(struct nlmsghdr *nlHdr, struct route_info *rtInfo, char *gatewa
         {
                 gate.s_addr = rtInfo->gateWay;
                 sprintf(gateway, (char *)inet_ntoa(gate));
+                PrintScreen(gateway);
         }
         free(tempBuf);
         return;
@@ -2499,20 +2498,29 @@ int net_configure(void)   //返回0网络配置成功，返回-1，网络配置失败
         char tem_mrwg[16]={0};
         int i;
 
-        read_optfile();								//获取网络配置文件中的IP地址，子网掩码以及默认网关
+        /*获取网络配置文件中的IP地址，子网掩码以及默认网关*/
+        read_optfile();
 
         DebugPrintf("\n----%s\n    %s\n    %s\n", ipdz, zwym, mrwg);
-        sprintf(buff,"ifconfig eth0 %s netmask %s",ipdz,zwym);
-        if(system(buff) != 0)							//调用linux系统命令配置网络
+
+        /*禁用设备*/
+        if(system("ifconfig eth0 down")!=0)
                 DebugPrintf("\nsystem(1) error");
 
-        if(system("ifconfig eth0 down")!=0)				//禁用设备
+        /*激活设备*/
+        if(system("ifconfig eth0 up")!=0)
                 DebugPrintf("\nsystem(2) error");
 
-        if(system("ifconfig eth0 up")!=0)				//激活设备
+        /*动态获取IP、子网掩码、网关、DNS*/
+        system("udhcpc");
+
+        /*调用linux系统命令配置网络*/
+        sprintf(buff,"ifconfig eth0 %s netmask %s",ipdz,zwym);
+        if(system(buff) != 0)
                 DebugPrintf("\nsystem(3) error");
 
-        sprintf(buff,"route add default gw %s",mrwg);		//添加默认网关
+        /*添加默认网关*/
+        sprintf(buff,"route add default gw %s",mrwg);
         if(system(buff)!=0)
                 DebugPrintf("\nsystem(4) error");
         sleep(3);
@@ -4130,27 +4138,26 @@ void* CardPacketSend(void *arg)         //查询参数
 {
         pthread_t pid;
         pthread_attr_t attr;
+        size_t StackSize=THREAD_STACK;
         //int policy;
         int err;
                                                                                                                 //线程默认的属性为非绑定、非分离、缺省1M的堆栈、与父进程同样级别的优先级。
-        err = pthread_attr_init(&attr);								//线程属性值不能直接设置，须使用相关函数进行操作，
+        err = pthread_attr_init(&attr);                             		//线程属性值不能直接设置，须使用相关函数进行操作，
                                                                                                                 //初始化的函数为pthread_attr_init，这个函数必须在pthread_create函数之前调用
         if (err != 0)
         {
                 perror("\n----WorkThreadCreate--pthread_attr_init err\n");
                 return err;
         }
-
-        err = pthread_attr_setschedpolicy(&attr, SCHED_RR);			//SCHED_FIFO --先进先出；SCHED_RR--轮转法；SCHED_OTHER--其他
+        err = pthread_attr_setschedpolicy(&attr, SCHED_RR);                     //SCHED_FIFO --先进先出；SCHED_RR--轮转法；SCHED_OTHER--其他
         if (err != 0)
         {
                 perror("\n----pthread_attr_setschedpolicy err\n");
                 return err;
         }
 
-        err = pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);			//设置线程的分离属性
-                                                                                                                                        //PTHREAD_CREATE_DETACHED -- 分离线程
-                                                                                                                                        //PTHREAD _CREATE_JOINABLE -- 非分离线程
+        err = pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);      //设置线程的分离属性
+                                                                                                                                                                                  //PTHREAD _CREATE_JOINABLE -- 非分离线程
         if (err == 0)
         {
                 err = pthread_create(&pid, &attr, threadexec, NULL); //(void*)&sttConnSock[i]);;
@@ -4159,6 +4166,22 @@ void* CardPacketSend(void *arg)         //查询参数
                         perror("\n----WorkThreadCreate--pthread_create err\n");
                         return err;
                 }
+        }                                                                        //PTHREAD_CREATE_DETACHED -- 分离线程
+        err = pthread_attr_setstacksize(&attr,StackSize);
+        if (err != 0)
+        {
+            perror("\n---pthread_attr_setstacksize err\n");
+            return err;
+        }
+        err = pthread_attr_getstacksize(&attr,&StackSize);
+        if (err != 0)
+        {
+                perror("\n----pthread_attr_getstacksize err\n");
+                return err;
+        }
+        else
+        {
+            DebugPrintf("\n---modified static is %d bytes---\n",StackSize);
         }
         err = pthread_attr_destroy(&attr);
         if (err != 0)

@@ -8,10 +8,12 @@
 
 #define PORT           7000                       //监听端口
 #define MAX_LINK_SOCK  1
-#define RECV_BUFF_SIZE 5024*3
+#define RECV_BUFF_SIZE 1024*1200
 #define SEND_BUFF_SIZE 5212
 
-#define		BASIC_VALUE		20000
+#define THREAD_STACK    1024*2000                 //线程缓存
+
+#define	BASIC_VALUE		20000
 
 #define SERVER_ERR    224              //服务器出错
 #define SERVER_BUSY   225              //服务器忙
@@ -23,9 +25,9 @@
 
 #define QUERY_NONE    3                //查询未查到
 
-#define WAVE_DATA_UNIT                  52    			//地震波形数据单元(10+21×2)=52
-#define WAVE_PACK_UNIT  	(WAVE_DATA_UNIT+9)    	//地震波形数据包单元52+9
-#define WAVE_BUFF_LEN 	(WAVE_DATA_UNIT*300)    	//52×100=5200
+#define WAVE_DATA_UNIT                  52
+#define WAVE_PACK_UNIT  	(WAVE_DATA_UNIT+9)
+#define WAVE_BUFF_LEN 	(WAVE_DATA_UNIT*300)
 
 static int gheartbeat_fre;
 static int gmax_nalarms;
@@ -38,7 +40,7 @@ static int gIP_change = 1;
 #define UserConfigfile_Path "user.inf"			//用户账号配置信息文件默认目录。同时也是FTP默认目录
 
 #define NDEBUG  0
-#define RELEASE_MODE    0
+#define RELEASE_MODE    1
 #define DEBUG_CONN	1
 #define DEBUG_RECV	1
 #define DEBUG_DATA 1

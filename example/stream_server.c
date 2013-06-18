@@ -539,11 +539,11 @@ int main(int argc, char * argv[])
         DebugPrintf("\n----------%s----------",macaddr_cmd);
         DebugPrintf("\n");
 #if RELEASE_MODE
+        system("sleep 1");
         system("ifconfig eth0 down ");
         system(macaddr_cmd);
         system("ifconfig eth0 up");
         system("sleep 5");
-
         net_configure();
 #endif
         ////////////////////////////////////////////////////////////////////
