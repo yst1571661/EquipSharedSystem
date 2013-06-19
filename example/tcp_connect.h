@@ -40,7 +40,7 @@ static int gIP_change = 1;
 #define UserConfigfile_Path "user.inf"			//用户账号配置信息文件默认目录。同时也是FTP默认目录
 
 #define NDEBUG  0
-#define RELEASE_MODE    0
+#define RELEASE_MODE    1
 #define DEBUG_CONN	1
 #define DEBUG_RECV	1
 #define DEBUG_DATA 1

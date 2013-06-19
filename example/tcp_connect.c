@@ -479,7 +479,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
 
 #if DEBUG_CONN
     DebugPrintf("\n----------------dataBuffer[0] = %d---------", dataBuffer[0]);
-    PrintScreen("\n---dataBuffer[0] = %d---",dataBuffer[0]);
 #endif
     /*查询字*/
     switch(dataBuffer[0])
@@ -2718,14 +2717,11 @@ int net_configure(void)   //返回0网络配置成功，返回-1，网络配置失败
 
     /*禁用设备*/
     if(system("ifconfig eth0 down")!=0)
-            DebugPrintf("\nsystem(1) error");
+        DebugPrintf("\nsystem(1) error");
 
     /*激活设备*/
     if(system("ifconfig eth0 up")!=0)
-            DebugPrintf("\nsystem(2) error");
-
-    /*动态获取IP、子网掩码、网关、DNS*/
-    system("udhcpc");
+        DebugPrintf("\nsystem(2) error");
 
     /*调用linux系统命令配置网络*/
     sprintf(buff,"ifconfig eth0 %s netmask %s",ipdz,zwym);
@@ -2753,6 +2749,8 @@ int net_configure(void)   //返回0网络配置成功，返回-1，网络配置失败
             for(Loopi=0;Loopi<5000000;Loopi++);
             return -1;
     }
+    /*动态获取IP、子网掩码、网关、DNS*/
+    system("udhcpc");
 }
 
 void BmpFileSend(char * bmpfilename)
@@ -3092,7 +3090,7 @@ static void card_sent(unsigned char *transBuffer)
             transBuffer[1] = 0x01;
             transBuffer[2] = 0x01;
             Loopi = 0;
-            PrintScreen("\n----------start to send beginsendcar----\n");
+            //PrintScreen("\n----------start to send beginsendcar----\n");
 
             do
             {
@@ -3376,12 +3374,12 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         {
         /////////////////////////////////////////////////
 
-            self_check(action_fd);
-            if (!is_redict)
-            {					//启动线程时先得设定灵敏度
-                sleep(1);
-                continue;
-            }
+            //self_check(action_fd);
+            //if (!is_redict)
+            //{					//启动线程时先得设定灵敏度
+                //sleep(1);
+                //continue;
+            //}
             /*********************** err check send *******************************/
             board_check(transBuffer);
             /************************************************************************/
@@ -4119,7 +4117,7 @@ void* CardPacketSend(void *arg)         //查询参数
             if(devicecount >= 50)
             {
                 beginsendcard = 1;
-                PrintScreen("\n-----device detecting-----");
+                //PrintScreen("\n-----device detecting-----");
                 devicecount = 0;
                 cur_devicestate = ReadVol();
 #if NDEBUG

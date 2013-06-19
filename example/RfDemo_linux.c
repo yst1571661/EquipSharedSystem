@@ -14,9 +14,9 @@
 static int icdev = -1;
 extern unsigned char BCD_decode_tab[];
 extern int ledtwinklebegin;
-int init_card_uart()
+int         init_card_uart()
 {
-        int Loopi,st;
+        int i,st;
         int par=1;
         long baud=115200;
         static unsigned char buff[16];
@@ -24,15 +24,15 @@ int init_card_uart()
         unsigned char tk[6]={
         0xff,0xff,0xff,0xff,0xff,0xff
         };
-        for(Loopi=0;Loopi<16;Loopi++)
+        for(i=0;i<16;i++)
         {
-          buff[Loopi]=0xff;
-          data[Loopi]=0x33;
+          buff[i]=0xff;
+          data[i]=0x33;
         }
         icdev=dc_init(par,baud);
         if(icdev<0)
         {
-          printf("rf_init error.");
+          printf("\nrf_init error.");
           //Ch450Write(BCD_decode_tab[0],BCD_decode_tab[0],BCD_decode_tab[2]);
           ledtwinklebegin = 1;
           return 0;
@@ -63,16 +63,16 @@ int CardRead()
     unsigned int tagtype;
     unsigned long cardsnr = 0;
     unsigned char strSize[5];
-    if((dc_reset(icdev,0))!=0) {printf("dc_reset error!\n"); return -2;}
+    if((dc_reset(icdev,0))!=0) {printf("\ndc_reset error!"); return -2;}
 
     cardsnr=0;
      // if((dc_card(icdev,0,&snr))!=0) {printf("dc_card error!\n"); continue;}
 
     if( dc_request(icdev,0,&tagtype)!=0) {/*printf("dc_request error!\n")*/; return 0;}
 
-    if(dc_anticoll(icdev,0,&cardsnr)!=0){printf("dc_anticoll error!\n"); return -2;}
+    if(dc_anticoll(icdev,0,&cardsnr)!=0){printf("\ndc_anticoll error!"); return -2;}
 
-    if(dc_select(icdev,cardsnr,strSize)!=0){printf("dc_select error!\n"); return -2;}
+    if(dc_select(icdev,cardsnr,strSize)!=0){printf("\ndc_select error!"); return -2;}
 
 
     //printf("serial number: %08lX\n",cardsnr);
@@ -84,7 +84,7 @@ int CardRead()
 /*
 unsigned long CardRead()
 {
-    //int Loopi,st;
+    //int i,st;
     static unsigned long snr;
     //static unsigned char data[16];
     //static unsigned char buff[16];
@@ -129,6 +129,6 @@ void card_beep(int msec)
         }
         else
         {
-            printf("dc_halt 0x%02x\n",st);
+            printf("\ndc_halt 0x%02x",st);
         }
 }
