@@ -28,7 +28,7 @@ typedef enum {
     XML_SCHEMATRON_OUT_ERROR = 1 << 3,  /* output via xmlStructuredErrorFunc */
     XML_SCHEMATRON_OUT_FILE = 1 << 8,	/* output to a file descriptor */
     XML_SCHEMATRON_OUT_BUFFER = 1 << 9,	/* output to a buffer */
-    XML_SCHEMATRON_OUT_IO = 1 << 10	/* output to I/O mechanism */
+    XML_SCHEMATRON_OUT_IO = 1 << 10	/* output to i/O mechanism */
 } xmlSchematronValidOptions;
 
 /**

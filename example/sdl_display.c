@@ -176,7 +176,7 @@ static int disp_thread(void * arg)
 				}
 				if(data->flags == DATA_VIDEO_I)
 				{
-					begindecode = 1; // decode first frame must I frame
+					begindecode = 1; // decode first frame must i frame
 				}
 				// got i frme decode video frame
 				if(begindecode)

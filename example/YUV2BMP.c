@@ -118,8 +118,7 @@ int WriteBmpFileHead(FILE *pf, long width, long height)
 	
 	if(NULL == pf)
 		return -1;
-	//位图文件头
-	//文件类型BMP
+	//位图文件�	//文件类型BMP
 	head[0] = 'B';
 	head[1] = 'M';
 	
@@ -131,7 +130,7 @@ int WriteBmpFileHead(FILE *pf, long width, long height)
 	tmpLong = 54;
 	memcpy(head + 10, &tmpLong, 4);
 	
-	//位图信息头长度40
+	//位图信息头长�0
 	tmpLong = 40;
 	memcpy(head + 14, &tmpLong, 4);
 	

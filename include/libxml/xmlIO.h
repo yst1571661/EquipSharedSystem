@@ -1,6 +1,6 @@
 /*
- * Summary: interface for the I/O interfaces used by the parser
- * Description: interface for the I/O interfaces used by the parser
+ * Summary: interface for the i/O interfaces used by the parser
+ * Description: interface for the i/O interfaces used by the parser
  *
  * Copy: See Copyright for the status of this software.
  *
@@ -19,14 +19,14 @@ extern "C" {
 
 /*
  * Those are the functions and datatypes for the parser input
- * I/O structures.
+ * i/O structures.
  */
 
 /**
  * xmlInputMatchCallback:
  * @filename: the filename or URI
  *
- * Callback used in the I/O Input API to detect if the current handler 
+ * Callback used in the i/O Input API to detect if the current handler 
  * can provide input fonctionnalities for this resource.
  *
  * Returns 1 if yes and 0 if another Input module should be used
@@ -36,7 +36,7 @@ typedef int (XMLCALL *xmlInputMatchCallback) (char const *filename);
  * xmlInputOpenCallback:
  * @filename: the filename or URI
  *
- * Callback used in the I/O Input API to open the resource
+ * Callback used in the i/O Input API to open the resource
  *
  * Returns an Input context or NULL in case or error
  */
@@ -47,7 +47,7 @@ typedef void * (XMLCALL *xmlInputOpenCallback) (char const *filename);
  * @buffer:  the buffer to store data read
  * @len:  the length of the buffer in bytes
  *
- * Callback used in the I/O Input API to read the resource
+ * Callback used in the i/O Input API to read the resource
  *
  * Returns the number of bytes read or -1 in case of error
  */
@@ -56,7 +56,7 @@ typedef int (XMLCALL *xmlInputReadCallback) (void * context, char * buffer, int 
  * xmlInputCloseCallback:
  * @context:  an Input context
  *
- * Callback used in the I/O Input API to close the resource
+ * Callback used in the i/O Input API to close the resource
  *
  * Returns 0 or -1 in case of error
  */
@@ -65,14 +65,14 @@ typedef int (XMLCALL *xmlInputCloseCallback) (void * context);
 #ifdef LIBXML_OUTPUT_ENABLED
 /*
  * Those are the functions and datatypes for the library output
- * I/O structures.
+ * i/O structures.
  */
 
 /**
  * xmlOutputMatchCallback:
  * @filename: the filename or URI
  *
- * Callback used in the I/O Output API to detect if the current handler 
+ * Callback used in the i/O Output API to detect if the current handler 
  * can provide output fonctionnalities for this resource.
  *
  * Returns 1 if yes and 0 if another Output module should be used
@@ -82,7 +82,7 @@ typedef int (XMLCALL *xmlOutputMatchCallback) (char const *filename);
  * xmlOutputOpenCallback:
  * @filename: the filename or URI
  *
- * Callback used in the I/O Output API to open the resource
+ * Callback used in the i/O Output API to open the resource
  *
  * Returns an Output context or NULL in case or error
  */
@@ -93,7 +93,7 @@ typedef void * (XMLCALL *xmlOutputOpenCallback) (char const *filename);
  * @buffer:  the buffer of data to write
  * @len:  the length of the buffer in bytes
  *
- * Callback used in the I/O Output API to write to the resource
+ * Callback used in the i/O Output API to write to the resource
  *
  * Returns the number of bytes written or -1 in case of error
  */
@@ -103,7 +103,7 @@ typedef int (XMLCALL *xmlOutputWriteCallback) (void * context, const char * buff
  * xmlOutputCloseCallback:
  * @context:  an Output context
  *
- * Callback used in the I/O Output API to close the resource
+ * Callback used in the i/O Output API to close the resource
  *
  * Returns 0 or -1 in case of error
  */

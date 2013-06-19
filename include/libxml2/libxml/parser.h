@@ -1022,7 +1022,7 @@ XMLPUBFUN int XMLCALL
 #endif /* LIBXML_PUSH_ENABLED */
 
 /*
- * Special I/O mode.
+ * Special i/O mode.
  */
 
 XMLPUBFUN xmlParserCtxtPtr XMLCALL 

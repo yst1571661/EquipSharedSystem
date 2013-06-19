@@ -170,7 +170,7 @@ int main(int argc, char * argv[])
 
 	printf(" read file %s\n", filename);
 	printf(" 	video paceket count: %d\n", video_packet_count);
-	printf(" 		i frame   count: %d\n", i_frame_count);
+	printf(" 		Loopi frame   count: %d\n", i_frame_count);
 	printf("     audio packet count: %d\n", audio_packet_count);
 
 	return 0;

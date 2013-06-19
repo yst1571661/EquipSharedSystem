@@ -40,24 +40,26 @@ static int gIP_change = 1;
 #define UserConfigfile_Path "user.inf"			//用户账号配置信息文件默认目录。同时也是FTP默认目录
 
 #define NDEBUG  0
-#define RELEASE_MODE    1
+#define RELEASE_MODE    0
 #define DEBUG_CONN	1
 #define DEBUG_RECV	1
 #define DEBUG_DATA 1
 #define DEBUG_LOG	1							//1:output log	0:output screen
-#define SCREEN_INFO	1						//1:output screen	important information	0:don't output information	on screen
+
 
 #if  			RELEASE_MODE
 #define DebugPrintf(args...)	log_error(LOG_DEBUG,##args)
+#define SCREEN_INFO     1                               //1:output screen	important information	0:don't output information	on screen
 #else
 #define DebugPrintf	printf
+#define SCREEN_INFO     0
 #endif
 
 #if 			SCREEN_INFO
 #define	PrintScreen	printf
 #else
 #define	PrintScreen	/\
-                                        /
+/
 #endif
 
 typedef struct connectComm
