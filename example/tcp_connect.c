@@ -477,8 +477,8 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     int len = 0;
     int Loopi = 0;
 #if DEBUG_CONN
-    DebugPrintf("\n----- query case 0x%x -----",dataBuffer[0]);
-    PrintScreen("\n----- query case 0x%x -----",dataBuffer[0]);
+    DebugPrintf("\n\n----- query case 0x%x -----",dataBuffer[0]);
+    PrintScreen("\n\n----- query case 0x%x -----",dataBuffer[0]);
 #endif
     /*查询字*/
     switch(dataBuffer[0])
@@ -487,10 +487,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0:
             DebugPrintf("\n----- query snrnum -----\n");
             PrintScreen("\n----- query snrnum -----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x00 -----");
-            PrintScreen("\n----- query case 0x00 -----");
-#endif
             *length=0;
             ansData = malloc(3);
             ansData[0]  =0x00;
@@ -503,10 +499,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 1:
             DebugPrintf("\n----- query card information ----\n");
             PrintScreen("\n----- query card information ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x01 -----");
-            PrintScreen("\n----- query case 0x01 -----");
-#endif
             *length=0;
             ansData = malloc(3);
             ansData[0]  =0x00;
@@ -520,10 +512,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 2:
             DebugPrintf("\n----- query terminal information ----\n");
             PrintScreen("\n----- query terminal information ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x02 -----");
-            PrintScreen("\n----- query case 0x02 -----");
-#endif
             *length=0;
             ansData = malloc(3);
             ansData[0]  =0x00;
@@ -537,10 +525,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 3:
             DebugPrintf("\n----- query device information ----\n");
             PrintScreen("\n----- query device information ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x03 -----");
-            PrintScreen("\n----- query case 0x03 -----");
-#endif
             *length=0;
             ansData = malloc(3);
             ansData[0]  =0x00;
@@ -553,10 +537,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 4:
             DebugPrintf("\n----- query system configure ----\n");
             PrintScreen("\n----- query system configure ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x04 -----");
-            PrintScreen("\n----- query case 0x04 -----");
-#endif
             *length=13;
             ansData = malloc(13);
             if(re == 0)
@@ -587,10 +567,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 5:
             DebugPrintf("\n----- query collect image ----\n");
             PrintScreen("\n----- query collect image ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x05 -----");
-            PrintScreen("\n----- query case 0x05 -----");
-#endif
             *length=0;
             ansData = malloc(3);
             ansData[0]  =0x00;
@@ -617,10 +593,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 6:
             DebugPrintf("\n----- query sync image ----\n");
             PrintScreen("\n----- query sync image ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x06 -----");
-            PrintScreen("\n----- query case 0x06 -----");
-#endif
             *length=0;
             ansData = malloc(3);
             ansData[0]  =0x00;
@@ -645,10 +617,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 7:
             DebugPrintf("\n----- query collect mode ----\n");
             PrintScreen("\n----- query collect mode ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x07 -----");
-            PrintScreen("\n----- query case 0x07 -----");
-#endif
             if (catch_mode)
             {
                 *length = 7;
@@ -681,10 +649,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 8:
             DebugPrintf("\n----- query err state ----\n");
             PrintScreen("\n----- query err state ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x08 -----");
-            PrintScreen("\n----- query case 0x08 -----");
-#endif
             if (dataLenth < 3)
             {
                 *length=4;
@@ -736,10 +700,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 9:
             DebugPrintf("\n----- query user version ----\n");
             PrintScreen("\n----- query user version ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x09 -----");
-            PrintScreen("\n----- query case 0x09 -----");
-#endif
             if (trans_user)
                 *length = 0;
             else
@@ -761,10 +721,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x11:
             DebugPrintf("\n----- query os version ----\n");
             PrintScreen("\n----- query os version ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x11 -----");
-            PrintScreen("\n----- query case 0x11 -----");
-#endif
             *length = 7;
             ansData = malloc(7);
             ansData[0] = 0x00;
@@ -824,10 +780,6 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x10:
             DebugPrintf("\n----- query physical card number ----\n");
             PrintScreen("\n----- query physical card number -----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- query case 0x10 -----");
-            PrintScreen("\n----- query case 0x10 -----");
-#endif
             *length = 3;
             ansData = malloc(3);
             begin_query = 1;									//查询物理卡号标志位置1
@@ -900,8 +852,8 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     static int byte_count=0;
     static unsigned int byte_all=0;
 #if DEBUG_CONN
-    DebugPrintf("\n----- set case 0x%x -----",dataBuffer[0]);
-    PrintScreen("\n----- set case 0x%x -----",dataBuffer[0]);
+    DebugPrintf("\n\n----- set case 0x%x -----",dataBuffer[0]);
+    PrintScreen("\n\n----- set case 0x%x -----",dataBuffer[0]);
 #endif
     /*设置字*/
     switch(dataBuffer[0])
@@ -930,10 +882,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x00:
             DebugPrintf("\n----- set system time ----\n");
             PrintScreen("\n----- set system time ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x00 -----");
-            PrintScreen("\n----- set case 0x00 -----");
-#endif
             *length = 3;
             ansData=malloc(3);
             memcpy(TempDatabuf,dataBuffer+1,7);
@@ -957,10 +905,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x01:
             DebugPrintf("\n----- set system configure ----\n");
             PrintScreen("\n----- set system configure ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x01 -----");
-            PrintScreen("\n----- set case 0x01 -----");
-#endif
             *length=4;
             ansData=malloc(4);
             memcpy(TempDatabuf,dataBuffer+1,dataLenth-1);
@@ -985,10 +929,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x02:
             DebugPrintf("\n----- set system reboot ----\n");
             PrintScreen("\n----- set system reboot ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x02 -----");
-            PrintScreen("\n----- set case 0x02 -----");
-#endif
             *length = 3;
             ansData=malloc(3);
             if(re==0)
@@ -1009,10 +949,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x03:
             DebugPrintf("\n----- set power control ----\n");
             PrintScreen("\n----- set power control ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x03 -----");
-            PrintScreen("\n----- set case 0x03 -----");
-#endif
             *length = 0;
             ansData=malloc(3);
             ansData[0]=0x00;
@@ -1041,10 +977,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x04:
                 DebugPrintf("\n----- set collect mode ----\n");
                 PrintScreen("\n----- set collect mode ----\n");
-#if DEBUG_CONN
-                DebugPrintf("\n----- set case 0x04 -----");
-                PrintScreen("\n----- set case 0x04 -----");
-#endif
                 /*动态检测*/
                 if (dataBuffer[1])
                 {
@@ -1094,10 +1026,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x05:
                 DebugPrintf("\n----- set to init work memery ----\n");
                 PrintScreen("\n----- set to init work memery ----\n");
-#if DEBUG_CONN
-                DebugPrintf("\n----- set case 0x05 -----");
-                PrintScreen("\n----- set case 0x05 -----");
-#endif
                 *length = 3;
                 ansData = malloc(3);
                 system("rm -rf /mnt/work/*");
@@ -1113,10 +1041,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x06:
                 DebugPrintf("\n----- set to delete user.xml ----\n");
                 PrintScreen("\n----- set to delete user.xml ----\n");
-#if DEBUG_CONN
-                DebugPrintf("\n----- set case 0x06 -----");
-                PrintScreen("\n----- set case 0x06 -----");
-#endif
                 count_users = 0;
                 trans_user = 1;
                 *length = 3;
@@ -1154,10 +1078,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x07:
             DebugPrintf("\n----- set to delete user.xml ----\n");
             PrintScreen("\n----- set to delete user.xml ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x07 -----");
-            PrintScreen("\n----- set case 0x07 -----");
-#endif
             *length = 5;
             ansData=malloc(5);
             ansData[0] = 0x00;
@@ -1269,10 +1189,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x08:
             DebugPrintf("\n----- set to update user version ----\n");
             PrintScreen("\n----- set to delete user version ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x08 -----");
-            PrintScreen("\n----- set case 0x08 -----");
-#endif
             trans_user = 0;
             *length = 3;
             ansData = malloc(3);
@@ -1327,10 +1243,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x09:
             DebugPrintf("\n----- set card time interval ----\n");
             PrintScreen("\n----- set card time interval ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x09 -----");
-            PrintScreen("\n----- set case 0x09 -----");
-#endif
             *length = 4;
                 ansData=malloc(4);
             ansData[0]=0x00;
@@ -1351,10 +1263,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x10:
             DebugPrintf("\n----- set to verify card information ----\n");
             PrintScreen("\n----- set to verify card information ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x10 -----");
-            PrintScreen("\n----- set case 0x10 -----");
-#endif
             *length = 0;
             ansData = malloc(4);
             ansData[0] = 0x00;
@@ -1391,10 +1299,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x11:
             DebugPrintf("\n----- set to verify physical card ----\n");
             PrintScreen("\n----- set to verify physical card ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x11 -----");
-            PrintScreen("\n----- set case 0x11 -----");
-#endif
             *length = 0;
             ansData = malloc(4);
             /*将收到去包头的服务器卡号的8个字节数据放在暂存缓冲里*/
@@ -1420,10 +1324,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x12:
             DebugPrintf("\n----- set open mode ----\n");
             PrintScreen("\n----- set open mode ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x12 -----");
-            PrintScreen("\n----- set case 0x12 -----");
-#endif
             *length = 3;
             ansData = malloc(3);
             ansData[0] = 0x00;
@@ -1449,10 +1349,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     case 0x13:
             DebugPrintf("\n----- set ordertime ----\n");
             PrintScreen("\n----- set ordertime ----\n");
-#if DEBUG_CONN
-            DebugPrintf("\n----- set case 0x13 -----");
-            PrintScreen("\n----- set case 0x13 -----");
-#endif
 
             gdbm_ordertimebak = db_open("/tmp/ordertime.xml");
             DebugPrintf("\n-----open dbm id:%d-----",gdbm_ordertimebak);
@@ -1535,10 +1431,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
         case 0x14:
                 DebugPrintf("\n----- set remote update software----\n");
                 PrintScreen("\n----- set remote update software----\n");
-#if DEBUG_CONN
-                DebugPrintf("\n----- set case 0x14 -----");
-                PrintScreen("\n----- set case 0x14 -----");
-#endif
                 beginupload = 1;
                 ansData = malloc(5);
                 ansData[1] = 0x02;
@@ -1639,10 +1531,6 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
         case 0x15:
                 DebugPrintf("\n----- set os version ----\n");
                 PrintScreen("\n----- set os version ----\n");
-#if DEBUG_CONN
-                DebugPrintf("\n----- set case 0x15 -----");
-                PrintScreen("\n----- set case 0x15 -----");
-#endif
                 *length = 3;
                 ansData = malloc(3);
                 ansData[1] = 0x02;
