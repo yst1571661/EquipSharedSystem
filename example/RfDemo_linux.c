@@ -14,7 +14,7 @@
 static int icdev = -1;
 extern unsigned char BCD_decode_tab[];
 extern int ledtwinklebegin;
-int         init_card_uart()
+int init_card_uart()
 {
         int i,st;
         int par=1;

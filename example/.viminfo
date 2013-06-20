@@ -11,8 +11,8 @@
 ~MSle0~/posix2_version
 
 # Command Line History (newest to oldest):
-:wq
 :q
+:wq
 :w
 :set nu
 :q!
@@ -89,18 +89,22 @@
 	static void
 
 # 文件标记:
-'0  1301  1  /home/zsj/lima/coreutils-5.0/src/tail.c
-'1  1031  1  /home/zsj/lima/coreutils-5.0/src/tail.c
-'2  1524  1  /home/zsj/lima/coreutils-5.0/src/tail.c
-'3  1512  1  /home/zsj/lima/coreutils-5.0/src/tail.c
-'4  1393  1  /home/zsj/lima/coreutils-5.0/src/tail.c
-'5  1382  0  /home/zsj/lima/coreutils-5.0/src/tail.c
-'6  517  39  /home/zsj/lima/coreutils-5.0/src/tail.c
-'7  1  0  /home/zsj/lima/coreutils-5.0/src/tail.c
-'8  1638  4  /home/zsj/lima/coreutils-5.0/src/tail.c
-'9  387  1  /home/zsj/lima/coreutils-5.0/src/tail.c
+'0  32  0  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+'1  33  0  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+'2  29  30  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+'3  1301  1  /home/zsj/lima/coreutils-5.0/src/tail.c
+'4  1031  1  /home/zsj/lima/coreutils-5.0/src/tail.c
+'5  1524  1  /home/zsj/lima/coreutils-5.0/src/tail.c
+'6  1512  1  /home/zsj/lima/coreutils-5.0/src/tail.c
+'7  1393  1  /home/zsj/lima/coreutils-5.0/src/tail.c
+'8  1382  0  /home/zsj/lima/coreutils-5.0/src/tail.c
+'9  517  39  /home/zsj/lima/coreutils-5.0/src/tail.c
 
 # 跳转列表 (从新到旧):
+-'  32  0  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+-'  1  0  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+-'  33  0  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+-'  29  30  /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
 -'  1301  1  /home/zsj/lima/coreutils-5.0/src/tail.c
 -'  1  0  /home/zsj/lima/coreutils-5.0/src/tail.c
 -'  1031  1  /home/zsj/lima/coreutils-5.0/src/tail.c
@@ -195,11 +199,17 @@
 -'  33  39  /etc/passwd
 -'  1  0  /etc/passwd
 -'  33  39  /etc/passwd
--'  1  0  /etc/passwd
--'  146  0  /home/zsj/lima/coreutils-5.0/tail.o
--'  1  0  /home/zsj/lima/coreutils-5.0/tail.o
 
 # 文件内的标记历史记录 (从新到旧):
+
+> /home/zsj/lima_novedio_netupdate/rootfs/etc/init.d/rcS
+	"	32	0
+	^	33	0
+	.	33	0
+	+	29	0
+	+	33	0
+	+	29	30
+	+	33	0
 
 > /home/zsj/lima/coreutils-5.0/src/tail.c
 	"	1301	1

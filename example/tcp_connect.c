@@ -1074,10 +1074,10 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 }
                 break;
 
-        /***************************************增加物理卡(用户)*********************************************/
+    /***************************************增加物理卡(用户)*********************************************/
     case 0x07:
-            DebugPrintf("\n----- set to delete user.xml ----\n");
-            PrintScreen("\n----- set to delete user.xml ----\n");
+            DebugPrintf("\n----- set to add user ----\n");
+            PrintScreen("\n----- set to add user ----\n");
             *length = 5;
             ansData=malloc(5);
             ansData[0] = 0x00;
@@ -1869,9 +1869,11 @@ static void SockRelease(stuConnSock *sttParm)
     beginsyncbmp = 0;
     if (sttParm->isPid > 0)
     {
-            pthread_cancel(sttParm->isPid);    //取消该socket通信线程
+            /*取消该socket通信线程*/
+            pthread_cancel(sttParm->isPid);
     }
-    sttParm->isPid = 0;                    //pid归零
+    /*pid归零*/
+    sttParm->isPid = 0;
 
     memset((unsigned char *)&sttParm->clientAddr, 0, sizeof(struct in_addr));
     sttParm->remainPos = 0;
@@ -1883,8 +1885,8 @@ static void SockRelease(stuConnSock *sttParm)
     sttParm->noProbes = 0;
 
 #if DEBUG_DATA
-    DebugPrintf("\n------ & ------SockRelease--current thread delete");
-    PrintScreen("\n------ & ------SockRelease--current thread delete");
+    DebugPrintf("\n-----SockRelease--current thread delete");
+    PrintScreen("\n-----SockRelease--current thread delete");
     fflush(stdout);
 #endif
 
@@ -1904,13 +1906,14 @@ static int SockThreadOpen(stuConnSock *sttParm)
     err = pthread_attr_init(&attr);
     if (err != 0)
     {
+        /*服务器出错*/
         perror("\n----SockThreadOpen--pthread_attr_init err");
-        SockPackSend((unsigned char)SERVER_ERR, sttParm->fdSock, NULL, NULL, 0);    //服务器出错
+        SockPackSend((unsigned char)SERVER_ERR, sttParm->fdSock, NULL, NULL, 0);
         SockRelease(sttParm);
         return err;
     }
-
-    policy = SCHED_RR;                                                   //设置线程调度策略
+    /*设置线程调度策略*/
+    policy = SCHED_RR;
     pthread_attr_setschedpolicy(&attr, policy);
 
     err = pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
@@ -1921,7 +1924,8 @@ static int SockThreadOpen(stuConnSock *sttParm)
         if (err != 0)
         {
                 perror("\n----SockThreadOpen--pthread_create err");
-                SockPackSend((unsigned char)SERVER_ERR, sttParm->fdSock, NULL, NULL, 0);    //服务器出错
+                /*服务器出错*/
+                SockPackSend((unsigned char)SERVER_ERR, sttParm->fdSock, NULL, NULL, 0);
                 SockRelease(sttParm);
                 return err;
         }
@@ -1929,14 +1933,16 @@ static int SockThreadOpen(stuConnSock *sttParm)
         DebugPrintf("\n----------------SockThreadOpen--pthread tid = %d", pid);
         fflush(stdout);
         #endif
-        sttParm->isPid = pid;        //记录当前socket线程id
+         /*记录当前socket线程id*/
+        sttParm->isPid = pid;
     }
 
     err = pthread_attr_destroy(&attr);
     if (err != 0)
     {
         perror("\n----SockThreadOpen--pthread_attr_destroy err");
-        SockPackSend((unsigned char)SERVER_ERR, sttParm->fdSock, NULL, NULL, 0);        //服务器出错
+        /*服务器出错*/
+        SockPackSend((unsigned char)SERVER_ERR, sttParm->fdSock, NULL, NULL, 0);
         SockRelease(sttParm);
         return err;
     }
@@ -1952,20 +1958,24 @@ static int SockBuffRecv(stuConnSock *sttParm)
 
     pthread_mutex_lock(&sttParm->lockBuffIn);
 
-    recvLen = sttParm->curReadth + sttParm->remainPos;     //记录当前用户缓冲区上次未处理数据长度
+    /*记录当前用户缓冲区上次未处理数据长度*/
+    recvLen = sttParm->curReadth + sttParm->remainPos;
     tagAddr = sttParm->packBuffIn + recvLen;
-    //memset(tagAddr, 0, RECV_BUFF_SIZE-recvLen);            //当前用户缓冲区余下空间清零
+    /*当前用户缓冲区余下空间清零*/
+    //memset(tagAddr, 0, RECV_BUFF_SIZE-recvLen);
 
     do
     {
-        curRead = recv(sttParm->fdSock, tagAddr, RECV_BUFF_SIZE-recvLen, 0);        //读系统缓冲区 最大到当前用户缓冲区满
+        /*读系统缓冲区 最大到当前用户缓冲区满*/
+        curRead = recv(sttParm->fdSock, tagAddr, RECV_BUFF_SIZE-recvLen, 0);
         if (curRead < 0)
         {
             if (errno == EINTR)
             {
                 continue;
             }
-            if (errno != EAGAIN)    //POSIX.1 对于一非阻塞描述符若无数据可读 read返回-1 errno置EAGAIN
+            /*POSIX.1 对于一非阻塞描述符若无数据可读 read返回-1 errno置EAGAIN*/
+            if (errno != EAGAIN)
             {
 #if DEBUG_DATA
                 DebugPrintf("\n----SockBuffRecv--current receive bytes = %d, error reason: %d", curRead, errno);
@@ -2000,8 +2010,8 @@ static int SockBuffRecv(stuConnSock *sttParm)
     }
     DebugPrintf("\n");
 #endif
-
-    return (recvLen-sttParm->curReadth-sttParm->remainPos);       //返回此次读取长度(非当前用户缓冲区数据长度)
+    /*返回此次读取长度(非当前用户缓冲区数据长度)*/
+    return (recvLen-sttParm->curReadth-sttParm->remainPos);
 }
 
 static int DispatchPacket(stuConnSock *sttParm)
@@ -2014,7 +2024,8 @@ static int DispatchPacket(stuConnSock *sttParm)
 #if NDEBUG
     DebugPrintf("\n---thisRead = %d---------", thisRead);
 #endif
-    if (thisRead <= 0)                //判断socket关闭
+    /*判断socket关闭*/
+    if (thisRead <= 0)
     {
             #if DEBUG_DATA
             DebugPrintf("\n----DispatchPacket--Connection lost: FD = %d", sttParm->fdSock/*, curSlot*/);
@@ -2023,11 +2034,10 @@ static int DispatchPacket(stuConnSock *sttParm)
             return fdConn;
     }
 
-    //数据包解析处理
-
+    /*数据包解析处理*/
     pthread_mutex_lock(&sttParm->lockBuffIn);
-
-    sttParm->curReadth += thisRead;    //接收缓冲区当前未处理字节数累加 一旦当前缓冲区数据进入线程处理函数 该值归零
+    /*接收缓冲区当前未处理字节数累加 一旦当前缓冲区数据进入线程处理函数 该值归零*/
+    sttParm->curReadth += thisRead;
 
 #if NDEBUG
     DebugPrintf("\n----DispatchPacket--%d bytes received, readey for parse Packet", thisRead);
