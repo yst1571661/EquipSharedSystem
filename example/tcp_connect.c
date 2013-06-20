@@ -2635,8 +2635,6 @@ int net_configure(void)   //返回0网络配置成功，返回-1，网络配置失败
             for(Loopi=0;Loopi<5000000;Loopi++);
             return -1;
     }
-    /*动态获取IP、子网掩码、网关、DNS*/
-    system("udhcpc");
 }
 
 void BmpFileSend(char * bmpfilename)
@@ -3844,8 +3842,8 @@ void* CardPacketSend(void *arg)         //查询参数
                     /*判断用户是否为非机组*/
                     if (gdbm_exists(gdbm_user, key) != 0)
                     {
-                        DebugPrintf("\n----obtain a normal card normal_card = %s, cardrecordwr = %s-------", normal_card, cardrecordwr);
-                        PrintScreen("\n----obtain a normal card normal_card = %s, cardrecordwr = %s-------", normal_card, cardrecordwr);
+                        DebugPrintf("\n-----obtain a normal card normal_card = %s\n-----cardrecordwr = %s-------", normal_card, cardrecordwr);
+                        PrintScreen("\n-----obtain a normal card normal_card = %s\n-----cardrecordwr = %s-------", normal_card, cardrecordwr);
 
                         /*记录刷卡信息*/
                         if (cur_card[0] == 0)

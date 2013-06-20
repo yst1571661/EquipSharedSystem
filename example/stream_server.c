@@ -543,6 +543,8 @@ int main(int argc, char * argv[])
     system("ifconfig eth0 up");
     system("sleep 5");
     net_configure();
+    /*动态获取IP、子网掩码、网关、DNS*/
+    system("udhcpc");
 #endif
     ////////////////////////////////////////////////////////////////////
     memset(&context , 0 , sizeof(context));
