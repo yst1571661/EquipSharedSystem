@@ -476,9 +476,9 @@ char *query_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     *length = 0;
     int len = 0;
     int Loopi = 0;
-
 #if DEBUG_CONN
-    DebugPrintf("\n----------------dataBuffer[0] = %d---------", dataBuffer[0]);
+    DebugPrintf("\n----- query case 0x%x -----",dataBuffer[0]);
+    PrintScreen("\n----- query case 0x%x -----",dataBuffer[0]);
 #endif
     /*查询字*/
     switch(dataBuffer[0])
@@ -899,10 +899,9 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     static int software_seq=0,software_seqtmp=0;		//software_seqtmp stores the sequency of this record,software_seq stores the sequency of last record
     static int byte_count=0;
     static unsigned int byte_all=0;
-
-#if NDEBUG
-    DebugPrintf("\n--------------receive set command databuffer[0] = %d------", dataBuffer[0]);
-    PrintScreen("\n--------------receive set command databuffer[0] = %d------", dataBuffer[0]);
+#if DEBUG_CONN
+    DebugPrintf("\n----- set case 0x%x -----",dataBuffer[0]);
+    PrintScreen("\n----- set case 0x%x -----",dataBuffer[0]);
 #endif
     /*设置字*/
     switch(dataBuffer[0])
@@ -1456,7 +1455,7 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
 #endif
 
             gdbm_ordertimebak = db_open("/tmp/ordertime.xml");
-            DebugPrintf("\n-----------open dbm id:%d---------------",gdbm_ordertimebak);
+            DebugPrintf("\n-----open dbm id:%d-----",gdbm_ordertimebak);
 
             ansData = malloc(72);
 
@@ -1466,13 +1465,13 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
 
             if(gdbm_ordertimebak == NULL)
             {
-                DebugPrintf("\n--------------open ordertime err!--------------");
+                DebugPrintf("\n-----open ordertime err!-----");
                 ansData[0] = 0xFF;
                 //break;
             }
             else
             {
-                DebugPrintf("\n--------------open ordertime successfully!");
+                DebugPrintf("\n-----open ordertime successfully!-----");
             }
 
             //temp = 1;
@@ -1493,13 +1492,13 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
             for(Loopi=34;Loopi<72;Loopi++)
                 TempBuffer[Loopi-34] = dataBuffer[Loopi];
             TempBuffer[38] = 0;
-            DebugPrintf("\n----------key:%s---------------",TempBuffer);
+            DebugPrintf("\n-----key:%s-----",TempBuffer);
 
             for(Loopi=43;Loopi<72;Loopi++)
                 /*TempDatabuf得到预约时间*/
                 TempDatabuf[Loopi-43] = dataBuffer[Loopi];
             TempDatabuf[29] = 0;
-            DebugPrintf("\n----------ordertime :%s---------------",TempDatabuf);
+            DebugPrintf("\n-----ordertime :%s-----",TempDatabuf);
             /*将卡号作为检索的关键字*/
             key.dptr = TempBuffer;
             key.dsize = strlen(TempBuffer)+1;
@@ -1511,11 +1510,11 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
             if (db_store(gdbm_ordertimebak, key, data) < 0)
             {
                 /*保存预约记录*/
-                DebugPrintf("\n-------- store ordertime err ------");
+                DebugPrintf("\n-----store ordertime err-----");
                 ansData[0] = 0xFF;
                 //pthread_mutex_unlock(&cardfile_lock);
                 db_close(gdbm_ordertimebak);
-                gdbm_ordertime = NULL;
+                gdbm_ordertimebak = NULL;
                 return ansData;
                 break;
             }
@@ -1524,10 +1523,9 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 DebugPrintf("\n---store ordertime success!---");
 
                 db_close(gdbm_ordertimebak);
-                DebugPrintf("\n-----------close dbm id:%d---------------",gdbm_ordertimebak);
+                DebugPrintf("\n-----close dbm id:%d-----",gdbm_ordertimebak);
                 gdbm_ordertimebak = NULL;
 
-                //system("cp /tmp/ordertime_bak.xml /tmp/ordertimecur.xml");
             }
 
             updata_ordertime_xml = 1;
@@ -3198,10 +3196,9 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
     //pthread_mutex_lock(&ordertime_lock);
     DebugPrintf("\n----------------half open mode!!--------------------\n");
     PrintScreen("\n----------------half open mode!!--------------------\n");
-    if(gdbm_ordertime==NULL) {
-            DebugPrintf("\n---------gdbm_ordertime = %d------------\n",gdbm_ordertime);
-            gdbm_ordertime = db_open("/tmp/ordertime.xml");
-    }
+
+    DebugPrintf("\n---------gdbm_ordertime = %d------------\n",gdbm_ordertime);
+    gdbm_ordertime = db_open("/tmp/ordertime.xml");
     /*遍历数据库所有的key并与给定卡号比较*/
     for(key_order = gdbm_firstkey(gdbm_ordertime);key_order.dptr;)
     {
@@ -3211,12 +3208,12 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         sprintf(user_temp, "%08lX",cur_cardsnr);
         memcpy(tmp_cmp,key_order.dptr,8);
         tmp_cmp[8] = 0;
-        DebugPrintf("\n-------tmp_cmp = %s--------\n",tmp_cmp);
-        DebugPrintf("\n-------user_temp = %s--------\n",user_temp);
+        DebugPrintf("\n-----tmp_cmp = %s----------\n",tmp_cmp);
+        DebugPrintf("\n-----user_temp = %s--------\n",user_temp);
         /*如果用户和数据库不一致则继续循环*/
         if(strcmp(tmp_cmp,user_temp)){
-                DebugPrintf("\n---------It's other's ordertime!----------------");
-                PrintScreen("\n---------It's other's ordertime!----------------");
+                DebugPrintf("\n-----It's other's ordertime!---------");
+                PrintScreen("\n-----It's other's ordertime!---------");
                 key_order = gdbm_nextkey(gdbm_ordertime,key_order);
                 continue;
         }
@@ -3227,7 +3224,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                 {
                     Led_delay = 1;
 
-                    DebugPrintf("\n------------normal user is to get off!---------------");
+                    DebugPrintf("\n-----normal user is to get off!---------------");
                     /*记录刷卡信息*/
                     sprintf(cardrecordwr, "%.14s_%.14s_%08lX", card_time, read_sys_Time,cur_cardsnr);
                     DebugPrintf("\n%.14s_%.14s_%08lX\n", card_time, read_sys_Time,cur_cardsnr);
@@ -3241,7 +3238,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                     //pthread_mutex_lock(&cardfile_lock);
                     /*保存读卡记录*/
                     if (db_store(gdbm_card, key, data) < 0) {
-                        DebugPrintf("\n--------normal store cardrecordwe err ------");
+                        DebugPrintf("\n-----normal store cardrecordwe err-------------");
                     }
                     else
                     {
@@ -3252,24 +3249,24 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                         break;
                     }
                 }
-                DebugPrintf("\n---------get order time!-------------");
+                DebugPrintf("\n-----get order time!---------------");
                 /*得到key的内容，也就预约时间*/
                 data = gdbm_fetch(gdbm_ordertime,key_order);
 
-                DebugPrintf("\n-----------data.dptr = %s----------------",data_order.dptr);
+                DebugPrintf("\n-----data.dptr = %s----------------",data_order.dptr);
 
                 strncpy(order_starttime,data.dptr+3,11);
-                DebugPrintf("\n-----------order starttime = %s----------------",order_starttime);
+                DebugPrintf("\n-----order starttime = %s----------",order_starttime);
                 /*得到预约起始时间*/
                 order_start = atoll(order_starttime);
-                DebugPrintf("\n-----------order start = %ld----------------",order_start);
+                DebugPrintf("\n-----order start = %ld-------------",order_start);
                 strncpy(order_endtime,data.dptr+18,11);
-                DebugPrintf("\n-----------order endtime = %s----------------",order_endtime);
+                DebugPrintf("\n-----order endtime = %s------------",order_endtime);
                 /*得到预约结束时间*/
                 order_end = atoll(order_endtime);
-                DebugPrintf("\n-----------order end = %ld----------------",order_end);
+                DebugPrintf("\n-----order end = %ld---------------",order_end);
 
-                DebugPrintf("\n-----------sys_Time = %s------------",sys_Time);
+                DebugPrintf("\n-----sys_Time = %s-----------------",sys_Time);
 
                 /*得到当前时间*/
                 sys_iTime = atoll(sys_Time+3);
@@ -3296,7 +3293,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                     /*保存读卡记录*/
                     if (db_store(gdbm_card, key, data) < 0)
                     {
-                        DebugPrintf("\n--------normal store cardrecordwe err ------");
+                        DebugPrintf("\n-----normal store cardrecordwe err-----");
                     }
                     else
                     {
@@ -3313,28 +3310,28 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                 }
                 else if(sys_iTime>order_end)
                 {
-                    DebugPrintf("\n--------It's out of order time-----------------------");
-                    PrintScreen("\n--------It's out of order time-----------------------");
+                    DebugPrintf("\n-----It's out of order time-----");
+                    PrintScreen("\n-----It's out of order time-----");
                     //pthread_mutex_lock(&cardfile_lock);
-                    DebugPrintf("\n---------------key.dptr = %s------------",key.dptr);
+                    DebugPrintf("\n-----key.dptr = %s--------------",key.dptr);
                     gdbm_delete(gdbm_ordertime,key_order);
                     //system("cp /tmp/ordertime.xml /tmp/ordertime_bak.xml");
                     /*备份更新过的数据库*/
                     system("cp /tmp/ordertime.xml /mnt/ordertime.xml");
 
                     key_order = gdbm_firstkey(gdbm_ordertime);
-                    DebugPrintf("\n------------next key.dptr = %s----------",key_order.dptr);
+                    DebugPrintf("\n-----next key.dptr = %s---------",key_order.dptr);
                     continue;
                     //pthread_mutex_unlock(&cardfile_lock);
                 }
                 else
                 {
-                    DebugPrintf("\n--------It's not order time!----------------------");
-                    PrintScreen("\n--------It's not order time!----------------------");
+                    DebugPrintf("\n-----It's not order time!-------");
+                    PrintScreen("\n-----It's not order time!-------");
                 }
             }
             key_order = gdbm_nextkey(gdbm_ordertime,key_order);
-            DebugPrintf("\n------------next key.dptr = %s----------",key_order.dptr);
+            DebugPrintf("\n-----next key.dptr = %s-----",key_order.dptr);
     }
     if(gdbm_ordertime != NULL)
     {
@@ -3795,6 +3792,7 @@ void* CardPacketSend(void *arg)         //查询参数
             gdbm_ordertime = db_open("/tmp/ordertime.xml");
             DebugPrintf("\n-----ordertime.xml open err-----\n");
     }
+    db_close(gdbm_ordertime);
     /*读取当前卡号*/
     for (Loopi = 0; Loopi <  8; Loopi++) {
         cur_card[Loopi] = read_at24c02b(Loopi+ADDR_BEGIN);
@@ -3873,21 +3871,22 @@ void* CardPacketSend(void *arg)         //查询参数
                         pre_ctime = cur_ctime - card_tlimit + 1;
                     }
                     /*刷卡延时(就是说刷了一张卡后延时30s，在这段时间都不可刷卡，直接跳出循环)*/
-                    if (need_delay) {
-                                        if (cur_ctime - pre_ctime < card_tlimit) {
-                                            PrintScreen("---limit = %ds  ----------------\n", card_tlimit);
-                                            break;
-                                        }
-                                    }
+                    if (need_delay)
+                    {
+                        if (cur_ctime - pre_ctime < card_tlimit) {
+                            PrintScreen("\n-----limit = %ds-----\n", card_tlimit);
+                            break;
+                        }
+                    }
                                     /*后一个人和前一个刷卡时间大于5s*/
-                                    else {
-                                        if (cur_ctime - pre_ctime < CARD_LIMIT) {
+                    else {
+                        if (cur_ctime - pre_ctime < CARD_LIMIT) {
 #if NDEBUG
-                                            DebugPrintf("\n---limit = %ds  ----------------", CARD_LIMIT);
+                            DebugPrintf("\n---limit = %ds  ----------------", CARD_LIMIT);
 #endif
-                                            break;
-                                        }
-                                    }
+                            break;
+                        }
+                    }
                     sprintf(this_card, "%08lX", cur_cardsnr);		//写入卡号到this_card
                     DebugPrintf("\n-------this_card = %s----", this_card);
 
@@ -4304,8 +4303,8 @@ void* CardPacketSend(void *arg)         //查询参数
 
             if ((gdbm_user = db_open("/tmp/user.xml")) != NULL)
             {
-                DebugPrintf("\n--------!!!!!!!!!!!!!!update user successful------\n");
-                PrintScreen("\n----!!updata_ordertime.xml----\n");
+                DebugPrintf("\n-----!!update user successful-----\n");
+                PrintScreen("\n-----!!updata user.xml----\n");
             }
 
             write_at24c02b(232, (user_version >> 24) & 0xFF);
