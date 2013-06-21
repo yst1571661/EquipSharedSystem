@@ -500,37 +500,43 @@ int main(int argc, char * argv[])
 {
     Server_Context context;
     char url[256];
-    char LogFilename[50],LogFilenameNext[50];
-    unsigned char LogCount=0;
     int res;
+    char *SysCmd=malloc(30);
     pthread_attr_t attr;
     pthread_t threadId1;
 
-    //////////////////////////////////////////////////////////////////////
-    if(init_at24c02b() == -1) // init eeprom
+    /*初始化24c02b*/
+    if(init_at24c02b() == -1)
     {
-            return -1;
+        return -1;
     }
     system("mkdir /mnt/log");
     system("mkdir /mnt/work");
     system("mkdir /mnt/safe");
-
+    /*读取备份的日志*/
+    sprintf(SysCmd,"cp %s %s",LOGFILEBACKDIR,LOGFILETMPDIR);
+    system(SysCmd);
     init_log(LOGFILETMPDIR,LOG_DEBUG);
+    /*记录打开备份时间*/
+    ReadSysTime();
+    backup_flag = 0;
 
     FILE *fd_mac;
     char macaddr_cmd[50];
     char snrnum_temp[20];
-    fd_mac = fopen("/tmp/macaddr","r+"); // open the macaddr file
+    /*打开vdc号的文件*/
+    fd_mac = fopen("/tmp/macaddr","r+");
     if(fd_mac == NULL)
     {
-            DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
+        DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
     }
     else
     {
-            fscanf(fd_mac,"%s",snrnum_temp);//the macaddr is 12bit
-            fclose(fd_mac);
-            strcpy(snrnum, snrnum_temp);
-            snrnum[12] = '\0';
+        /*vdc号12位*/
+        fscanf(fd_mac,"%s",snrnum_temp);
+        fclose(fd_mac);
+        strcpy(snrnum, snrnum_temp);
+        snrnum[12] = '\0';
     }
     DebugPrintf("\n-----snrnum = %s-----", snrnum);
     sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);

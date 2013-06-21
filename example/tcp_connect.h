@@ -49,6 +49,7 @@ static int gIP_change = 1;
 
 #if  			RELEASE_MODE
 #define DebugPrintf(args...)	log_error(LOG_DEBUG,##args)
+#define BACKUPINTERVEL  5
 #define SCREEN_INFO     1                               //1:output screen	important information	0:don't output information	on screen
 #else
 #define DebugPrintf	printf
@@ -71,6 +72,7 @@ typedef struct connectComm
 stuConnComm sttDspRoute;
 
 unsigned char sys_Time[15];
+struct tm *sys_tm;
 int beginsyncbmp;
 int startsyncbmp;
 int beginsendbmp;
@@ -88,7 +90,7 @@ int beginupload;
 
 int trans_user;
 int catchonemotion;
-int		action_fd;
+int action_fd;
 void IsSetaction(int action_fd);
 
 
@@ -105,6 +107,7 @@ int card_tlimit;
 int update_user_xml;            //更新用户数据
 int updata_ordertime_xml;
 int reboot_flag;
+int backup_flag;               //备份日志
 unsigned long user_version;    //用户数据库版本号
 unsigned long software_version;	//程序版本号
 int user_count;
@@ -124,23 +127,23 @@ extern int action_fd;
 
 /* 故障检测信息 */
 struct err_check {
-        unsigned char begincheck;
-        unsigned char flash;
-        unsigned char eeprom;
-        unsigned char rtc;
-        unsigned char card_checked;
-        unsigned char card;
-        unsigned char photo_checked;
-        unsigned char photo;
+    unsigned char begincheck;
+    unsigned char flash;
+    unsigned char eeprom;
+    unsigned char rtc;
+    unsigned char card_checked;
+    unsigned char card;
+    unsigned char photo_checked;
+    unsigned char photo;
 
-        unsigned char year_high;
-        unsigned char yead_low;
-        unsigned char month;
-        unsigned char day;
-        unsigned char hour;
-        unsigned char min;
-        unsigned char sec;
-        unsigned char issavvideo;
+    unsigned char year_high;
+    unsigned char yead_low;
+    unsigned char month;
+    unsigned char day;
+    unsigned char hour;
+    unsigned char min;
+    unsigned char sec;
+    unsigned char issavvideo;
     //time_t		  time_now;
     struct tm time_now;
 } Err_Check;
@@ -153,22 +156,25 @@ int Led_delay;
 int Led_on;
 int Led_off;
 
+void ReadSysTime(void);
+
 unsigned int CRC_check(char bs[],int off,int len);
 
 int net_configure(void) ;
 
 int _ConnLoop();
 
- void FreeMemForEx();
+void FreeMemForEx();
 
- void* WavePacketSend(void *arg);
+void* WavePacketSend(void *arg);
 
 void* CardPacketSend(void *arg);
 
 typedef void* ptexec(void *arg);
- int WorkThreadCreate(ptexec threadexec, int prio);
 
- void BmpFileSend(char * bmpfilename);
+int WorkThreadCreate(ptexec threadexec, int prio);
+
+void BmpFileSend(char * bmpfilename);
 
 #endif
 

@@ -126,13 +126,12 @@ static GDBM_FILE gdbm_device;
 void ReadSysTime(void)
 {
     time_t now;
-    struct tm  *timenow;
+    //struct tm  *timenow;
     //int re;
-
     time(&now);
-    timenow = localtime(&now);
+    sys_tm = localtime(&now);
 
-    strftime(sys_Time,sizeof(sys_Time),"%Y%m%d%H%M%S",timenow);
+    strftime(sys_Time,sizeof(sys_Time),"%Y%m%d%H%M%S",sys_tm);
 }
 
  void FreeMemForEx()
@@ -1188,7 +1187,7 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
     /***************************************更新用户版本号*********************************************/
     case 0x08:
             DebugPrintf("\n----- set to update user version ----\n");
-            PrintScreen("\n----- set to delete user version ----\n");
+            PrintScreen("\n----- set to update user version ----\n");
             trans_user = 0;
             *length = 3;
             ansData = malloc(3);
@@ -1427,7 +1426,7 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
             updata_ordertime_xml = 1;
             return ansData;
             break;
-        /***************************************y**远程更新程序******************************************/
+        /*****************************************远程更新程序******************************************/
         case 0x14:
                 DebugPrintf("\n----- set remote update software----\n");
                 PrintScreen("\n----- set remote update software----\n");
@@ -1527,7 +1526,7 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
                 *length = 5;
                 return ansData;
                 break;
-        /***************************************y**更新程序版本号******************************************/
+        /*****************************************更新程序版本号******************************************/
         case 0x15:
                 DebugPrintf("\n----- set os version ----\n");
                 PrintScreen("\n----- set os version ----\n");
@@ -1594,14 +1593,14 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
             /*set update bit,shows the program has not been updated*/
             write_at24c02b(236,0);
             /*eraze nor flash:1.5M*/
-            sprintf(cmdtmp,"/usb/./mtd_debug erase /dev/mtd0 0x02a0000 0x150000");
+            sprintf(cmdtmp,"/usb/./mtd_debug erase /dev/mtd0 0x0290000 0x150000");
             system(cmdtmp);
 
 #if DEBUG_DATA
             DebugPrintf("\nWRITE PROGRAM TO NORFLASH!");
 #endif
 
-            sprintf(cmdtmp,"/usb/mtd_debug write /dev/mtd0 0x02a0000 %d /tmp/Tmp_Soft",byte_all);		//write the program to nor flash
+            sprintf(cmdtmp,"/usb/mtd_debug write /dev/mtd0 0x0290000 %d /tmp/Tmp_Soft",byte_all);		//write the program to nor flash
             system(cmdtmp);
             /*reset update bit,shows the program has been updated*/
             write_at24c02b(236,1);
@@ -2979,7 +2978,6 @@ static void card_sent(unsigned char *transBuffer)
     {
         if(beginsendcard)
         {
-
             transBuffer[0] = 0x00;
             transBuffer[1] = 0x01;
             transBuffer[2] = 0x01;
@@ -2994,7 +2992,8 @@ static void card_sent(unsigned char *transBuffer)
 
                 cardrecordre = key.dptr;
                 //cardsendcount++;
-                if (cardrecordre == NULL) {
+                if (cardrecordre == NULL)
+                {
                     break;
                 }
                 else if(cardrecordre != NULL)
@@ -3265,7 +3264,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
 
         while (1)
         {
-        /////////////////////////////////////////////////
+            /////////////////////////////////////////////////
 
             //self_check(action_fd);
             //if (!is_redict)
@@ -3675,11 +3674,16 @@ void* CardPacketSend(void *arg)         //查询参数
         DebugPrintf("\n-----device.xml open err-----\n");
     }
     /*打开读卡数据库*/
-    gdbm_card = db_open("/tmp/cards.xml");
-    if (gdbm_card == NULL) {
+    gdbm_card = db_open("/tmp/cards.xml");					//get a record
+    if (gdbm_card == NULL)
+    {
         system("rm /tmp/devices.xml");
         gdbm_card = db_open("/tmp/cards.xml");
         DebugPrintf("\n-----cards.xml open err-----\n");
+    }
+    else
+    {
+        key = gdbm_firstkey(gdbm_card);
     }
     /*打开预约时间数据库*/
     gdbm_ordertime = db_open("/tmp/ordertime.xml");
@@ -3725,6 +3729,25 @@ void* CardPacketSend(void *arg)         //查询参数
         /*读卡频率*/
         if(cardcount == FREQ_HIGH)
         {
+            ReadSysTime();
+            /*定时备份暂存日志*/
+            /*
+            if((sys_tm->tm_min%BACKUPINTERVEL)==0)
+            {
+                if(backup_flag==0)
+                {
+                    DebugPrintf("\n-----Have Backup Log-----\n");
+                    char *SysCmd=malloc(30);
+                    sprintf(SysCmd,"cp %s %s",LOGFILETMPDIR,LOGFILEBACKDIR);
+                    system(SysCmd);
+                    backup_flag = 1;
+                }
+            }
+            else
+            {
+                backup_flag = 0;
+            }
+            */
             cardcount = 0;
             if(!beginupload)
             {
@@ -3758,7 +3781,6 @@ void* CardPacketSend(void *arg)         //查询参数
                 if(pre_cardsnr == 0 && cur_cardsnr > 1 && cur_cardsnr != -1 && cur_cardsnr != -2)
                 {
                     cur_ctime = time(NULL);
-                    ReadSysTime();
                     memcpy(read_sys_Time, sys_Time, 15);
                     /*如果当前时间比之前刷卡时间还早5秒以上，说明之前刷卡时间有问题*/
                     if (cur_ctime < pre_ctime - 5)
@@ -4332,7 +4354,6 @@ void* CardPacketSend(void *arg)         //查询参数
                     DebugPrintf("\n-----terminalstatesre = %s -----",terminalstatesre);
                     for (Loopi=0; Loopi<MAX_LINK_SOCK; Loopi++)
                     {
-
                         if (sttConnSock[Loopi].fdSock>0 && sttConnSock[Loopi].loginLegal>0)
                         {
                             //pthread_mutex_lock(&sttConnSock[Loopi].lockBuffOut);
