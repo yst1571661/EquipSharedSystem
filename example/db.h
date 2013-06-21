@@ -4,7 +4,7 @@
 #include "gdbm.h"
 
 #define     RECORD_LENGTH   30
-
+#define     DEBUG           0
 
 #define     USERHEAD    "user_version"
 #define     KEY_SIZE_MAX        20

@@ -2987,6 +2987,7 @@ static void card_sent(unsigned char *transBuffer)
             do
             {
                 pthread_mutex_lock(&cardfile_lock);
+                printf("\ngdbm_firstkey");
                 key = gdbm_firstkey(gdbm_card);					//get a record
                 pthread_mutex_unlock(&cardfile_lock);
 
@@ -3683,6 +3684,7 @@ void* CardPacketSend(void *arg)         //查询参数
     }
     else
     {
+        printf("\ngdbm_firstkey");
         key = gdbm_firstkey(gdbm_card);
     }
     /*打开预约时间数据库*/
@@ -3731,7 +3733,7 @@ void* CardPacketSend(void *arg)         //查询参数
         {
             ReadSysTime();
             /*定时备份暂存日志*/
-            /*
+
             if((sys_tm->tm_min%BACKUPINTERVEL)==0)
             {
                 if(backup_flag==0)
@@ -3747,7 +3749,7 @@ void* CardPacketSend(void *arg)         //查询参数
             {
                 backup_flag = 0;
             }
-            */
+
             cardcount = 0;
             if(!beginupload)
             {
