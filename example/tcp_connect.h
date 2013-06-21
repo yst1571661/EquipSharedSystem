@@ -41,6 +41,7 @@ static int gIP_change = 1;
 
 #define NDEBUG  0
 #define RELEASE_MODE    1
+#define STATIC_IP       0
 #define DEBUG_CONN	1
 #define DEBUG_RECV	1
 #define DEBUG_DATA 1

@@ -504,7 +504,6 @@ int main(int argc, char * argv[])
     char *SysCmd=malloc(30);
     pthread_attr_t attr;
     pthread_t threadId1;
-
     /*初始化24c02b*/
     if(init_at24c02b() == -1)
     {
@@ -548,9 +547,12 @@ int main(int argc, char * argv[])
     system(macaddr_cmd);
     system("ifconfig eth0 up");
     system("sleep 5");
+#if STATIC_IP
     net_configure();
+#else
     /*动态获取IP、子网掩码、网关、DNS*/
     system("udhcpc");
+#endif
 #endif
     ////////////////////////////////////////////////////////////////////
     memset(&context , 0 , sizeof(context));

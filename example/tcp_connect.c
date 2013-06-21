@@ -1593,14 +1593,14 @@ char *set_Para(const char *dataBuffer,int dataLenth,unsigned int *length)
             /*set update bit,shows the program has not been updated*/
             write_at24c02b(236,0);
             /*eraze nor flash:1.5M*/
-            sprintf(cmdtmp,"/usb/./mtd_debug erase /dev/mtd0 0x0290000 0x150000");
+            sprintf(cmdtmp,"/usb/./mtd_debug erase /dev/mtd0 0x02a0000 0x150000");
             system(cmdtmp);
 
 #if DEBUG_DATA
             DebugPrintf("\nWRITE PROGRAM TO NORFLASH!");
 #endif
 
-            sprintf(cmdtmp,"/usb/mtd_debug write /dev/mtd0 0x0290000 %d /tmp/Tmp_Soft",byte_all);		//write the program to nor flash
+            sprintf(cmdtmp,"/usb/mtd_debug write /dev/mtd0 0x02a0000 %d /tmp/Tmp_Soft",byte_all);		//write the program to nor flash
             system(cmdtmp);
             /*reset update bit,shows the program has been updated*/
             write_at24c02b(236,1);
@@ -2987,7 +2987,6 @@ static void card_sent(unsigned char *transBuffer)
             do
             {
                 pthread_mutex_lock(&cardfile_lock);
-                printf("\ngdbm_firstkey");
                 key = gdbm_firstkey(gdbm_card);					//get a record
                 pthread_mutex_unlock(&cardfile_lock);
 
@@ -3684,7 +3683,6 @@ void* CardPacketSend(void *arg)         //查询参数
     }
     else
     {
-        printf("\ngdbm_firstkey");
         key = gdbm_firstkey(gdbm_card);
     }
     /*打开预约时间数据库*/

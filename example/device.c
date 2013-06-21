@@ -5,9 +5,10 @@
 #include <sys/ioctl.h>
 #include "rtc.h"
 #include "bcd.h"
+#include "tcp_connect.h"
 #include "log.h"
 
-#if  			DEBUG_LOG
+#if  	DEBUG_LOG
 #define DebugPrintf(args...)	log_error(LOG_DEBUG,##args)
 #else
 #define DebugPrintf	printf
