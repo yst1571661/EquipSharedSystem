@@ -89,3 +89,13 @@ lib/mingw/libutils.a
 README.txt
 example/MYI2C_Ex.c~
 example/stream_server
+tool/db.c
+tool/db.h
+tool/db_store_test
+tool/db_store_test.c
+tool/gdbm.h
+tool/gread.c
+tool/libgdbm.a
+tool/lo
+tool/thread_mutex_test
+tool/thread_mutex_test.c
