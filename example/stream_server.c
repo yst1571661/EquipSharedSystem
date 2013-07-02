@@ -535,7 +535,7 @@ int main(int argc, char * argv[])
     }
     DebugPrintf("\n-----snrnum = %s-----", snrnum);
     sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
-    DebugPrintf("\n----------%s----------",macaddr_cmd);
+    DebugPrintf("\n-----%s-----",macaddr_cmd);
     DebugPrintf("\n");
 #if RELEASE_MODE
     system("sleep 1");
@@ -555,9 +555,11 @@ int main(int argc, char * argv[])
 
     /*parser argv*/
     pasarg(argc, argv, &context);
-    //catch_mode 226    catch_sen  227  catch_freq 228 229   238 check eeprom 236 237 数卡时间间隔 239 240 用户数目
-    card_tlimit = 30;							//init the limit of card interval
-    device_mode = 0x01;							//default open mode
+    /*catch_mode 226    catch_sen  227  catch_freq 228 229   238 check eeprom 236 237 数卡时间间隔 239 240 用户数目*/
+    /*init the limit of card interval*/
+    /*default open mode*/
+    card_tlimit = 30;
+    device_mode = 0x01;
     beginsendbmp = 1;
     beginupload = 0;
     reboot_flag=0;
@@ -605,10 +607,13 @@ int main(int argc, char * argv[])
         write_at24c02b(231, BASIC_LEVEL_&0xFF);
         write_at24c02b(220, (card_tlimit>>8)&0xFF);
         write_at24c02b(221, card_tlimit&0xFF);
-        write_at24c02b(239,1);		//default set open mode
+        /*default set open mode*/
+        write_at24c02b(239,1);
+        /*log number*/
         write_at24c02b(241,0);
-        write_at24c02b(242,0);              //log number
-        is_redict = 0;			//test motion data when boot
+        /*test motion data when boot*/
+        write_at24c02b(242,0);
+        is_redict = 0;
         write_at24c02b(60, 0); //write_at24c02b(ADDR_BEGIN, 0);
     }
 
@@ -624,21 +629,21 @@ int main(int argc, char * argv[])
     context.pro.sample_rate = 8000; // audio sample rate
     context.pro.bit_rate = 200; 	// bitrate
 
-    // device init
+    /*device init*/
     if(ip_cam_construct(&context.ipcam, "/dev/video1"))
     {
             fprintf(stderr, "Open device fail\n");
             return -1;
     }
 
-    // init streaming server
+    //init streaming server
     if(streaming_server_construct(&context.server, 554)) // use default RTSP port
     {
             fprintf(stderr, "Create srever fail\n");
             return -1;
     }
 
-    // create stream session
+    //create stream session
     context.session = streaming_new_session(&context.server,
                                     0,	//channel 0
                                     6000, // rtp port number
@@ -659,7 +664,7 @@ int main(int argc, char * argv[])
     streaming_get_session_url(context.session, url, sizeof(url));
     DebugPrintf("spct streaming session URL: %s\n", url);
 
-    // register data handle function to ip cam device
+    //register data handle function to ip cam device
     context.ipcam.datahandler = &context;
     context.ipcam.fun = send_data;
     streaming_server_start(&context.server);
