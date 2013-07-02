@@ -3652,7 +3652,7 @@ void* CardPacketSend(void *arg)         //²éÑ¯²ÎÊı
     datum key;
     datum data;
 
-    //Init_Webserver_Par();
+    Init_Webserver_Par();
     int CardPacketSend_count = 0;
     //system("rm -rf /tmp/*.xml");
     //system("cp -rf /mnt/*.xml /tmp/");
