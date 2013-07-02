@@ -112,6 +112,7 @@ int backup_flag;               //备份日志
 unsigned long user_version;    //用户数据库版本号
 unsigned long software_version;	//程序版本号
 int user_count;
+int card_errcount;             //连续初始化读卡器错误数
 int led_state;
 int device_mode;				//标志设备是开放还是半开放模式 0x01 开放模式	0x00 半开放模式
 /*视频采集参数*/

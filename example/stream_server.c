@@ -101,195 +101,191 @@ static void check_photo(char *bmpfilename)
 
 static void * save_file(void * arg)
 {
-        Server_Context * context;
-        Spct_Data * data;
-        context = (Server_Context *) arg;
+    Server_Context * context;
+    Spct_Data * data;
+    context = (Server_Context *) arg;
 
-        // set data queue used
-        dq_set_used(&context->dq);
-        ///////////////////////////////////////////////////////////////////////
-        unsigned char * gotbuf;
-        int  gotsize;
-        Decode_Context videodecoder;
-        int ret;
-        char bmpfilename[50];
-        char delfilename[50];
-        unsigned char min_time[2];
-        int premin_time = 0;
-        int curmin_time = 0;
-        int prehou_time = 0;
-        int curhou_time = 0;
-        int preday_time = 0;
-        int curday_time = 0;
-        int premon_time = 0;
-        int curmon_time = 0;
-        int preyea_time = 0;
-        int curyea_time = 0;
-        int cursec_time = 0;
-        int presec_time = 0;
-        int save_curhour = 0;
-        int save_prehour = 0;
-        time_t cur_seconds = 0;
-        time_t pre_seconds = 0;
+    // set data queue used
+    dq_set_used(&context->dq);
+    ///////////////////////////////////////////////////////////////////////
+    unsigned char * gotbuf;
+    int  gotsize;
+    Decode_Context videodecoder;
+    int ret;
+    char bmpfilename[50];
+    char delfilename[50];
+    unsigned char min_time[2];
+    int premin_time = 0;
+    int curmin_time = 0;
+    int prehou_time = 0;
+    int curhou_time = 0;
+    int preday_time = 0;
+    int curday_time = 0;
+    int premon_time = 0;
+    int curmon_time = 0;
+    int preyea_time = 0;
+    int curyea_time = 0;
+    int cursec_time = 0;
+    int presec_time = 0;
+    int save_curhour = 0;
+    int save_prehour = 0;
+    time_t cur_seconds = 0;
+    time_t pre_seconds = 0;
 
 
-        unsigned char read_sys_Time[15];
-        ret = spct_decode_open(SPCT_CODEC_H264, &videodecoder, 0);
-        if(ret)
+    unsigned char read_sys_Time[15];
+    ret = spct_decode_open(SPCT_CODEC_H264, &videodecoder, 0);
+    if(ret)
+    {
+        fprintf(stderr, " Open h264 decoder fail\n");
+    }
+    ReadSysTime();
+    memcpy(read_sys_Time, sys_Time, 15);
+    cursec_time = (read_sys_Time[12] - 48)*10 + (read_sys_Time[13] - 48);
+    presec_time = cursec_time;
+    curmin_time = (read_sys_Time[10] - 48)*10+(read_sys_Time[11] - 48);
+    premin_time = curmin_time;
+    curhou_time = (read_sys_Time[8] - 48)*10+(read_sys_Time[9] - 48);
+    prehou_time = curhou_time;
+    save_curhour = curhou_time;
+    save_prehour = save_curhour;
+    curday_time = (read_sys_Time[6] - 48)*10+(read_sys_Time[7] - 48);
+    preday_time = curday_time;
+    curmon_time = (read_sys_Time[4] - 48)*10+(read_sys_Time[5] - 48);
+    premon_time = curmon_time;
+    curyea_time = (read_sys_Time[0] - 48)*1000+(read_sys_Time[1] - 48)*100+(read_sys_Time[2] - 48)*10+(read_sys_Time[3] - 48);
+    preyea_time = curyea_time;
+    DebugPrintf("\n----- curmin_time = %d -----",curmin_time);
+
+    cur_seconds = time(NULL);
+    pre_seconds = cur_seconds;
+
+    freqsendbmp = 1;
+    ///////////////////////////////////////////////////////////////////////
+    int save_file_count = 0;
+    while(1)
+    {
+        save_file_count++;
+        if(save_file_count == 50)
         {
-                fprintf(stderr, " Open h264 decoder fail\n");
+            save_file_count = 0;
+            DebugPrintf("\n----- save_file thread running -----");
+            PrintScreen("\n----- save_file thread running -----");
         }
-        ReadSysTime();
-        memcpy(read_sys_Time, sys_Time, 15);
-        cursec_time = (read_sys_Time[12] - 48)*10 + (read_sys_Time[13] - 48);
-        presec_time = cursec_time;
-        curmin_time = (read_sys_Time[10] - 48)*10+(read_sys_Time[11] - 48);
-        premin_time = curmin_time;
-        curhou_time = (read_sys_Time[8] - 48)*10+(read_sys_Time[9] - 48);
-        prehou_time = curhou_time;
-        save_curhour = curhou_time;
-        save_prehour = save_curhour;
-        curday_time = (read_sys_Time[6] - 48)*10+(read_sys_Time[7] - 48);
-        preday_time = curday_time;
-        curmon_time = (read_sys_Time[4] - 48)*10+(read_sys_Time[5] - 48);
-        premon_time = curmon_time;
-        curyea_time = (read_sys_Time[0] - 48)*1000+(read_sys_Time[1] - 48)*100+(read_sys_Time[2] - 48)*10+(read_sys_Time[3] - 48);
-        preyea_time = curyea_time;
-        DebugPrintf("\n----- curmin_time = %d -----",curmin_time);
-
-        cur_seconds = time(NULL);
-        pre_seconds = cur_seconds;
-
-        freqsendbmp = 1;
-        ///////////////////////////////////////////////////////////////////////
-        int save_file_count = 0;
-        while(1)
+        /////////启动灵敏度自校准开始///////////////
+        //if (curhou_time == 2) {
+        //is_redict = 0;
+        //BASIC_LEVEL_ = 24000;
+        ////////////////////////
+        // get data from data queue
+        data = dq_get(&context->dq);
+        if(data == NULL)
         {
-            save_file_count++;
-            if(save_file_count == 50)
+            DebugPrintf("\n----- data == NULL -----");
+            continue;
+        }
+        else
+        {
+            if(data->type == DATA_VIDEO)
             {
-                save_file_count = 0;
-                DebugPrintf("\n----- save_file thread running -----");
-                PrintScreen("\n----- save_file thread running -----");
-            }
-            /////////启动灵敏度自校准开始///////////////
-            //if (curhou_time == 2) {
-            //is_redict = 0;
-            //BASIC_LEVEL_ = 24000;
-            ////////////////////////
-            // get data from data queue
-            data = dq_get(&context->dq);
-            if(data == NULL)
-            {
-                DebugPrintf("\n----- data == NULL -----");
-                continue;
-            }
-            else
-            {
-                if(data->type == DATA_VIDEO)
+                if(data->flags == DATA_VIDEO_I)
                 {
-                    if(data->flags == DATA_VIDEO_I)
+                    ///////////////////////////////////////////////////////////////////
+                    ReadSysTime();
+                    memcpy(read_sys_Time, sys_Time, 15);
+                    curmin_time = (read_sys_Time[10] - 48)*10+(read_sys_Time[11] - 48);
+                    curhou_time = (read_sys_Time[8] - 48)*10+(read_sys_Time[9] - 48);
+                    save_curhour = curhou_time;
+                    curday_time = (read_sys_Time[6] - 48)*10+(read_sys_Time[7] - 48);
+                    curmon_time = (read_sys_Time[4] - 48)*10+(read_sys_Time[5] - 48);
+                    curyea_time = (read_sys_Time[0] - 48)*1000+(read_sys_Time[1] - 48)*100+(read_sys_Time[2] - 48)*10+(read_sys_Time[3] - 48);
+
+                    if(curmon_time != premon_time)
                     {
-                        ///////////////////////////////////////////////////////////////////
-                        ReadSysTime();
-                        memcpy(read_sys_Time, sys_Time, 15);
-                        curmin_time = (read_sys_Time[10] - 48)*10+(read_sys_Time[11] - 48);
-                        curhou_time = (read_sys_Time[8] - 48)*10+(read_sys_Time[9] - 48);
-                        save_curhour = curhou_time;
-                        curday_time = (read_sys_Time[6] - 48)*10+(read_sys_Time[7] - 48);
-                        curmon_time = (read_sys_Time[4] - 48)*10+(read_sys_Time[5] - 48);
-                        curyea_time = (read_sys_Time[0] - 48)*1000+(read_sys_Time[1] - 48)*100+(read_sys_Time[2] - 48)*10+(read_sys_Time[3] - 48);
-
-                        if(curmon_time != premon_time)
+                        if(curmon_time == 1)
                         {
-                            if(curmon_time == 1)
-                            {
-                                sprintf(delfilename, "/mnt/work/%04d11*.jpg",curyea_time-1);
-                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                DelFile(delfilename);
-                            }
-                            else if(curmon_time == 2)
-                            {
-                                sprintf(delfilename, "/mnt/work/%04d12*.jpg",curyea_time-1);
-                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                DelFile(delfilename);
-                            }
-                            else
-                            {
-                                sprintf(delfilename, "/mnt/work/%04d%02d*.jpg",curyea_time, curmon_time-2);
-                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                DelFile(delfilename);
-                            }
-                            premon_time = curmon_time;
-                            ////////////////////////////////////////////////////////////
-                            DebugPrintf("\n----- curmin_time = %d -----",curmin_time);
-                            ret = spct_decode(&videodecoder, data->data,
-                            data->size, &gotbuf, &gotsize);
-                            if(ret < 0) // decode error
-                            {
-                                DebugPrintf("\n----- decode error -----");
-                                break;
-                            }
-                            if(gotsize != 0) // decoder need more data
-                            {
-                                //display one frame
-                                //sprintf(bmpfilename, "/mnt/safe/%.12s.jpg", read_sys_Time);
-                                sprintf(bmpfilename, "/mnt/safe/%.14s.jpg", read_sys_Time);
-                                DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
-                                YUV2JPEG(gotbuf, 704, 576, bmpfilename);
-                                DebugPrintf("\nbmp save gotsized:%d ", gotsize);
-                                //BmpFileSend(bmpfilename);
-                            }
-                            else
-                            {
-                                DebugPrintf("\n----- decoder need more data -----");
-                            }
-                            //////////////////////////////////////////////////////////////
+                            sprintf(delfilename, "/mnt/work/%04d11*.jpg",curyea_time-1);
+                            DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                            DelFile(delfilename);
                         }
-                        if(curday_time != preday_time)
+                        else if(curmon_time == 2)
                         {
-                            preday_time = curday_time;
-                            if(curmon_time == 1)
-                            {
-                                sprintf(delfilename, "/mnt/work/%04d12%02d*.jpg",curyea_time-1, curday_time);
-                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                DelFile(delfilename);
-                            }
-                            else
-                            {
-                                sprintf(delfilename, "/mnt/work/%04d%02d%02d*.jpg",curyea_time, curmon_time-1,curday_time);
-                                DebugPrintf("\n-----delfilename = %s -----",delfilename);
-                                DelFile(delfilename);
-                            }
+                            sprintf(delfilename, "/mnt/work/%04d12*.jpg",curyea_time-1);
+                            DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                            DelFile(delfilename);
                         }
-                        cur_seconds = time(NULL);
-
-                        switch (catch_mode)
+                        else
                         {
-                            case 0x01:
-                            if (catchonemotion || Err_Check.begincheck)
+                            sprintf(delfilename, "/mnt/work/%04d%02d*.jpg",curyea_time, curmon_time-2);
+                            DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                            DelFile(delfilename);
+                        }
+                        premon_time = curmon_time;
+                        ////////////////////////////////////////////////////////////
+                        DebugPrintf("\n----- curmin_time = %d -----",curmin_time);
+                        ret = spct_decode(&videodecoder, data->data,
+                        data->size, &gotbuf, &gotsize);
+                        if(ret < 0) // decode error
+                        {
+                            DebugPrintf("\n----- decode error -----");
+                            break;
+                        }
+                        if(gotsize != 0) // decoder need more data
+                        {
+                            //display one frame
+                            //sprintf(bmpfilename, "/mnt/safe/%.12s.jpg", read_sys_Time);
+                            sprintf(bmpfilename, "/mnt/safe/%.14s.jpg", read_sys_Time);
+                            DebugPrintf("\n-----bmpfilename = %s-----", bmpfilename);
+                            YUV2JPEG(gotbuf, 704, 576, bmpfilename);
+                            DebugPrintf("\nbmp save gotsized:%d ", gotsize);
+                            //BmpFileSend(bmpfilename);
+                        }
+                        else
+                        {
+                            DebugPrintf("\n----- decoder need more data -----");
+                        }
+                        //////////////////////////////////////////////////////////////
+                    }
+                    if(curday_time != preday_time)
+                    {
+                        preday_time = curday_time;
+                        if(curmon_time == 1)
+                        {
+                            sprintf(delfilename, "/mnt/work/%04d12%02d*.jpg",curyea_time-1, curday_time);
+                            DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                            DelFile(delfilename);
+                        }
+                        else
+                        {
+                            sprintf(delfilename, "/mnt/work/%04d%02d%02d*.jpg",curyea_time, curmon_time-1,curday_time);
+                            DebugPrintf("\n-----delfilename = %s -----",delfilename);
+                            DelFile(delfilename);
+                        }
+                    }
+                    cur_seconds = time(NULL);
+
+                    switch (catch_mode)
+                    {
+                        case 0x01:
+                        if (catchonemotion || Err_Check.begincheck)
+                        {
+                            if (cur_seconds - pre_seconds >= catch_freq || (Err_Check.begincheck && !Err_Check.photo_checked))
                             {
-                                //if(curmin_time  + 60 - premin_time == freqsendbmp || curmin_time  + 60 - premin_time == freqsendbmp + 60) //采集图像频率
-                                #if NDEBUG
-                                        DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
-                                #endif
-                                if (cur_seconds - pre_seconds >= catch_freq || (Err_Check.begincheck && !Err_Check.photo_checked))
+                                DebugPrintf("\n-----motion deteced-----");
+                                PrintScreen("\n-----motion deteced-----");
+                                DebugPrintf("\n----- curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
+                                pre_seconds = cur_seconds;
+                                ret = spct_decode(&videodecoder, data->data,
+                                data->size, &gotbuf, &gotsize);
+                                if(ret < 0) // decode error
                                 {
-                                    DebugPrintf("\n-----------motion deteced-------------------");
-                                    PrintScreen("\n-----------motion deteced-------------------");
-                                    DebugPrintf("\n----- curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
-                                    pre_seconds = cur_seconds;
-                                    ret = spct_decode(&videodecoder, data->data,
-                                    data->size, &gotbuf, &gotsize);
-                                    if(ret < 0) // decode error
-                                    {
-                                        DebugPrintf("\n----- decode error -----");
-                                        break;
-                                    }
-                                    if(gotsize != 0) // decoder need more data
-                                    {
-                                        // display one frame
-                                        //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
+                                    DebugPrintf("\n----- decode error -----");
+                                    break;
+                                }
+                                if(gotsize != 0) // decoder need more data
+                                {
+                                    // display one frame
+                                    //sprintf(bmpfilename, "/tmp/%.12s.jpg", read_sys_Time);
                                     sprintf(bmpfilename, "/tmp/%.14s.jpg", read_sys_Time);
                                     DebugPrintf("\n-----bmpfilename = %s-----\n", bmpfilename);
                                     YUV2JPEG(gotbuf, 704, 576, bmpfilename); // save .jpg pictures
@@ -316,15 +312,15 @@ static void * save_file(void * arg)
                         {
                             DebugPrintf("\n---prefix curmin_time = %d   cur_seconds = %ld   pre_seconds = %ld-----",curmin_time, cur_seconds, pre_seconds);
                             pre_seconds = cur_seconds;
-                            #if NDEBUG
-                                    DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
-                            #endif
+#if NDEBUG
+                            DebugPrintf("\n--------catch_freq = %d--------", catch_freq);
+#endif
                             ret = spct_decode(&videodecoder, data->data,
                             data->size, &gotbuf, &gotsize);
                             if(ret < 0) // decode error
                             {
-                                    DebugPrintf("\n----- decode error -----");
-                                    break;
+                                DebugPrintf("\n----- decode error -----");
+                                break;
                             }
                             if(gotsize != 0) // decoder need more data
                             {
@@ -351,7 +347,6 @@ static void * save_file(void * arg)
                         }
                         break;
                     }
-
                     //////////////////////////////////////
                     /////////////更新时间/////////////////
                     if(time_change == 1)
@@ -387,7 +382,7 @@ static void * save_file(void * arg)
                         prehou_time = curhou_time;
                         if(islink() == 0) // SD卡已挂载
                         {
-                                system("cp -rf /tmp/*.jpg /mnt/work/");
+                            system("cp -rf /tmp/*.jpg /mnt/work/");
                         }
                         system("rm -rf /tmp/*.jpg");
                         beginsavewebpar = 1;
@@ -397,14 +392,14 @@ static void * save_file(void * arg)
             }
             // free data from data queue
             dq_pop(&context->dq);
+            }
         }
-    }
-    ///////////////////////////////////////////////////////////////////////
-    spct_decode_close(&videodecoder);
-    DebugPrintf("\n-----save_file Thread exit-----\n");
-    sleep(1);
-    system("reboot");
-    ///////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////
+        spct_decode_close(&videodecoder);
+        DebugPrintf("\n-----save_file Thread exit-----\n");
+        sleep(1);
+        system("reboot");
+        ///////////////////////////////////////////////////////////////////////
 }
 
 static void send_data(void * handler, void * arg)
@@ -630,21 +625,21 @@ int main(int argc, char * argv[])
     context.pro.bit_rate = 200; 	// bitrate
 
     // device init
-    /*if(ip_cam_construct(&context.ipcam, "/dev/video1"))
+    if(ip_cam_construct(&context.ipcam, "/dev/video1"))
     {
             fprintf(stderr, "Open device fail\n");
             return -1;
     }
-    */
+
     // init streaming server
-    /*if(streaming_server_construct(&context.server, 554)) // use default RTSP port
+    if(streaming_server_construct(&context.server, 554)) // use default RTSP port
     {
             fprintf(stderr, "Create srever fail\n");
             return -1;
     }
-    */
+
     // create stream session
-    /*context.session = streaming_new_session(&context.server,
+    context.session = streaming_new_session(&context.server,
                                     0,	//channel 0
                                     6000, // rtp port number
                                     0,	  // is not multicast
@@ -671,7 +666,7 @@ int main(int argc, char * argv[])
 
     ///////////////////////////////////////////////////////////////////////////
     cam_start_work(&context.ipcam);
-    */
+
     init_ds3231(); // init clock chip
     struct rtc_time curtime;
     get_time(&curtime);
@@ -702,7 +697,7 @@ int main(int argc, char * argv[])
     }
 
     /////////////////////////////////////////////////////////////////////////
-    /*if(context.bsavefile) // save file
+    if(context.bsavefile) // save file
     {
         // data queue construct
         res = dq_construct(&context.dq,
@@ -714,7 +709,7 @@ int main(int argc, char * argv[])
             DebugPrintf("construct data queue fail\n");
             return -1;
         }
-*/
+
         /*// file opt construct
         res = fileopt_asf_construct(&context.fileopt);
         if(res != 0)
@@ -726,7 +721,7 @@ int main(int argc, char * argv[])
         context.fileoptready = fileopt_create(&context.fileopt, context.outfilename, &context.pro);
         */
         // create save file  thread
-/*	pthread_attr_init(&attr);
+        pthread_attr_init(&attr);
         pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
         if((res = pthread_create(&threadId1, &attr, save_file, &context)) != 0)
         {
@@ -734,7 +729,7 @@ int main(int argc, char * argv[])
             return -1;
         }
     }
-    else */
+    else
     {
         Err_Check.issavvideo = 1;
         Err_Check.photo = 0;

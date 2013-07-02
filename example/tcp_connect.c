@@ -1804,6 +1804,9 @@ static void* SyncParketExec(void *arg)
                             pthread_mutex_unlock(&conn->lockBuffOut);
                             if(reboot_flag==1)
                             {
+                                PrintScreen("\n----Ready to Reboot----\n");
+                                system("cp /tmp/local.log /mnt/local.log");
+                                sleep(1);
                                 system("reboot");
                             }
                         }
@@ -2665,9 +2668,9 @@ void BmpFileSend(char * bmpfilename)
     unsigned char sendfilename[20];
     FILE *output = NULL;
     int freadcount = 0;
-    #if NDEBUG
-            DebugPrintf("\n------beginsendbmp = %d bmpfilename = %s", beginsendbmp, bmpfilename);
-    #endif
+
+    PrintScreen("\n-----beginsendbmp = %d-----\n",beginsendbmp);
+
     if(beginsendbmp)
     {
     if (sttConnSock[0].fdSock <= 0)
@@ -2765,13 +2768,15 @@ void self_check(int fd_video1)
 
         BASIC_LEVEL_ += BASIC_DISP;			//BASIC_DISP=800
         set_action(fd_video1, &catch_sen_back);
-        DebugPrintf ("\n\n\n   MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
+        DebugPrintf("\n\n\n   MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
+        PrintScreen("\n\n\n   MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
     }
     /*未捕捉到动作，需要重定向*/
     else if (!is_redict)
     {
         packet_count++;
         DebugPrintf ("\n----- times = %d----------\n", packet_count);
+        PrintScreen ("\n----- times = %d----------\n", packet_count);
         /*当收到4个以上包的时候，需要降低基准灵敏度(自调节)*/
         if (packet_count > 4)
         {
@@ -2794,7 +2799,8 @@ void self_check(int fd_video1)
             is_redict = 1;
             check_ok = 0;
             //packet_count = 0;
-            DebugPrintf ("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
+            DebugPrintf("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
+            PrintScreen("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
             write_at24c02b(230, (BASIC_LEVEL_>>8)&0xFF);
             write_at24c02b(231, BASIC_LEVEL_&0xFF);
         }
@@ -3271,7 +3277,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         beginsyncbmp = 1;
         sleep(5);
 
-        //startsyncbmp = 1;
+        startsyncbmp = 1;
 
         //srand((unsigned) time(NULL));
 
@@ -3279,41 +3285,40 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         {
             /////////////////////////////////////////////////
 
-            //self_check(action_fd);
-            //if (!is_redict)
-            //{					//启动线程时先得设定灵敏度
-                //sleep(1);
-                //continue;
-            //}
+            self_check(action_fd);
+            if (!is_redict)
+            {					//启动线程时先得设定灵敏度
+                sleep(1);
+                continue;
+            }
             /*********************** err check send *******************************/
             board_check(transBuffer);
             /************************************************************************/
 
-            if(sttConnSock->fdSock <= 0)
-            {
-                continue;
-            }
-            else
-            {
-                /************************* card send ********************************/
-                card_sent(transBuffer);
-                /********************************************************************/
-            }
+            /************************* card send ********************************/
+            card_sent(transBuffer);
+            /********************************************************************/
 
-            while(0)
-            //while(startsyncbmp) // 同步图片使能
+
+            while(startsyncbmp) // 同步图片使能
             {
-                if (sttConnSock[0].fdSock <= 0)
+                if(sttConnSock->fdSock <= 0)
+                {
                     break;
+                }
                 else
-                DebugPrintf("\n-------begin to syncbmp--------");
+                {
+                    /************************* card send ********************************/
+                    card_sent(transBuffer);
+                    /********************************************************************/
+                    PrintScreen("\n-------begin to syncbmp--------");
+                }
 
-                //rand_value = rand() % (RANDOM_MAX + 1);
                 //DebugPrintf( "\n-----begin  d_name:   %s-----\n ",   syncbeginFname);
                 //DebugPrintf( "\n-----end  d_name:   %s-----\n ",   syncendFname);
-                dir   =opendir( "/mnt/work/");
+                dir = opendir( "/mnt/work/");
                 while((ptr = readdir(dir)) != NULL && sttConnSock[0].fdSock > 0)
-                        {
+                {
                 //if(strcmp(ptr-> d_name,syncbeginFname) >= 0 && strcmp(ptr-> d_name,syncendFname) <= 0)
                 if (strstr(ptr-> d_name,".jpg") != NULL)
                 {
@@ -3355,7 +3360,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                                 //pthread_mutex_lock(&sttConnSock[Loopi].lockBuffOut);
                                 SockPackSend(CMD_ACK, sttConnSock[Loopi].fdSock, &sttConnSock[Loopi], transBuffer, freadcount+9);
                                 //pthread_mutex_unlock(&sttConnSock[Loopi].lockBuffOut);
-
                             }
                         }
                     }
@@ -3365,7 +3369,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                     strcat(file_del, ptr-> d_name);
                     system(file_del);
                     memcpy(file_del, "rm /mnt/work/", strlen("rm /mnt/work/") + 1);
-                    //usleep(rand_value*1000);
                 }
             }
             closedir(dir);
@@ -3747,6 +3750,7 @@ void* CardPacketSend(void *arg)         //查询参数
 #endif
     //cur_card[0] = 0;
     cur_card[Loopi] = 0;
+    card_errcount  = 0;
 
     while(1)
     {
@@ -3764,7 +3768,7 @@ void* CardPacketSend(void *arg)         //查询参数
         {
             ReadSysTime();
             /*定时备份暂存日志*/
-
+#if RELEASE_MODE
             if((sys_tm->tm_min%BACKUPINTERVEL)==0)
             {
                 if(backup_flag==0)
@@ -3780,6 +3784,7 @@ void* CardPacketSend(void *arg)         //查询参数
             {
                 backup_flag = 0;
             }
+#endif
 
             cardcount = 0;
             if(!beginupload)
@@ -3791,8 +3796,20 @@ void* CardPacketSend(void *arg)         //查询参数
             /*需要重启读卡器*/
             if ((cur_cardsnr == -2)&&!beginupload)
             {
+                card_errcount++;
+                if(card_errcount>=20)
+                {
+                    PrintScreen("\n----Ready to Reboot----\n");
+                    system("cp /tmp/local.log /mnt/local.log");
+                    sleep(3);
+                    system("reboot");
+                }
                 close_card_uart();
                 init_card_uart();
+            }
+            else
+            {
+                card_errcount = 0;
             }
 
             /*老版本的dc_reset失败时返回1，目前版本没用*/
@@ -4211,7 +4228,6 @@ void* CardPacketSend(void *arg)         //查询参数
            // DebugPrintf("\n-------cur_card time begin from %ld----\n", time_last);
 #endif
         }
-        /*如果电源没开，则不需要延时*/
         if(Led_off == 1)
         {
             card_beep(50);
@@ -4223,6 +4239,7 @@ void* CardPacketSend(void *arg)         //查询参数
             cur_card[0] = 0;
             /*将60位写0，表示现在没有卡号*/
             write_at24c02b(ADDR_BEGIN, 0);
+            /*如果电源没开，则不需要延时*/
             need_delay = 0;
         }
         /*需要延迟则将Led_delay置1*/

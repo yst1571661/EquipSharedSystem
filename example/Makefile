@@ -109,7 +109,7 @@ install:
 #	-cp $(DEMO_SAVEFILE) $(INS_DIR)
 	-cp $(DEMO_SERVER) 	$(INS_DIR)
 	cd /home/zsj/zsj_nfs/nfs_test/
-	tar zcvf /mnt/hgfs/shared/DEVELOPING_VERSION/TEST_VERSION/2013060302 stream_server
+	tar zcvf /mnt/hgfs/shared/DEVELOPING_VERSION/TEST_VERSION/2013070101 stream_server
 #	-cp $(DEMO_DECODE) $(INS_DIR)
 #	-cp $(DEMO_DISP) $(INS_DIR)
 #	-cp $(DEMO_ASFREAD) $(INS_DIR)

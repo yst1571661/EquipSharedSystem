@@ -1,0 +1,62 @@
+#!/bin/sh    
+/bin/mount -t proc none /proc
+/bin/mount -t devpts none /dev/pts
+/bin/mount -t ramfs ramfs /mnt
+/bin/mount -t ramfs ramfs /tmp
+/bin/mount -t ramfs ramfs /var
+/sbin/ifconfig lo up
+/sbin/ifconfig eth0 up
+
+telnetd &
+#hot &
+
+sleep 5
+
+/bin/mount -t ext3 /dev/sda1 /mnt
+sleep 3
+
+cd /tmp
+cp -rf /mnt/*.xml /tmp/
+#cp -rf /usb/stream_server ./
+cp -rf /usb/while ./
+cp -rf /usb/macaddr ./
+#cp -rf /usb/spct6100/ ./
+sleep 3
+
+#sleep 10
+
+cd /tmp
+tar jxvf ../spct6100.tar.bz2
+
+  
+
+echo -n "SPCT6100 IPCamera Load Driver & FFMPEG ... "
+cd /tmp/spct6100/arm-v4l2
+sh demo.sh &
+sleep 15 
+echo "DONE"
+
+cd /tmp/spct6100
+
+./multic &
+
+cd /usb
+insmod nuc900_wdt.ko
+./mtd_debug read /dev/mtd0 0x290000 0x150000 /tmp/server_gz
+cd /tmp
+tar zxvf server_gz
+rm server_gz
+./while &
+sleep 3
+
+echo -n "SPCT6100 IPCamera Start Web Server ... "
+cd /tmp/spct6100
+./boa -c /tmp/spct6100 &
+sleep 3
+echo "DONE"
+
+echo -n "SPCT6100 IPCamera Background AP ... "
+cd /tmp/spct6100/www/cgi-bin
+./ipcamset &
+echo "DONE"
+
