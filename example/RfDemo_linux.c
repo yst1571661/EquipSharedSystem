@@ -55,7 +55,6 @@ int init_card_uart()
                 ledtwinklebegin = 0;
         }
          printf("\n----- init card_uart ok-----\n");
-
 }
 
 int CardRead()

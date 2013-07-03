@@ -11,6 +11,7 @@
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/wait.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
@@ -2801,8 +2802,11 @@ void self_check(int fd_video1)
             //packet_count = 0;
             DebugPrintf("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
             PrintScreen("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
+            PrintScreen("q");
             write_at24c02b(230, (BASIC_LEVEL_>>8)&0xFF);
+            PrintScreen("w");
             write_at24c02b(231, BASIC_LEVEL_&0xFF);
+            PrintScreen("e");
         }
 
     }
@@ -2941,9 +2945,13 @@ static void board_check(unsigned char *transBuffer)
     if (Err_Check.begincheck && Err_Check.card_checked && (Err_Check.photo_checked || Err_Check.issavvideo || beginsendbmp == 0))
     {
         DebugPrintf("\n------begin to selfcheck----");
+        PrintScreen("3");
         check_eeprom();
+        PrintScreen("4");
         check_flash();
+        PrintScreen("5");
         check_rtc();
+        PrintScreen("6");
 
         DebugPrintf("\n---------begin send check information-------------");
         transBuffer[0] = 0x00;
@@ -2958,8 +2966,11 @@ static void board_check(unsigned char *transBuffer)
         for (Loopi=0; Loopi<MAX_LINK_SOCK; Loopi++)
         if (sttConnSock[Loopi].fdSock>0 && sttConnSock[Loopi].loginLegal>0)
         {
+            PrintScreen("7");
             pthread_mutex_lock(&sttConnSock[Loopi].lockBuffOut);
+            PrintScreen("8");
             SockPackSend(CMD_ACK, sttConnSock[Loopi].fdSock, &sttConnSock[Loopi], transBuffer, 8);
+            PrintScreen("9");
             pthread_mutex_unlock(&sttConnSock[Loopi].lockBuffOut);
             break;
         }
@@ -2994,19 +3005,23 @@ static void card_sent(unsigned char *transBuffer)
     seconds = time_towait;
     do
     {
+        PrintScreen("@");
         if(beginsendcard)
         {
             transBuffer[0] = 0x00;
             transBuffer[1] = 0x01;
             transBuffer[2] = 0x01;
             Loopi = 0;
-            //PrintScreen("\n----------start to send beginsendcar----\n");
 
             do
             {
+                PrintScreen("#");
                 pthread_mutex_lock(&cardfile_lock);
+                PrintScreen("$");
                 key = gdbm_firstkey(gdbm_card);					//get a record
+                PrintScreen("%");
                 pthread_mutex_unlock(&cardfile_lock);
+                PrintScreen("^");
 
                 cardrecordre = key.dptr;
                 //cardsendcount++;
@@ -3022,9 +3037,13 @@ static void card_sent(unsigned char *transBuffer)
 #if DEBUG_DATA
                             DebugPrintf("\nthis record is illegal!");
 #endif
+                            PrintScreen("&");
                             pthread_mutex_lock(&cardfile_lock);
+                            PrintScreen("*");
                             gdbm_delete(gdbm_card, key);
+                            PrintScreen("(");
                             pthread_mutex_unlock(&cardfile_lock);
+                            PrintScreen(")");
                             break;
                     }
                     memcpy(transBuffer+3, cardrecordre, strlen(cardrecordre));
@@ -3261,7 +3280,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
  void* WavePacketSend(void *arg)
 {
         int Loopi, waveLen;
-        int rand_value = 0,IpRet;
+        int rand_value = 0,IpRet,IpFlag=0,PingServerRet,PingGateRet;
         unsigned char transBuffer[WAVE_BUFF_LEN];
         unsigned char sendfilename[30];
         unsigned char openfilename[30];
@@ -3318,11 +3337,64 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         startsyncbmp = 1;
         while (1)
         {
+            ReadSysTime();
+            if(sys_tm->tm_sec==0)
+            {
+                /*动态获取IP*/
+                if(IpFlag==0)
+                {
+                    do{
+                        {
+                            /*检测是否与服务器连接*/
+                            PingServerRet = system("ping 58.192.119.146");
+                            PingGateRet = system("ping 223.3.32.1");
+#if RELEASE_MODE
+#else
+                            PrintScreen("\n----- PingServerRet = %d -----\n",PingRet);
+#endif
+                            /*ping 服务器及网关，只要有一个通就说明网络是通的*/
+                            if((PingServerRet!=-1)&&(WIFEXITED(PingServerRet))&&(WEXITSTATUS(PingServerRet)==0)|
+                               (PingGateRet!=-1)&&(WIFEXITED(PingGateRet))&&(WEXITSTATUS(PingGateRet)==0))
+                            {
+                                IpFlag = 1;
+                                break;
+                            }
+                            /*网络不通则动态获取IP*/
+                            else
+                            {
+                                PrintScreen("\n----- ping server and gate failed! -----");
+                                do{
+                                    IpRet = system("udhcpc -t 10 -T 3 -n -q &");
+                                    /*休眠，用于控制获取的频率*/
+                                    sleep(1);
+#if RELEASE_MODE
+#else
+                                    PrintScreen("\n----- IpRet = %d -----\n",PingRet);
+#endif
+                                    if((IpRet!=-1)&&(WIFEXITED(IpRet))&&(WEXITSTATUS(IpRet)==0))
+                                    {
+                                        break;
+                                    }
+                                }
+                                while(1);
+                            }
+                        }
+                    }
+                    while(1);
+                }
+            }
+            else
+            {
+                //PrintScreen("\nelse IpFlag = %d\n",IpFlag);
+                IpFlag = 0;
+            }
             /////////////////////////////////////////////////
 
             self_check(action_fd);
+            PrintScreen("1");
             if (!is_redict)
             {					//启动线程时先得设定灵敏度
+                PrintScreen("2");
                 sleep(1);
                 continue;
             }
@@ -3330,6 +3402,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
             board_check(transBuffer);
             /************************************************************************/
 
+            PrintScreen("0");
             /************************* card send ********************************/
             card_sent(transBuffer);
             /********************************************************************/
@@ -3349,8 +3422,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                     PrintScreen("\n-------begin to syncbmp--------");
                 }
 
-                //DebugPrintf( "\n-----begin  d_name:   %s-----\n ",   syncbeginFname);
-                //DebugPrintf( "\n-----end  d_name:   %s-----\n ",   syncendFname);
                 dir = opendir( "/mnt/work/");
                 while((ptr = readdir(dir)) != NULL && sttConnSock[0].fdSock > 0)
                 {
@@ -3365,14 +3436,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                     transBuffer[2] = 0x06;
                     //memcpy(sendfilename,ptr-> d_name,12);  //去掉".bmp"
                     memcpy(sendfilename,ptr-> d_name,14);
-                    /*
-                    transBuffer[3] = (sendfilename[0] - 48)*10 + sendfilename[1] - 48;//字符串文件名201011130953转化为字节发送20 10 11 13 09 53
-                    transBuffer[4] = (sendfilename[2] - 48)*10 + sendfilename[3] - 48;
-                    transBuffer[5] = (sendfilename[4] - 48)*10 + sendfilename[5] - 48;
-                    transBuffer[6] = (sendfilename[6] - 48)*10 + sendfilename[7] - 48;
-                    transBuffer[7] = (sendfilename[8] - 48)*10 + sendfilename[9] - 48;
-                    transBuffer[8] = (sendfilename[10] - 48)*10 + sendfilename[11] - 48;
-                    */
                     transBuffer[8] = (sendfilename[12] - 48)*10 + sendfilename[13] - 48;//字符串文件名20101113095327转化为字节发送 10 11 13 09 53 27
                     transBuffer[3] = (sendfilename[2] - 48)*10 + sendfilename[3] - 48;
                     transBuffer[4] = (sendfilename[4] - 48)*10 + sendfilename[5] - 48;

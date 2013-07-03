@@ -515,13 +515,52 @@ int main(int argc, char * argv[])
     /*记录打开备份时间*/
     ReadSysTime();
     backup_flag = 0;
+    FILE *fd_mac;
+    char macaddr_cmd[50];
+    char snrnum_temp[20];
+    /*打开vdc号的文件*/
+    fd_mac = fopen("/tmp/macaddr","r+");
+    if(fd_mac == NULL)
+    {
+        DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
+    }
+    else
+    {
+        /*vdc号12位*/
+        fscanf(fd_mac,"%s",snrnum_temp);
+        fclose(fd_mac);
+        strcpy(snrnum, snrnum_temp);
+        snrnum[12] = '\0';
+    }
 
+    DebugPrintf("\n-----snrnum = %s-----", snrnum);
+    sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
+    DebugPrintf("\n-----%s-----",macaddr_cmd);
+    DebugPrintf("\n");
+
+#if RELEASE_MODE
+    system("sleep 1");
+    system("ifconfig eth0 down ");
+    system(macaddr_cmd);
+    system("ifconfig eth0 up");
+    system("sleep 5");
+#if STATIC_IP
+    net_configure();
+#else
+    /*动态获取IP、子网掩码、网关、DNS*/
+    system("udhcpc -q ");
+    PrintScreen("\n1");
+#endif
+#endif
 
     ////////////////////////////////////////////////////////////////////
+    PrintScreen("\n2");
     memset(&context , 0 , sizeof(context));
+    PrintScreen("\n3");
 
     /*parser argv*/
     pasarg(argc, argv, &context);
+    PrintScreen("\n4");
     /*catch_mode 226    catch_sen  227  catch_freq 228 229   238 check eeprom 236 237 数卡时间间隔 239 240 用户数目*/
     /*init the limit of card interval*/
     /*default open mode*/
@@ -597,6 +636,7 @@ int main(int argc, char * argv[])
     context.pro.bit_rate = 200; 	// bitrate
 
     /*device init*/
+    PrintScreen("\n5");
     if(ip_cam_construct(&context.ipcam, "/dev/video1"))
     {
             fprintf(stderr, "Open device fail\n");
@@ -604,13 +644,15 @@ int main(int argc, char * argv[])
     }
 
     //init streaming server
+    PrintScreen("\n6");
     if(streaming_server_construct(&context.server, 554)) // use default RTSP port
     {
-            fprintf(stderr, "Create srever fail\n");
+            fprintf(stderr, "Create server fail\n");
             return -1;
     }
 
     //create stream session
+    PrintScreen("\n7");
     context.session = streaming_new_session(&context.server,
                                     0,	//channel 0
                                     6000, // rtp port number
@@ -620,6 +662,7 @@ int main(int argc, char * argv[])
                                     1	  // stream video
                                     );
 
+    PrintScreen("\n8");
     if(context.session == NULL)
     {
             fprintf(stderr, "Create streaming session fail\n");
@@ -628,6 +671,7 @@ int main(int argc, char * argv[])
             return -1;
     }
 
+    PrintScreen("\n9");
     streaming_get_session_url(context.session, url, sizeof(url));
     DebugPrintf("spct streaming session URL: %s\n", url);
 
@@ -719,12 +763,12 @@ int main(int argc, char * argv[])
         exit(0);
     }
 
-    if (WorkThreadCreate(WatchDog, 0))        	//start the synchronization pictures thread
+    /*if (WorkThreadCreate(WatchDog, 0))        	//start the synchronization pictures thread
     {
         perror("\n------------Thread WatchDog create error");
         fflush(stdout);
         exit(0);
-    }
+    }*/
     if (WorkThreadCreate(WavePacketSend, 0))        	//start the synchronization pictures thread
     {
         perror("\n------------Thread WavePacketSend create error");
@@ -739,7 +783,7 @@ int main(int argc, char * argv[])
         exit(0);
     }
 
-
+    while(1);
     if (_ConnLoop() == -1)	//net connect
     {
         FreeMemForEx();
