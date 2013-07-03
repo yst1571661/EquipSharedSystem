@@ -516,40 +516,7 @@ int main(int argc, char * argv[])
     ReadSysTime();
     backup_flag = 0;
 
-    FILE *fd_mac;
-    char macaddr_cmd[50];
-    char snrnum_temp[20];
-    /*打开vdc号的文件*/
-    fd_mac = fopen("/tmp/macaddr","r+");
-    if(fd_mac == NULL)
-    {
-        DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
-    }
-    else
-    {
-        /*vdc号12位*/
-        fscanf(fd_mac,"%s",snrnum_temp);
-        fclose(fd_mac);
-        strcpy(snrnum, snrnum_temp);
-        snrnum[12] = '\0';
-    }
-    DebugPrintf("\n-----snrnum = %s-----", snrnum);
-    sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
-    DebugPrintf("\n-----%s-----",macaddr_cmd);
-    DebugPrintf("\n");
-#if RELEASE_MODE
-    system("sleep 1");
-    system("ifconfig eth0 down ");
-    system(macaddr_cmd);
-    system("ifconfig eth0 up");
-    system("sleep 5");
-#if STATIC_IP
-    net_configure();
-#else
-    /*动态获取IP、子网掩码、网关、DNS*/
-    system("udhcpc &");
-#endif
-#endif
+
     ////////////////////////////////////////////////////////////////////
     memset(&context , 0 , sizeof(context));
 
@@ -771,6 +738,8 @@ int main(int argc, char * argv[])
         fflush(stdout);
         exit(0);
     }
+
+
     if (_ConnLoop() == -1)	//net connect
     {
         FreeMemForEx();

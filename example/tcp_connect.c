@@ -3261,7 +3261,7 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
  void* WavePacketSend(void *arg)
 {
         int Loopi, waveLen;
-        int rand_value = 0;
+        int rand_value = 0,IpRet;
         unsigned char transBuffer[WAVE_BUFF_LEN];
         unsigned char sendfilename[30];
         unsigned char openfilename[30];
@@ -3281,6 +3281,45 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
 
         //srand((unsigned) time(NULL));
 
+        FILE *fd_mac;
+        char macaddr_cmd[50];
+        char snrnum_temp[20];
+        /*打开vdc号的文件*/
+        fd_mac = fopen("/tmp/macaddr","r+");
+        if(fd_mac == NULL)
+        {
+            DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
+        }
+        else
+        {
+            /*vdc号12位*/
+            fscanf(fd_mac,"%s",snrnum_temp);
+            fclose(fd_mac);
+            strcpy(snrnum, snrnum_temp);
+            snrnum[12] = '\0';
+        }
+
+        DebugPrintf("\n-----snrnum = %s-----", snrnum);
+        sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
+        DebugPrintf("\n-----%s-----",macaddr_cmd);
+        DebugPrintf("\n");
+
+#if RELEASE_MODE
+        system("sleep 1");
+        system("ifconfig eth0 down ");
+        system(macaddr_cmd);
+        system("ifconfig eth0 up");
+        system("sleep 5");
+#if STATIC_IP
+        net_configure();
+#else
+        /*动态获取IP、子网掩码、网关、DNS*/
+        IpRet = system("udhcpc &");
+        PrintScreen("IpRet1 = %d\n",IpRet);
+        IpRet = system("udhcpc ");
+        PrintScreen("IpRet2 = %d\n",IpRet);
+#endif
+#endif
         while (1)
         {
             /////////////////////////////////////////////////
@@ -3648,7 +3687,7 @@ void* CardPacketSend(void *arg)         //查询参数
     int Loopi;
     unsigned char transBuffer[WAVE_BUFF_LEN];
     int need_delay = 0;
-        datum key_order,data_order;
+    datum key_order,data_order;
     datum key;
     datum data;
 
