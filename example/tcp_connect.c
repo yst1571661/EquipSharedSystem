@@ -3274,12 +3274,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         int freadcount = 0;
         DIR   *   dir;
         struct   dirent   *   ptr;
-        beginsyncbmp = 1;
-        sleep(5);
-
-        startsyncbmp = 1;
-
-        //srand((unsigned) time(NULL));
 
         FILE *fd_mac;
         char macaddr_cmd[50];
@@ -3320,6 +3314,8 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         PrintScreen("IpRet2 = %d\n",IpRet);
 #endif
 #endif
+        beginsyncbmp = 1;
+        startsyncbmp = 1;
         while (1)
         {
             /////////////////////////////////////////////////
