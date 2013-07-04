@@ -754,12 +754,13 @@ int main(int argc, char * argv[])
         exit(0);
     }
 
-    /*if (WorkThreadCreate(WatchDog, 0))        	//start the synchronization pictures thread
+    if (WorkThreadCreate(WatchDog, 0))        	//start the synchronization pictures thread
     {
         perror("\n------------Thread WatchDog create error");
         fflush(stdout);
         exit(0);
-    }*/
+    }
+
     if (WorkThreadCreate(WavePacketSend, 0))        	//start the synchronization pictures thread
     {
         perror("\n------------Thread WavePacketSend create error");
