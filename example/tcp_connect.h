@@ -50,7 +50,7 @@ static int gIP_change = 1;
 
 #if  			RELEASE_MODE
 #define DebugPrintf(args...)	log_error(LOG_DEBUG,##args)
-#define BACKUPINTERVEL  1
+#define BACKUPINTERVEL  2
 #define SCREEN_INFO     1                               //1:output screen	important information	0:don't output information	on screen
 #else
 #define DebugPrintf	printf

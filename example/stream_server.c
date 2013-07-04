@@ -549,18 +549,14 @@ int main(int argc, char * argv[])
 #else
     /*动态获取IP、子网掩码、网关、DNS*/
     system("udhcpc -q ");
-    PrintScreen("\n1");
 #endif
 #endif
 
     ////////////////////////////////////////////////////////////////////
-    PrintScreen("\n2");
     memset(&context , 0 , sizeof(context));
-    PrintScreen("\n3");
 
     /*parser argv*/
     pasarg(argc, argv, &context);
-    PrintScreen("\n4");
     /*catch_mode 226    catch_sen  227  catch_freq 228 229   238 check eeprom 236 237 数卡时间间隔 239 240 用户数目*/
     /*init the limit of card interval*/
     /*default open mode*/
@@ -636,7 +632,6 @@ int main(int argc, char * argv[])
     context.pro.bit_rate = 200; 	// bitrate
 
     /*device init*/
-    PrintScreen("\n5");
     if(ip_cam_construct(&context.ipcam, "/dev/video1"))
     {
             fprintf(stderr, "Open device fail\n");
@@ -644,7 +639,6 @@ int main(int argc, char * argv[])
     }
 
     //init streaming server
-    PrintScreen("\n6");
     if(streaming_server_construct(&context.server, 554)) // use default RTSP port
     {
             fprintf(stderr, "Create server fail\n");
@@ -652,7 +646,6 @@ int main(int argc, char * argv[])
     }
 
     //create stream session
-    PrintScreen("\n7");
     context.session = streaming_new_session(&context.server,
                                     0,	//channel 0
                                     6000, // rtp port number
@@ -662,7 +655,6 @@ int main(int argc, char * argv[])
                                     1	  // stream video
                                     );
 
-    PrintScreen("\n8");
     if(context.session == NULL)
     {
             fprintf(stderr, "Create streaming session fail\n");
@@ -671,7 +663,6 @@ int main(int argc, char * argv[])
             return -1;
     }
 
-    PrintScreen("\n9");
     streaming_get_session_url(context.session, url, sizeof(url));
     DebugPrintf("spct streaming session URL: %s\n", url);
 
@@ -783,7 +774,6 @@ int main(int argc, char * argv[])
         exit(0);
     }
 
-    while(1);
     if (_ConnLoop() == -1)	//net connect
     {
         FreeMemForEx();

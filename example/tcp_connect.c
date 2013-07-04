@@ -2802,11 +2802,8 @@ void self_check(int fd_video1)
             //packet_count = 0;
             DebugPrintf("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
             PrintScreen("\n\n\n   FINAL  MOTION LEVEL  %d \n\n\n", BASIC_LEVEL_);
-            PrintScreen("q");
             write_at24c02b(230, (BASIC_LEVEL_>>8)&0xFF);
-            PrintScreen("w");
             write_at24c02b(231, BASIC_LEVEL_&0xFF);
-            PrintScreen("e");
         }
 
     }
@@ -3005,7 +3002,6 @@ static void card_sent(unsigned char *transBuffer)
     seconds = time_towait;
     do
     {
-        PrintScreen("@");
         if(beginsendcard)
         {
             transBuffer[0] = 0x00;
@@ -3015,13 +3011,9 @@ static void card_sent(unsigned char *transBuffer)
 
             do
             {
-                PrintScreen("#");
                 pthread_mutex_lock(&cardfile_lock);
-                PrintScreen("$");
                 key = gdbm_firstkey(gdbm_card);					//get a record
-                PrintScreen("%");
                 pthread_mutex_unlock(&cardfile_lock);
-                PrintScreen("^");
 
                 cardrecordre = key.dptr;
                 //cardsendcount++;
@@ -3294,45 +3286,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         DIR   *   dir;
         struct   dirent   *   ptr;
 
-        FILE *fd_mac;
-        char macaddr_cmd[50];
-        char snrnum_temp[20];
-        /*打开vdc号的文件*/
-        fd_mac = fopen("/tmp/macaddr","r+");
-        if(fd_mac == NULL)
-        {
-            DebugPrintf("\n-----error: open /tmp/macaddr failed-----");
-        }
-        else
-        {
-            /*vdc号12位*/
-            fscanf(fd_mac,"%s",snrnum_temp);
-            fclose(fd_mac);
-            strcpy(snrnum, snrnum_temp);
-            snrnum[12] = '\0';
-        }
-
-        DebugPrintf("\n-----snrnum = %s-----", snrnum);
-        sprintf(macaddr_cmd,"ifconfig eth0 hw ether %.2s:%.2s:%.2s:%.2s:%.2s:%.2s",snrnum_temp,snrnum_temp+2,snrnum_temp+4,snrnum_temp+6,snrnum_temp+8,snrnum_temp+10);
-        DebugPrintf("\n-----%s-----",macaddr_cmd);
-        DebugPrintf("\n");
-
-#if RELEASE_MODE
-        system("sleep 1");
-        system("ifconfig eth0 down ");
-        system(macaddr_cmd);
-        system("ifconfig eth0 up");
-        system("sleep 5");
-#if STATIC_IP
-        net_configure();
-#else
-        /*动态获取IP、子网掩码、网关、DNS*/
-        IpRet = system("udhcpc &");
-        PrintScreen("IpRet1 = %d\n",IpRet);
-        IpRet = system("udhcpc ");
-        PrintScreen("IpRet2 = %d\n",IpRet);
-#endif
-#endif
         beginsyncbmp = 1;
         startsyncbmp = 1;
         while (1)
@@ -3350,7 +3303,8 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                             PingGateRet = system("ping 223.3.32.1");
 #if RELEASE_MODE
 #else
-                            PrintScreen("\n----- PingServerRet = %d -----\n",PingRet);
+                            PrintScreen("\n----- PingServerRet = %d -----\n",PingServerRet);
+                            PrintScreen("\n----- PingGateRet = %d -----\n",PingGateRet);
 #endif
                             /*ping 服务器及网关，只要有一个通就说明网络是通的*/
                             if((PingServerRet!=-1)&&(WIFEXITED(PingServerRet))&&(WEXITSTATUS(PingServerRet)==0)|
@@ -3362,14 +3316,14 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
                             /*网络不通则动态获取IP*/
                             else
                             {
-                                PrintScreen("\n----- ping server and gate failed! -----");
+                                PrintScreen("\n----- ping server and gate failed! -----\n");
                                 do{
                                     IpRet = system("udhcpc -t 10 -T 3 -n -q &");
                                     /*休眠，用于控制获取的频率*/
                                     sleep(1);
 #if RELEASE_MODE
 #else
-                                    PrintScreen("\n----- IpRet = %d -----\n",PingRet);
+                                    PrintScreen("\n----- IpRet = %d -----\n",IpRet);
 #endif
                                     if((IpRet!=-1)&&(WIFEXITED(IpRet))&&(WEXITSTATUS(IpRet)==0))
                                     {
@@ -3385,16 +3339,13 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
             }
             else
             {
-                //PrintScreen("\nelse IpFlag = %d\n",IpFlag);
                 IpFlag = 0;
             }
             /////////////////////////////////////////////////
 
             self_check(action_fd);
-            PrintScreen("1");
             if (!is_redict)
             {					//启动线程时先得设定灵敏度
-                PrintScreen("2");
                 sleep(1);
                 continue;
             }
@@ -3402,7 +3353,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
             board_check(transBuffer);
             /************************************************************************/
 
-            PrintScreen("0");
             /************************* card send ********************************/
             card_sent(transBuffer);
             /********************************************************************/
@@ -3871,8 +3821,8 @@ void* CardPacketSend(void *arg)         //查询参数
             {
                 if(backup_flag==0)
                 {
-                    DebugPrintf("\n-----Have Backup Log-----\n");
-                    char *SysCmd=malloc(30);
+                    PrintScreen("\n-----Have Backup Log-----\n");
+                    char *SysCmd=malloc(50);
                     sprintf(SysCmd,"cp %s %s",LOGFILETMPDIR,LOGFILEBACKDIR);
                     system(SysCmd);
                     backup_flag = 1;
