@@ -2679,15 +2679,6 @@ void BmpFileSend(char * bmpfilename)
             transBuffer[0] = 0x00;
             transBuffer[1] = 0x01;
             transBuffer[2] = 0x05;
-            /*memcpy(sendfilename,bmpfilename,17);
-            memcpy(sendfilename,bmpfilename,18);
-            transBuffer[3] = (sendfilename[5] - 48)*10 + sendfilename[6] - 48;
-            transBuffer[4] = (sendfilename[7] - 48)*10 + sendfilename[8] - 48;
-            transBuffer[5] = (sendfilename[9] - 48)*10 + sendfilename[10] - 48;
-            transBuffer[6] = (sendfilename[11] - 48)*10 + sendfilename[12] - 48;
-            transBuffer[7] = (sendfilename[13] - 48)*10 + sendfilename[14] - 48;
-            transBuffer[8] = (sendfilename[15] - 48)*10 + sendfilename[16] - 48;
-            */
             memcpy(sendfilename,bmpfilename,19);
             transBuffer[8] = (sendfilename[17] - 48)*10 + sendfilename[18] - 48;
             transBuffer[3] = (sendfilename[7] - 48)*10 + sendfilename[8] - 48;
@@ -3290,6 +3281,13 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
         startsyncbmp = 1;
         while (1)
         {
+            self_check(action_fd);
+            if (!is_redict)
+            {					//启动线程时先得设定灵敏度
+                sleep(1);
+                continue;
+            }
+
             ReadSysTime();
             if(sys_tm->tm_sec==0)
             {
@@ -3343,12 +3341,6 @@ static void check_ordertime(unsigned long cur_cardsnr,unsigned char *cardrecordw
             }
             /////////////////////////////////////////////////
 
-            self_check(action_fd);
-            if (!is_redict)
-            {					//启动线程时先得设定灵敏度
-                sleep(1);
-                continue;
-            }
             /*********************** err check send *******************************/
             board_check(transBuffer);
             /************************************************************************/
@@ -3847,10 +3839,12 @@ void* CardPacketSend(void *arg)         //查询参数
                 card_errcount++;
                 if(card_errcount>=20)
                 {
+#if RELEASE_MODE
                     PrintScreen("\n----Ready to Reboot----\n");
                     system("cp /tmp/local.log /mnt/local.log");
                     sleep(3);
                     system("reboot");
+#endif
                 }
                 close_card_uart();
                 init_card_uart();

@@ -548,7 +548,7 @@ int main(int argc, char * argv[])
     net_configure();
 #else
     /*动态获取IP、子网掩码、网关、DNS*/
-    system("udhcpc -q ");
+    system("udhcpc -q &");
 #endif
 #endif
 
